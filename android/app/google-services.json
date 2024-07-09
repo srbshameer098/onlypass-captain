@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "101146301709",
+    "project_id": "captain-3ef2d",
+    "storage_bucket": "captain-3ef2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101146301709:android:32ea9ec3f6fb0f6edb0c44",
+        "android_client_info": {
+          "package_name": "com.onlypass.captian.untitled7"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1e5ms-bbw16jmaT6gcEt1dgJ8IgWp_9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
