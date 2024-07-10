@@ -17,6 +17,7 @@ import 'enquiry.dart';
 import 'members.dart';
 
 class Home extends StatefulWidget {
+
   const Home({super.key});
 
   @override
@@ -24,6 +25,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   List<String> icons = [
     'assets/icons/history.png',
     'assets/icons/members.png',
@@ -37,13 +39,185 @@ class _HomeState extends State<Home> {
     'Wallet',
   ];
   int _currentIndex = 0;
+
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      modalBottomSheetShow(context);
+      _showModalBottomSheet(context);
     });
   }
+  int? selectedValue;
+
+  void _showModalBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+
+      decoration: BoxDecoration(
+        color: Color(0xFF191919),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 28, vertical: 32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'Welcome to Onlypass Captain App',
+              style: TextStyle(
+                color: Color(0xFFE4E4E4),
+                fontSize: 16,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              "We couldn't find any account registered with the phone number. Select one of the below.",
+              style: TextStyle(
+                color: Color(0xFF6F6F6F),
+                fontSize: 14,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+        SizedBox(height: 32.h,),
+        GestureDetector(
+          onTap:  () {
+      setState(() {
+      selectedValue = 1;
+      });
+      },
+          child: Container(
+            width: 334,
+            height: 95,
+            decoration: ShapeDecoration(
+              color: Color(0xFFFEFEFE),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
+            ),child:
+          Padding(
+            padding:  EdgeInsets.only(left: 0.w,top: 6.h),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Radio(
+                      value: 0,
+                      groupValue: selectedValue,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedValue = value;
+                        });
+                      },
+                      activeColor: Colors.green,
+                    ),
+                    Text(
+                      'I am a staff of a registered business',
+                      style: TextStyle(
+                        color: Color(0xFF191919),
+                        fontSize: 13.sp,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+
+                      ),
+                    ),
+                  ],
+                ),
+
+
+
+                Padding(
+                  padding:  EdgeInsets.only(left: 20.w,top: 0.h),
+                  child: Text(
+                    'Select your business from registered list of businesses with a name or code.',
+                    style: TextStyle(
+                      color: Color(0xFF818181),
+                      fontSize: 14,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w400,
+
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ),
+        ),
+            SizedBox(height: 24.h,),
+            GestureDetector(
+              onTap: (){
+
+                selectedValue = 2;
+              },
+              child: Container(
+                width: 334,
+                height: 74,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF282828),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
+                ),child: Padding(
+                  padding:  EdgeInsets.only(left: 24.w,top: 0.h),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                       Row(
+                        children: [
+                          Radio(
+                            value: 0,
+                            groupValue: selectedValue,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedValue = value;
+                              });
+                            },
+                            activeColor: Colors.green,
+                          ),
+                          Text(
+                          'I am a new user.',
+                          style: TextStyle(
+                            color: Color(0xFFFEFEFE),
+                            fontSize: 14.sp,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w600,
+
+                          ),
+                                      ),
+                        ],
+                      ),
+                      // SizedBox(height: 12.h,),
+
+                      Text(
+                        'I would like to register my business.',
+                        style: TextStyle(
+                          color: Color(0xFF6F6F70),
+                          fontSize: 14,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w400,
+                          height: 0.08,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // Add more widgets here if needed
+          ],
+        ),
+      ),
+    );
+
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -103,7 +277,7 @@ class _HomeState extends State<Home> {
               ),
               GestureDetector(
                 onTap: (){
-                  modalBottomSheetShow(context);
+                  _showModalBottomSheet(context);
                 },
                 child: Image.asset(
                   'assets/icons/account.png',
@@ -817,60 +991,159 @@ class _HomeState extends State<Home> {
 //   );
 // }
 
-
-Future modalBottomSheetShow(BuildContext context) {
-  return showModalBottomSheet(
-
-    backgroundColor: Colors.transparent,
-    context: context,
-    builder: (context) => buildSheet(context),
-    isDismissible: false,
-    elevation: 0,
-  ).whenComplete(() => Home());
-}
-
-Widget buildSheet(BuildContext context) {
-  return SizedBox(height: 800,
-    child: Container(
-      height: 800,
-      decoration: BoxDecoration(
-        color: Color(0xFF191919),
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
-        ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 28, vertical: 32),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              'Welcome to Onlypass Captain App',
-              style: TextStyle(
-                color: Color(0xFFE4E4E4),
-                fontSize: 16,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
-              child: Text(
-                "We couldn't find any account registered with the phone number. Select one of the below.",
-                style: TextStyle(
-                  color: Color(0xFF6F6F6F),
-                  fontSize: 14,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-            // Add more widgets here if needed
-          ],
-        ),
-      ),
-    ),
-  );
-}
+//
+// Future modalBottomSheetShow(BuildContext context) {
+//   return showModalBottomSheet(
+//     isScrollControlled: true,
+//     enableDrag: false,
+//
+//
+//     backgroundColor: Colors.transparent,
+//     context: context,
+//     builder: (context) => buildSheet(context),
+//     isDismissible: false,
+//     elevation: 0,
+//   ).whenComplete(() => Home());
+// }
+//
+// Widget buildSheet(BuildContext context) {
+//   return SizedBox(height: 600,
+//     child: Container(
+//
+//       decoration: BoxDecoration(
+//         color: Color(0xFF191919),
+//         borderRadius: BorderRadius.only(
+//           topLeft: Radius.circular(16),
+//           topRight: Radius.circular(16),
+//         ),
+//       ),
+//       child: Padding(
+//         padding: EdgeInsets.symmetric(horizontal: 28, vertical: 32),
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.start,
+//           children: [
+//             Text(
+//               'Welcome to Onlypass Captain App',
+//               style: TextStyle(
+//                 color: Color(0xFFE4E4E4),
+//                 fontSize: 16,
+//                 fontFamily: 'Montserrat',
+//                 fontWeight: FontWeight.w600,
+//               ),
+//             ),
+//             SizedBox(height: 16),
+//             Text(
+//               "We couldn't find any account registered with the phone number. Select one of the below.",
+//               style: TextStyle(
+//                 color: Color(0xFF6F6F6F),
+//                 fontSize: 14,
+//                 fontFamily: 'Montserrat',
+//                 fontWeight: FontWeight.w400,
+//               ),
+//             ),
+//         SizedBox(height: 32.h,),
+//         Container(
+//           width: 334,
+//           height: 95,
+//           decoration: ShapeDecoration(
+//             color: Color(0xFFFEFEFE),
+//             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
+//           ),child:
+//         Padding(
+//           padding:  EdgeInsets.only(left: 20.w,top: 16.h),
+//           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Row(
+//                 children: [
+//                   Text(
+//                     'I am a staff of a registered business',
+//                     style: TextStyle(
+//                       color: Color(0xFF191919),
+//                       fontSize: 14.sp,
+//                       fontFamily: 'Montserrat',
+//                       fontWeight: FontWeight.w600,
+//
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//
+//
+//
+//               Text(
+//                 'Select your business from registered list of businesses with a name or code.',
+//                 style: TextStyle(
+//                   color: Color(0xFF818181),
+//                   fontSize: 14,
+//                   fontFamily: 'Montserrat',
+//                   fontWeight: FontWeight.w400,
+//
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//         ),
+//             SizedBox(height: 24.h,),
+//             GestureDetector(
+//               onTap: (){
+//
+//               },
+//               child: Container(
+//                 width: 334,
+//                 height: 74,
+//                 decoration: ShapeDecoration(
+//                   color: Color(0xFF282828),
+//                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
+//                 ),child: Padding(
+//                   padding:  EdgeInsets.only(left: 24.w,top: 16.h),
+//                   child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                        Row(
+//                         children: [
+//                           Radio(
+//                             value: 1,
+//                             groupValue: val,
+//                             onChanged: (value) {
+//                               setState(() {
+//                                 val = true;
+//                               });
+//                             },
+//                             activeColor: Colors.green,
+//                           ),
+//                           Text(
+//                           'I am a new user.',
+//                           style: TextStyle(
+//                             color: Color(0xFFFEFEFE),
+//                             fontSize: 14.sp,
+//                             fontFamily: 'Montserrat',
+//                             fontWeight: FontWeight.w600,
+//
+//                           ),
+//                                       ),
+//                         ],
+//                       ),
+//                       SizedBox(height: 12.h,),
+//
+//                       Text(
+//                         'I would like to register my business.',
+//                         style: TextStyle(
+//                           color: Color(0xFF6F6F70),
+//                           fontSize: 14,
+//                           fontFamily: 'Montserrat',
+//                           fontWeight: FontWeight.w400,
+//                           height: 0.08,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             // Add more widgets here if needed
+//           ],
+//         ),
+//       ),
+//     ),
+//   );
+// }
