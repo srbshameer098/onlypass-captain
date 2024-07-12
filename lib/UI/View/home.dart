@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:untitled7/Bloc/Event_Creation/event_bloc.dart';
 import 'package:untitled7/UI/View/pre_event.dart';
 import 'package:untitled7/UI/View/wallet.dart';
 
 import '../../components/facility_item.dart';
 import '../../event_pages.dart';
+import 'Staff customer-id form.dart';
+import 'Staff login - Facilities Search.dart';
+import 'Staff-login OTP.dart';
 import 'account.dart';
 import 'enquiry.dart';
 import 'members.dart';
@@ -37,6 +41,10 @@ class _HomeState extends State<Home> {
   ];
   int _currentIndex = 0;
   int? selectedValue = 1;
+  bool customer_id = true;
+  bool welcome_sheet = false;
+  bool otp_bottom_sheel = false;
+  bool profile_bottom_sheet = true;
 
   void _handleRadioValueChange(int? value) {
     setState(() {
@@ -48,9 +56,21 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _showModalBottomSheet(context);
+     if(welcome_sheet == true) {
+        _showModalBottomSheet(context);
+      }
+     if(otp_bottom_sheel == true){
+       showCustomBottomSheet(context);
+     }
+     if(profile_bottom_sheet == true){
+       staff_customer_id_BottomSheet(context);
+     }
+
     });
   }
+
+  final PageController _pageController = PageController();
+  int currentPage = 0; // Track current page index
 
   void _showModalBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -62,16 +82,16 @@ class _HomeState extends State<Home> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setModalState) {
             return Container(
-              height: 534,
+              height: 534.h,
               decoration: BoxDecoration(
                 color: Color(0xFF191919),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(2),
-                  topRight: Radius.circular(2),
+                  topLeft: Radius.circular(2.r),
+                  topRight: Radius.circular(2.r),
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 28, vertical: 32),
+                padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 32.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,17 +100,17 @@ class _HomeState extends State<Home> {
                       'Welcome to Onlypass Captain App',
                       style: TextStyle(
                         color: Color(0xFFE4E4E4),
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 16.h),
                     Text(
                       "We couldn't find any account registered with the phone number. Select one of the below.",
                       style: TextStyle(
                         color: Color(0xFF6F6F6F),
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w400,
                       ),
@@ -106,57 +126,58 @@ class _HomeState extends State<Home> {
                         });
                       },
                       child: Container(
-                        width: 334,
-                        height: 95,
+                        width: 334.w,
+                        height: 95.h,
                         decoration: ShapeDecoration(
                           color: selectedValue == 1 ? Color(0xFFFEFEFE) : Color(0xFF282828),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 0.w),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Radio(
-                                    value: 1,
-                                    groupValue: selectedValue,
-                                    onChanged: (value) {
-                                      setModalState(() {
-                                        _handleRadioValueChange(value);
-                                      });
-                                      setState(() {
-                                        _handleRadioValueChange(value);
-                                      });
-                                    },
-                                    activeColor: Colors.green,
-                                  ),
-                                  Text(
-                                    'I am a staff of a registered business',
-                                    style: TextStyle(
-                                      color: selectedValue == 1 ?Color(0xFF191919):Color(0xFFFEFEFE),
-                                      fontSize: 13.sp,
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 15.w, top: 0.h),
-                                child: Text(
-                                  'Select your business from registered list of businesses with a name or code.',
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Row(
+                              children: [
+                                SizedBox(width: 10.w,),
+
+                                Radio(
+
+                                  value: 1,
+                                  groupValue: selectedValue,
+                                  onChanged: (value) {
+                                    setModalState(() {
+                                      _handleRadioValueChange(value);
+                                    });
+                                    setState(() {
+                                      _handleRadioValueChange(value);
+                                    });
+                                  },
+                                  activeColor: Colors.green,
+                                ),
+                                Text(
+                                  'I am a staff of a registered business',
                                   style: TextStyle(
-                                    color: Color(0xFF818181),
-                                    fontSize: 14,
+                                    color: selectedValue == 1 ?Color(0xFF191919):Color(0xFFFEFEFE),
+                                    fontSize: 13.sp,
                                     fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 24.w,),
+                              child: Text(
+                                'Select your business from registered list of businesses with a name or code.',
+                                style: TextStyle(
+                                  color: Color(0xFF818181),
+                                  fontSize: 14,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -171,58 +192,58 @@ class _HomeState extends State<Home> {
                         });
                       },
                       child: Container(
-                        width: 334,
-                        height: 74,
+                        width: 334.w,
+                        height: 74.h,
                         decoration: ShapeDecoration(
                           color: selectedValue == 2 ? Color(0xFFFEFEFE) : Color(0xFF282828),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 0.w, top: 0.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Radio(
-                                    value: 2,
-                                    groupValue: selectedValue,
-                                    onChanged: (value) {
-                                      setModalState(() {
-                                        _handleRadioValueChange(value);
-                                      });
-                                      setState(() {
-                                        _handleRadioValueChange(value);
-                                      });
-                                    },
-                                    activeColor: Colors.green,
-                                  ),
-                                  Text(
-                                    'I am a new user.',
-                                    style: TextStyle(
-                                      color:selectedValue == 1 ? Color(0xFFFEFEFE):Color(0xFF191919),
-                                      fontSize: 14.sp,
-                                      fontFamily: 'Montserrat',
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 15.w),
-                                child: Text(
-                                  'I would like to register my business.',
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Row(
+                              children: [
+                                SizedBox(width: 10.w,),
+
+                                Radio(
+                                  value: 2,
+                                  groupValue: selectedValue,
+                                  onChanged: (value) {
+                                    setModalState(() {
+                                      _handleRadioValueChange(value);
+                                    });
+                                    setState(() {
+                                      _handleRadioValueChange(value);
+                                    });
+                                  },
+                                  activeColor: Colors.green,
+                                ),
+                                Text(
+                                  'I am a new user.',
                                   style: TextStyle(
-                                    color: Color(0xFF6F6F70),
-                                    fontSize: 14,
+                                    color:selectedValue == 1 ? Color(0xFFFEFEFE):Color(0xFF191919),
+                                    fontSize: 14.sp,
                                     fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w400,
-                                    height: 0.08,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 24.w),
+                              child: Text(
+                                'I would like to register my business.',
+                                style: TextStyle(
+                                  color: Color(0xFF6F6F70),
+                                  fontSize: 14,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w400,
+                                  height: 0.08,
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -235,23 +256,62 @@ class _HomeState extends State<Home> {
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w600,
                         decoration: TextDecoration.underline,
+                        decorationColor: const Color(0xFFFEFEFE),
                         height: 0,
                         letterSpacing: 0.28,
                       ),
                     ),
-                    // PageView(
-                    //   controller: _pageController,
-                    //   physics: NeverScrollableScrollPhysics(),
-                    //   onPageChanged: (index) => setState(() => currentPage = index),
-                    //   // Update current page
-                    //   children: [
-                    //     CreateEvent(),
-                    //     EventTime(),
-                    //     // EventDateTimePage(),
-                    //     EventLocation(),
-                    //
-                    //   ],
-                    // )
+
+
+
+SizedBox(height: 38.h,),
+
+                   Row(
+                     crossAxisAlignment: CrossAxisAlignment.end,
+                     mainAxisAlignment: MainAxisAlignment.end,
+                     children: [
+                       CircularStepProgressIndicator(
+
+                          totalSteps: 100,
+                          currentStep: 50 + currentPage * 50,
+                          stepSize: 0,
+                          selectedColor: Color(0xFF37F840),
+                          unselectedColor: Colors.transparent,
+                          width: 70.w,
+                          height: 70.h,
+                          selectedStepSize: 1,
+                          // roundedCap: (_, __) => true,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (currentPage < 2) {
+                                  currentPage += 1;
+                                  _pageController.jumpToPage(
+                                    currentPage,
+                                    // duration: Duration(milliseconds: 300),
+                                    // curve: Curves.easeInOut,
+                                  );
+                                } else if (currentPage == 2) {
+                                  // Navigator.of(context).pushAndRemoveUntil(
+                                  //   MaterialPageRoute(builder: (_) => const EventConfirm()),
+                                  //       (Route<dynamic> route) => false,);
+                                  Navigator.push(context, MaterialPageRoute(builder: (_)=> Facilities_Search()));
+                                }
+                              });
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 30.r,
+                              child: CircleAvatar(
+                                backgroundColor: Color(0xFFFEFEFE),
+                                radius: 30.r,
+                                child: Center(child: Icon(Icons.east)),
+                              ),
+                            ),
+                          ),
+                        ),
+                     ],
+                   ),
                     // Add more widgets here if needed
                   ],
                 ),
@@ -322,7 +382,7 @@ class _HomeState extends State<Home> {
               ),
               GestureDetector(
                 onTap: (){
-                  _showModalBottomSheet(context);
+                  staff_customer_id_BottomSheet(context);
                 },
                 child: Image.asset(
                   'assets/icons/account.png',

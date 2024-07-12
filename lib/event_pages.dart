@@ -107,7 +107,7 @@ class _EventPagesState extends State<EventPages> {
       // ),
       floatingActionButton: CircularStepProgressIndicator(
         totalSteps: 100,
-        currentStep: 35 + currentPage * 35,
+        currentStep: 50 + currentPage * 50,
         stepSize: 0,
         selectedColor: Color(0xFF37F840),
         unselectedColor: Colors.transparent,
