@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled7/UI/View/home.dart';
 import '../../Utils/utils.dart';
 import '../s1.dart';
 
@@ -20,7 +21,8 @@ class _VerifyState extends State<Verify> {
   bool loading = false;
   final auth = FirebaseAuth.instance;
   final verificationCodeController = TextEditingController();
-
+bool facility_id = true;
+bool customer_id =true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,10 +163,26 @@ class _VerifyState extends State<Verify> {
 
                         try {
                           await auth.signInWithCredential(credential);
+                          // Navigator.of(context).pushAndRemoveUntil(
+                          //   MaterialPageRoute(builder: (_) => S1()),
+                          //       (Route<dynamic> route) => false,
+                          // );
+                          if( customer_id == true && facility_id == true){
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: false,)),
+                                  (Route<dynamic> route) => false,
+                            );
+
+                          }else if(facility_id == true && customer_id==false){
                           Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (_) => S1()),
+                            MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: true, Newbusineessbottomsheet: false,)),
                                 (Route<dynamic> route) => false,
-                          );
+                          );} else{
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: true, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: false,)),
+                                    (Route<dynamic> route) => false,
+                            );
+                          }
                         } catch (e) {
                           setState(() {
                             loading = false;

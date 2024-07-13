@@ -20,7 +20,7 @@ int _currentIndex = 1;
 
 final List<Widget?> _pages = [
   const ScanPage(),
-  const Home(),
+  const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: false,),
   const MessagePage()
 ];
 List<String> icons = [

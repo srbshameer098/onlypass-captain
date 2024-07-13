@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled7/UI/View/home.dart';
 import 'package:untitled7/UI/View/wallet.dart';
 
-import 'Staff-login OTP.dart';
+import '../../components/Bottom Sheets/Staff-login OTP.dart';
 
 class Facilities_Search extends StatefulWidget {
   const Facilities_Search({super.key});
@@ -10,6 +11,7 @@ class Facilities_Search extends StatefulWidget {
   @override
   State<Facilities_Search> createState() => _Facilities_SearchState();
 }
+
 
 class _Facilities_SearchState extends State<Facilities_Search> {
   @override
@@ -112,7 +114,9 @@ class _Facilities_SearchState extends State<Facilities_Search> {
                     height: 70.h * 4.h,
                     child: GestureDetector(
                       onTap: (){
-                        showCustomBottomSheet(context);
+
+
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>  Home(otpBottomSheet: true, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: false,)));
 
                       },
                       child: ListView.separated(

@@ -10,17 +10,32 @@ import 'package:untitled7/Bloc/Event_Creation/event_bloc.dart';
 import 'package:untitled7/UI/View/pre_event.dart';
 import 'package:untitled7/UI/View/wallet.dart';
 
+import '../../components/Bottom Sheets/Admin customer-id form.dart';
+import '../../components/Bottom Sheets/New business enquiry.dart';
 import '../../components/facility_item.dart';
 import '../../event_pages.dart';
-import 'Staff customer-id form.dart';
+import '../../components/Bottom Sheets/Staff customer-id form.dart';
 import 'Staff login - Facilities Search.dart';
-import 'Staff-login OTP.dart';
+import '../../components/Bottom Sheets/Staff-login OTP.dart';
 import 'account.dart';
 import 'enquiry.dart';
 import 'members.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final bool otpBottomSheet;
+  final bool welcomeSheet;
+  final bool profilebottomsheet;
+  final bool adminformBottomSheet;
+  final bool Newbusineessbottomsheet;
+
+  const Home(
+      {super.key,
+        required this.otpBottomSheet,
+        required this.welcomeSheet,
+        required this.profilebottomsheet,
+        required this.adminformBottomSheet,
+        required this.Newbusineessbottomsheet
+      });
 
   @override
   State<Home> createState() => _HomeState();
@@ -41,10 +56,14 @@ class _HomeState extends State<Home> {
   ];
   int _currentIndex = 0;
   int? selectedValue = 1;
-  bool customer_id = true;
-  bool welcome_sheet = false;
-  bool otp_bottom_sheel = false;
+
+  // bool customer_id = true;
+
+  bool welcome_sheet =true ;
+  bool otp_bottom_sheet = true;
   bool profile_bottom_sheet = true;
+  bool admin_form_BottomSheet = true;
+  bool New_busineess_bottom_sheet = true;
 
   void _handleRadioValueChange(int? value) {
     setState(() {
@@ -56,16 +75,21 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-     if(welcome_sheet == true) {
+      if (welcome_sheet == widget.welcomeSheet) {
         _showModalBottomSheet(context);
       }
-     if(otp_bottom_sheel == true){
-       showCustomBottomSheet(context);
-     }
-     if(profile_bottom_sheet == true){
-       staff_customer_id_BottomSheet(context);
-     }
-
+      if (otp_bottom_sheet == widget.otpBottomSheet) {
+        showCustomBottomSheet(context);
+      }
+      if (profile_bottom_sheet == widget.profilebottomsheet) {
+        staff_customer_id_BottomSheet(context);
+      }
+      if (admin_form_BottomSheet == widget.adminformBottomSheet) {
+        admin_customer_id_BottomSheet(context);
+      }
+      if (New_busineess_bottom_sheet == widget.Newbusineessbottomsheet) {
+        New_busineess_BottomSheet(context);
+      }
     });
   }
 
@@ -75,7 +99,7 @@ class _HomeState extends State<Home> {
   void _showModalBottomSheet(BuildContext context) {
     showModalBottomSheet(
       isDismissible: false,
-      enableDrag: true,
+      enableDrag: false,
       isScrollControlled: true,
       context: context,
       builder: (context) {
@@ -129,19 +153,21 @@ class _HomeState extends State<Home> {
                         width: 334.w,
                         height: 95.h,
                         decoration: ShapeDecoration(
-                          color: selectedValue == 1 ? Color(0xFFFEFEFE) : Color(0xFF282828),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
+                          color: selectedValue == 1
+                              ? Color(0xFFFEFEFE)
+                              : Color(0xFF282828),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(1)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
                             Row(
                               children: [
-                                SizedBox(width: 10.w,),
-
+                                SizedBox(
+                                  width: 10.w,
+                                ),
                                 Radio(
-
                                   value: 1,
                                   groupValue: selectedValue,
                                   onChanged: (value) {
@@ -157,7 +183,9 @@ class _HomeState extends State<Home> {
                                 Text(
                                   'I am a staff of a registered business',
                                   style: TextStyle(
-                                    color: selectedValue == 1 ?Color(0xFF191919):Color(0xFFFEFEFE),
+                                    color: selectedValue == 1
+                                        ? Color(0xFF191919)
+                                        : Color(0xFFFEFEFE),
                                     fontSize: 13.sp,
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.w600,
@@ -166,7 +194,9 @@ class _HomeState extends State<Home> {
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 24.w,),
+                              padding: EdgeInsets.only(
+                                left: 24.w,
+                              ),
                               child: Text(
                                 'Select your business from registered list of businesses with a name or code.',
                                 style: TextStyle(
@@ -195,17 +225,20 @@ class _HomeState extends State<Home> {
                         width: 334.w,
                         height: 74.h,
                         decoration: ShapeDecoration(
-                          color: selectedValue == 2 ? Color(0xFFFEFEFE) : Color(0xFF282828),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
+                          color: selectedValue == 2
+                              ? Color(0xFFFEFEFE)
+                              : Color(0xFF282828),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(1)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
                             Row(
                               children: [
-                                SizedBox(width: 10.w,),
-
+                                SizedBox(
+                                  width: 10.w,
+                                ),
                                 Radio(
                                   value: 2,
                                   groupValue: selectedValue,
@@ -222,7 +255,9 @@ class _HomeState extends State<Home> {
                                 Text(
                                   'I am a new user.',
                                   style: TextStyle(
-                                    color:selectedValue == 1 ? Color(0xFFFEFEFE):Color(0xFF191919),
+                                    color: selectedValue == 1
+                                        ? Color(0xFFFEFEFE)
+                                        : Color(0xFF191919),
                                     fontSize: 14.sp,
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.w600,
@@ -262,16 +297,15 @@ class _HomeState extends State<Home> {
                       ),
                     ),
 
+                    SizedBox(
+                      height: 38.h,
+                    ),
 
-
-SizedBox(height: 38.h,),
-
-                   Row(
-                     crossAxisAlignment: CrossAxisAlignment.end,
-                     mainAxisAlignment: MainAxisAlignment.end,
-                     children: [
-                       CircularStepProgressIndicator(
-
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        CircularStepProgressIndicator(
                           totalSteps: 100,
                           currentStep: 50 + currentPage * 50,
                           stepSize: 0,
@@ -283,21 +317,40 @@ SizedBox(height: 38.h,),
                           // roundedCap: (_, __) => true,
                           child: GestureDetector(
                             onTap: () {
-                              setState(() {
-                                if (currentPage < 2) {
-                                  currentPage += 1;
-                                  _pageController.jumpToPage(
-                                    currentPage,
-                                    // duration: Duration(milliseconds: 300),
-                                    // curve: Curves.easeInOut,
-                                  );
-                                } else if (currentPage == 2) {
-                                  // Navigator.of(context).pushAndRemoveUntil(
-                                  //   MaterialPageRoute(builder: (_) => const EventConfirm()),
-                                  //       (Route<dynamic> route) => false,);
-                                  Navigator.push(context, MaterialPageRoute(builder: (_)=> Facilities_Search()));
-                                }
-                              });
+                              // setState(() {
+                              //   // if (currentPage < 2) {
+                              //   //   currentPage += 1;
+                              //   //   _pageController.jumpToPage(
+                              //   //     currentPage,
+                              //   //     // duration: Duration(milliseconds: 300),
+                              //   //     // curve: Curves.easeInOut,
+                              //   //   );
+                              //   // } else if (currentPage == 2) {
+                              //   //   setState(() {
+                              //   //     welcome_sheet = false;
+                              //   //   });
+                              //   //
+                              //   //   // Navigator.of(context).pushAndRemoveUntil(
+                              //   //   //   MaterialPageRoute(builder: (_) => const EventConfirm()),
+                              //   //   //       (Route<dynamic> route) => false,);
+                              //   //
+                              //   // }
+                              //
+                              //
+                              // });
+
+                              if(selectedValue==1){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                        const Facilities_Search()));
+                              }else{
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: true)));}
                             },
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
@@ -310,8 +363,8 @@ SizedBox(height: 38.h,),
                             ),
                           ),
                         ),
-                     ],
-                   ),
+                      ],
+                    ),
                     // Add more widgets here if needed
                   ],
                 ),
@@ -333,7 +386,6 @@ SizedBox(height: 38.h,),
           toolbarHeight: 75.h,
           automaticallyImplyLeading: false,
           forceMaterialTransparency: true,
-
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -346,7 +398,7 @@ SizedBox(height: 38.h,),
                 width: 207,
                 height: 40,
                 decoration: ShapeDecoration(
-                  color:  Color(0x10FEFEFE),
+                  color: Color(0x10FEFEFE),
                   shape: RoundedRectangleBorder(
                     side: BorderSide(width: 0.30, color: Color(0x26B2B2B2)),
                     borderRadius: BorderRadius.circular(140),
@@ -381,8 +433,8 @@ SizedBox(height: 38.h,),
                 ),
               ),
               GestureDetector(
-                onTap: (){
-                  staff_customer_id_BottomSheet(context);
+                onTap: () {
+                  New_busineess_BottomSheet(context);
                 },
                 child: Image.asset(
                   'assets/icons/account.png',
@@ -392,7 +444,6 @@ SizedBox(height: 38.h,),
               ),
             ],
           ),
-
           centerTitle: true,
           backgroundColor: Colors.black,
           bottom: PreferredSize(

@@ -4,6 +4,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../UI/View/home.dart';
 import '../../Utils/utils.dart';
 
 bool loading = false;
@@ -12,7 +13,7 @@ final verificationCodeController = TextEditingController();
 void showCustomBottomSheet(BuildContext context) {
   showModalBottomSheet(
     isDismissible: false,
-    enableDrag: true,
+    enableDrag: false,
     isScrollControlled: true,
     context: context,
     builder: (BuildContext context) {
@@ -109,7 +110,10 @@ void showCustomBottomSheet(BuildContext context) {
                       });
 
                       try {
-                        // Simulate authentication logic here
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (_) => Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: true, adminformBottomSheet: false, Newbusineessbottomsheet: false,)),
+                              (Route<dynamic> route) => false,
+                        );
                         // await auth.signInWithCredential(credential);
                         // Navigate to the next screen on success
                       } catch (e) {
@@ -125,7 +129,7 @@ void showCustomBottomSheet(BuildContext context) {
                                 Navigator.pop(context);
                               },
                             ),
-                            content: Text(
+                            content: const Text(
                               'Login failed',
                               style: TextStyle(color: Colors.white),
                             ),
