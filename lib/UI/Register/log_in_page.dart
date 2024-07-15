@@ -4,9 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled7/Repository/Model_Class/Login_model.dart';
 import 'package:untitled7/UI/Register/verify.dart';
 import 'package:untitled7/Bloc/LogIn/log_in_bloc.dart';
+import 'package:untitled7/UI/View/event_confirm.dart';
 import 'package:untitled7/Utils/utils.dart';
+
+import '../../components/Bottom Sheets/Admin customer-id form.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -19,6 +24,10 @@ class _LogInPageState extends State<LogInPage> {
   bool loading = false;
   final auth = FirebaseAuth.instance;
   final phoneNumberController = TextEditingController();
+  // void navigateToProfileInformation(BuildContext context, String phoneNumber) {
+  //   admin_customer_id_BottomSheet(context, phoneNumber);
+  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -171,6 +180,7 @@ class _LogInPageState extends State<LogInPage> {
                         if (state is LoginblocLoaded) {
                           auth.verifyPhoneNumber(
                             phoneNumber: '+91${phoneNumberController.text}',
+
                             verificationCompleted: (_) {
                               setState(() {
                                 loading = false;
@@ -183,11 +193,14 @@ class _LogInPageState extends State<LogInPage> {
                               Utils().toastMessage(e.toString());
                             },
                             codeSent: (String verificationId, int? token) {
+
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Verify(
                                     verificationId: verificationId, phoneNum: phoneNumberController.text.toString(), verificationcode: token.toString(),
+
+
                                   ),
                                 ),
                               );
@@ -202,6 +215,8 @@ class _LogInPageState extends State<LogInPage> {
                               });
                             },
                           );
+
+
                         }
 
                         if (state is LoginblocError) {
@@ -211,7 +226,7 @@ class _LogInPageState extends State<LogInPage> {
                         }
                       },
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (phoneNumberController.text.isEmpty) {
                             Utils().toastMessage('Enter Mobile Number');
                           } else if (phoneNumberController.text.length < 10) {
@@ -220,8 +235,15 @@ class _LogInPageState extends State<LogInPage> {
                             context.read<LogInBloc>().add(FetchLogin(
                               phoneNumber:
                               phoneNumberController.text.toString(),
+
                             ));
-                          }
+                          };
+                          String phoneNumber = phoneNumberController.text;
+
+                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                          await prefs.setString('phone_number', phoneNumber);
+
+
                         },
                         child: Container(
                           height: 48.h,

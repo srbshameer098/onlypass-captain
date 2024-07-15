@@ -28,13 +28,17 @@ class Home extends StatefulWidget {
   final bool adminformBottomSheet;
   final bool Newbusineessbottomsheet;
 
+
+
+
+
   const Home(
       {super.key,
         required this.otpBottomSheet,
         required this.welcomeSheet,
         required this.profilebottomsheet,
         required this.adminformBottomSheet,
-        required this.Newbusineessbottomsheet
+        required this.Newbusineessbottomsheet,
       });
 
   @override
@@ -85,7 +89,7 @@ class _HomeState extends State<Home> {
         staff_customer_id_BottomSheet(context);
       }
       if (admin_form_BottomSheet == widget.adminformBottomSheet) {
-        admin_customer_id_BottomSheet(context);
+        admin_customer_id_BottomSheet( context,);
       }
       if (New_busineess_bottom_sheet == widget.Newbusineessbottomsheet) {
         New_busineess_BottomSheet(context);
@@ -350,7 +354,7 @@ class _HomeState extends State<Home> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) =>
-                                          const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: true)));}
+                                          const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: true, )));}
                             },
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
@@ -434,7 +438,7 @@ class _HomeState extends State<Home> {
               ),
               GestureDetector(
                 onTap: () {
-                  New_busineess_BottomSheet(context);
+                  admin_customer_id_BottomSheet(context,);
                 },
                 child: Image.asset(
                   'assets/icons/account.png',

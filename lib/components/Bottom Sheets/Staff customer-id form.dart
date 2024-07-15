@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled7/UI/s1.dart';
 
 import '../../UI/View/home.dart';
@@ -17,7 +18,9 @@ bool loading = false;
 final verificationCodeController = TextEditingController();
 final phoneNumberController = TextEditingController();
 
-void staff_customer_id_BottomSheet(BuildContext context) {
+Future<void> staff_customer_id_BottomSheet(BuildContext context) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? phoneNumber = prefs.getString('phone_number');
   showModalBottomSheet(
     isDismissible: false,
     enableDrag: false,
@@ -140,7 +143,7 @@ void staff_customer_id_BottomSheet(BuildContext context) {
                           child: Opacity(
                             opacity: 0.10,
                             child: Text(
-                              '9846 78 1189',
+                              phoneNumber ?? 'No number',
                               style: TextStyle(
                                 color: Color(0xFFFEFEFE),
                                 fontSize: 14.sp,

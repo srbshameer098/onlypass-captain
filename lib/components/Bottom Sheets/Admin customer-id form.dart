@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled7/UI/s1.dart';
+import 'package:untitled7/components/Bottom%20Sheets/New%20business%20enquiry.dart';
 
 import '../../Utils/utils.dart';
 import '../Drop-downs/Admin-rules_dropdown.dart';
@@ -15,10 +17,12 @@ String _selectedGender = 'Male';
 String _selectedJobRole = 'Trainer';
 String _selectedJobRole2 = 'Owner';
 bool loading = false;
-final verificationCodeController = TextEditingController();
-final phoneNumberController = TextEditingController();
+final fullnameController = TextEditingController();
+final emailController = TextEditingController();
 
-void admin_customer_id_BottomSheet(BuildContext context) {
+void admin_customer_id_BottomSheet(BuildContext context,  )  async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? phoneNumber = prefs.getString('phone_number');
   showModalBottomSheet(
     isDismissible: false,
     enableDrag: true,
@@ -79,7 +83,7 @@ void admin_customer_id_BottomSheet(BuildContext context) {
                   height: 32.h,
                 ),
                 Text(
-                  'Phone number',
+                  'phoneNumber',
                   style: TextStyle(
                     color: const Color(0xFFE4E4E4),
                     fontSize: 14.sp,
@@ -141,7 +145,7 @@ void admin_customer_id_BottomSheet(BuildContext context) {
                           child: Opacity(
                             opacity: 0.10,
                             child: Text(
-                              '9846 78 1189',
+                              phoneNumber ?? 'No number',
                               style: TextStyle(
                                 color: Color(0xFFFEFEFE),
                                 fontSize: 14.sp,
@@ -177,8 +181,8 @@ void admin_customer_id_BottomSheet(BuildContext context) {
                       TextSpan(
                         text: 'Full name',
                         style: TextStyle(
-                          color: Color(0xFFE4E4E4),
-                          fontSize: 14,
+                          color: const Color(0xFFE4E4E4),
+                          fontSize: 14.sp,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w600,
                           height: 0,
@@ -187,8 +191,8 @@ void admin_customer_id_BottomSheet(BuildContext context) {
                       TextSpan(
                         text: '*',
                         style: TextStyle(
-                          color: Color(0xFFFF001E),
-                          fontSize: 14,
+                          color: const Color(0xFFFF001E),
+                          fontSize: 14.sp,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w600,
                           height: 0,
@@ -219,7 +223,7 @@ void admin_customer_id_BottomSheet(BuildContext context) {
                           child: TextFormField(
                             textInputAction: TextInputAction.done,
                             keyboardType: TextInputType.name,
-                            controller: phoneNumberController,
+                            controller: fullnameController,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],
@@ -366,7 +370,7 @@ void admin_customer_id_BottomSheet(BuildContext context) {
                           child: TextFormField(
                             textInputAction: TextInputAction.done,
                             keyboardType: TextInputType.emailAddress ,
-                            controller: phoneNumberController,
+                            controller: emailController,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],

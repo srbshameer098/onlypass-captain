@@ -21,8 +21,8 @@ class _VerifyState extends State<Verify> {
   bool loading = false;
   final auth = FirebaseAuth.instance;
   final verificationCodeController = TextEditingController();
-bool facility_id = true;
-bool customer_id =true;
+bool facility_id = false;
+bool customer_id =false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,13 +169,13 @@ bool customer_id =true;
                           // );
                           if( customer_id == true && facility_id == true){
                             Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: false,)),
+                              MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: false, )),
                                   (Route<dynamic> route) => false,
                             );
 
                           }else if(facility_id == true && customer_id==false){
                           Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: true, Newbusineessbottomsheet: false,)),
+                            MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: true, Newbusineessbottomsheet: false, )),
                                 (Route<dynamic> route) => false,
                           );} else{
                             Navigator.of(context).pushAndRemoveUntil(
