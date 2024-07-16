@@ -24,9 +24,7 @@ class _LogInPageState extends State<LogInPage> {
   bool loading = false;
   final auth = FirebaseAuth.instance;
   final phoneNumberController = TextEditingController();
-  // void navigateToProfileInformation(BuildContext context, String phoneNumber) {
-  //   admin_customer_id_BottomSheet(context, phoneNumber);
-  // }
+
 
 
   @override
@@ -178,9 +176,20 @@ class _LogInPageState extends State<LogInPage> {
                         }
 
                         if (state is LoginblocLoaded) {
+                          token(BlocProvider.of<LogInBloc>(context)
+                              .logInModel
+                              .acsToken
+                              .toString());
+                          customercode(BlocProvider.of<LogInBloc>(context)
+                              .logInModel
+                              .customerCode
+                              .toString());
+                          facilitycode(BlocProvider.of<LogInBloc>(context)
+                              .logInModel
+                              .facilityCode
+                              .toString());
                           auth.verifyPhoneNumber(
                             phoneNumber: '+91${phoneNumberController.text}',
-
                             verificationCompleted: (_) {
                               setState(() {
                                 loading = false;
@@ -192,13 +201,14 @@ class _LogInPageState extends State<LogInPage> {
                               });
                               Utils().toastMessage(e.toString());
                             },
-                            codeSent: (String verificationId, int? token) {
+
+                            codeSent: (String verificationId, int? token, ) {
 
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Verify(
-                                    verificationId: verificationId, phoneNum: phoneNumberController.text.toString(), verificationcode: token.toString(),
+                                    verificationId: verificationId,verificationcode: token.toString(), phoneNum: phoneNumberController.text.toString(),  facilitycode: facilitycode.toString(), customercode: customercode.toString(),
 
 
                                   ),
@@ -216,7 +226,6 @@ class _LogInPageState extends State<LogInPage> {
                             },
                           );
 
-
                         }
 
                         if (state is LoginblocError) {
@@ -232,16 +241,46 @@ class _LogInPageState extends State<LogInPage> {
                           } else if (phoneNumberController.text.length < 10) {
                             Utils().toastMessage('Enter Valid Mobile Number');
                           } else {
-                            context.read<LogInBloc>().add(FetchLogin(
-                              phoneNumber:
-                              phoneNumberController.text.toString(),
+                            auth.verifyPhoneNumber(
+                              phoneNumber: '+91${phoneNumberController.text}',
+                              verificationCompleted: (_) {
+                                setState(() {
+                                  loading = false;
+                                });
+                              },
+                              verificationFailed: (e) {
+                                setState(() {
+                                  loading = false;
+                                });
+                                Utils().toastMessage(e.toString());
+                              },
 
-                            ));
-                          };
-                          String phoneNumber = phoneNumberController.text;
+                              codeSent: (String verificationId, int? token, ) {
 
-                          SharedPreferences prefs = await SharedPreferences.getInstance();
-                          await prefs.setString('phone_number', phoneNumber);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Verify(
+                                      verificationId: verificationId,verificationcode: token.toString(), phoneNum: phoneNumberController.text.toString(),  facilitycode: facilitycode.toString(), customercode: customercode.toString(),
+
+
+                                    ),
+                                  ),
+                                );
+                                setState(() {
+                                  loading = false;
+                                });
+                              },
+                              codeAutoRetrievalTimeout: (e) {
+                                Utils().toastMessage(e.toString());
+                                setState(() {
+                                  loading = false;
+                                });
+                              },
+                            );
+
+                          }
+
 
 
                         },
@@ -288,4 +327,18 @@ class _LogInPageState extends State<LogInPage> {
       ),
     );
   }
+  void token(String accessToken) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("accessToken", accessToken);
+  }
+  void customercode(String customerCode) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("customerCode", customerCode);
+
+  }
+  void facilitycode(String facilityCode) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("facilityCode", facilityCode);
+  }
+
 }

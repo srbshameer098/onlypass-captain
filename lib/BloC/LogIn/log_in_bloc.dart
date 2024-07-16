@@ -15,6 +15,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       emit(LoginblocLoading());
       try{
         logInModel = await loginApi.getLogin(event.phoneNumber);
+
         emit(LoginblocLoaded());
       }catch(e){
         print(e);

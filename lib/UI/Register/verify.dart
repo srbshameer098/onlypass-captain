@@ -9,9 +9,17 @@ import '../s1.dart';
 
 class Verify extends StatefulWidget {
   final String verificationId;
-  final String phoneNum;
 
-  const Verify({super.key, required this.verificationId, required this.phoneNum,required verificationcode});
+  final String facilitycode;
+  final String customercode;
+
+  const Verify(
+      {super.key,
+      required this.verificationId,
+      required String phoneNum,
+      required verificationcode,
+      required this.facilitycode,
+      required this.customercode});
 
   @override
   State<Verify> createState() => _VerifyState();
@@ -21,8 +29,24 @@ class _VerifyState extends State<Verify> {
   bool loading = false;
   final auth = FirebaseAuth.instance;
   final verificationCodeController = TextEditingController();
-bool facility_id = false;
-bool customer_id =false;
+  bool facility_id = true;
+  bool customer_id = true;
+
+  // @override
+  // void initState() {
+  //   telephony.listenIncomingSms(
+  //     onNewMessage: (SmsMessage message) {
+  //       print(message.address);
+  //       print(message.body);
+  //
+  //       String sms = message.body.toString();
+  //
+  //
+  //     },
+  //     listenInBackground: false,
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +96,7 @@ bool customer_id =false;
                     ),
                   ),
                   Text(
-                    'A verification code has been sent to +91 ${widget.phoneNum}',
+                    'A verification code has been sent to +91 ${9585555600}',
                     style: GoogleFonts.montserrat(
                       color: const Color(0xFF6F6F70),
                       fontSize: 12.sp,
@@ -82,6 +106,7 @@ bool customer_id =false;
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 16.h),
                     child: OtpTextField(
+                      clearText: true,
                       alignment: FractionalOffset.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       fieldWidth: 48.w,
@@ -158,7 +183,8 @@ bool customer_id =false;
 
                         final credential = PhoneAuthProvider.credential(
                           verificationId: widget.verificationId,
-                          smsCode: verificationCodeController.text.trim(),
+                          smsCode:
+                          verificationCodeController.text.toString(),
                         );
 
                         try {
@@ -167,20 +193,43 @@ bool customer_id =false;
                           //   MaterialPageRoute(builder: (_) => S1()),
                           //       (Route<dynamic> route) => false,
                           // );
-                          if( customer_id == true && facility_id == true){
+                          if (widget.customercode == true &&
+                              widget.facilitycode == true) {
                             Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: false, )),
-                                  (Route<dynamic> route) => false,
+                              MaterialPageRoute(
+                                  builder: (_) => const Home(
+                                        otpBottomSheet: false,
+                                        welcomeSheet: false,
+                                        profilebottomsheet: false,
+                                        adminformBottomSheet: false,
+                                        Newbusineessbottomsheet: false,
+                                      )),
+                              (Route<dynamic> route) => false,
                             );
-
-                          }else if(facility_id == true && customer_id==false){
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: true, Newbusineessbottomsheet: false, )),
-                                (Route<dynamic> route) => false,
-                          );} else{
+                          } else if (widget.facilitycode == true &&
+                              widget.customercode == false) {
                             Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: true, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: false,)),
-                                    (Route<dynamic> route) => false,
+                              MaterialPageRoute(
+                                  builder: (_) => const Home(
+                                        otpBottomSheet: false,
+                                        welcomeSheet: false,
+                                        profilebottomsheet: false,
+                                        adminformBottomSheet: true,
+                                        Newbusineessbottomsheet: false,
+                                      )),
+                              (Route<dynamic> route) => false,
+                            );
+                          } else {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (_) => const Home(
+                                        otpBottomSheet: false,
+                                        welcomeSheet: true,
+                                        profilebottomsheet: false,
+                                        adminformBottomSheet: false,
+                                        Newbusineessbottomsheet: false,
+                                      )),
+                              (Route<dynamic> route) => false,
                             );
                           }
                         } catch (e) {
@@ -218,26 +267,26 @@ bool customer_id =false;
                         child: Center(
                           child: loading
                               ? const CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.black,
-                            ),
-                          )
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.black,
+                                  ),
+                                )
                               : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Verify',
-                                style: GoogleFonts.montserrat(
-                                  color: const Color(0xFF191919),
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Verify',
+                                      style: GoogleFonts.montserrat(
+                                        color: const Color(0xFF191919),
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    SizedBox(width: 12.w),
+                                    const Icon(Icons.east_rounded),
+                                  ],
                                 ),
-                              ),
-                              SizedBox(width: 12.w),
-                              const Icon(Icons.east_rounded),
-                            ],
-                          ),
                         ),
                       ),
                     ),

@@ -30,8 +30,7 @@ class EventApi {
      String updatedAt,
      String v,
   ) async {
-    final preferences = await SharedPreferences.getInstance();
-    final userid = preferences.getString('UserId');
+
     String trendingpath = 'http://178.18.254.224:8654/api/event/create';
     var body = {
       "name": name,

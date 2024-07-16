@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,19 +11,17 @@ class ApiClient {
     Response response;
 
     String url = path;
-    if (kDebugMode) {
-      print(url);
-    }
+    print(url);
+
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String accessToken= prefs.getString("accessToken").toString();
     final nullableHeaderParams = (headerParams.isEmpty) ? null : headerParams;
-    if (kDebugMode) {
-      print(body);
-    }
+    print(body);
     switch (method) {
       case "POST":
         response = await post(Uri.parse(url),
             headers: {
+
               'content-Type': 'application/json',
               "token":'Bearer $accessToken'
             },
@@ -44,17 +41,14 @@ class ApiClient {
       case "POST_":
         response = await post(
           Uri.parse(url),
-          headers: {'content-Type': 'application/json'},
+          headers: {},
           body: body,
         );
         break;
       case "GET_":
         response = await post(
           Uri.parse(url),
-          headers: {
-            "token":'Bearer $accessToken',
-            'content-Type': 'application/json',
-          },
+          headers: {},
           body: body,
         );
         break;
@@ -62,11 +56,8 @@ class ApiClient {
         response = await get(
           Uri.parse(url),
           headers: {
-
-
-
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            "token":'Bearer $accessToken',
+            'content-Type': 'application/json',
           },
         );
 
@@ -92,12 +83,8 @@ class ApiClient {
         });
     }
 
-    if (kDebugMode) {
-      print('status of $path =>${response.statusCode}');
-    }
-    if (kDebugMode) {
-      print(response.body);
-    }
+    print('status of $path =>${response.statusCode}');
+    print(response.body);
     if (response.statusCode >= 400) {
       log('$path : ${response.statusCode} : ${response.body}');
 
