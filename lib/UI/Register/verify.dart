@@ -29,8 +29,10 @@ class _VerifyState extends State<Verify> {
   bool loading = false;
   final auth = FirebaseAuth.instance;
   final verificationCodeController = TextEditingController();
-  bool facility_id = true;
-  bool customer_id = true;
+
+  //
+  // bool facility_on = true;
+  // bool customer_on = true;
 
   // @override
   // void initState() {
@@ -193,8 +195,15 @@ class _VerifyState extends State<Verify> {
                           //   MaterialPageRoute(builder: (_) => S1()),
                           //       (Route<dynamic> route) => false,
                           // );
-                          if (widget.customercode == true &&
-                              widget.facilitycode == true) {
+                          print('${widget.verificationId}*************');
+                          print('${widget.facilitycode}**********************');
+                          print('${widget.customercode}**********************');
+                          String facitiy_id = widget.facilitycode;
+                          String customer_id = widget.customercode;
+                          print(widget.facilitycode);
+                          print(widget.customercode);
+                          if (facitiy_id == true &&
+                              customer_id == true) {
                             Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                   builder: (_) => const Home(
@@ -206,8 +215,8 @@ class _VerifyState extends State<Verify> {
                                       )),
                               (Route<dynamic> route) => false,
                             );
-                          } else if (widget.facilitycode == true &&
-                              widget.customercode == false) {
+                          } else if (facitiy_id == true &&
+                              customer_id == false) {
                             Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                   builder: (_) => const Home(

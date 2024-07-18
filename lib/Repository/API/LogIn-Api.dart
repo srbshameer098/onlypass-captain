@@ -11,7 +11,7 @@ class LogInApi {
 
 
   Future<LogInModel> getLogin(String phoneNumber) async {
-    String trendingpath = 'http://192.168.1.37:5000/api/captian-app/for-login';
+    String trendingpath = 'http://192.168.1.19:5000/api/captian-app/for-login';
     var body = {
       "phoneNumber":phoneNumber
     };

@@ -1,19 +1,29 @@
 
 class LogInModel {
   String? facilityId;
-  bool? facilityCode;
+  String? facilityCode;
   String? acsToken;
-  String? customerId;
-  bool? customerCode;
+  String? customerCode;
 
-  LogInModel({this.facilityId, this.facilityCode, this.acsToken, this.customerId, this.customerCode});
+  LogInModel({this.facilityId, this.facilityCode, this.acsToken, this.customerCode});
 
   LogInModel.fromJson(Map<String, dynamic> json) {
-    facilityId = json["facilityId"];
-    facilityCode = json["facilityCode"];
-    acsToken = json["acsToken"];
-    customerId = json["customerId"];
-    customerCode = json["customerCode"];
+    if(json["facilityId"] is String) {
+      facilityId = json["facilityId"];
+    }
+    if(json["facilityCode"] is String) {
+      facilityCode = json["facilityCode"];
+    }
+    if(json["acsToken"] is String) {
+      acsToken = json["acsToken"];
+    }
+    if(json["customerCode"] is String) {
+      customerCode = json["customerCode"];
+    }
+  }
+
+  static List<LogInModel> fromList(List<Map<String, dynamic>> list) {
+    return list.map((map) => LogInModel.fromJson(map)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -21,7 +31,6 @@ class LogInModel {
     _data["facilityId"] = facilityId;
     _data["facilityCode"] = facilityCode;
     _data["acsToken"] = acsToken;
-    _data["customerId"] = customerId;
     _data["customerCode"] = customerCode;
     return _data;
   }

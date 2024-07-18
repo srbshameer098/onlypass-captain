@@ -7,6 +7,7 @@ import 'package:untitled7/UI/View/home.dart';
 import 'package:untitled7/UI/s1.dart';
 
 
+import '../Register/Authentication.dart';
 import '../Register/log_in_page.dart';
 
 class Splash{
@@ -15,11 +16,11 @@ class Splash{
     final user = auth.currentUser;
     if (user !=null){
       Timer(const Duration( milliseconds: 2500),()=> Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const S1()), (Route<dynamic> route) => false,
+        MaterialPageRoute(builder: (_) => const LogIn()), (Route<dynamic> route) => false,
       ));
     }else{
       Timer(const Duration( seconds: 1 ),()=> Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const LogInPage()), (Route<dynamic> route) => false,
+        MaterialPageRoute(builder: (_) => const LogIn()), (Route<dynamic> route) => false,
       ));
     }
 

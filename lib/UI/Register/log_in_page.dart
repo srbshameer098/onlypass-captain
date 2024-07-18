@@ -25,8 +25,6 @@ class _LogInPageState extends State<LogInPage> {
   final auth = FirebaseAuth.instance;
   final phoneNumberController = TextEditingController();
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +108,7 @@ class _LogInPageState extends State<LogInPage> {
                           ),
                           const Text(
                             '+91',
-                            style:TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
@@ -201,16 +199,20 @@ class _LogInPageState extends State<LogInPage> {
                               });
                               Utils().toastMessage(e.toString());
                             },
-
-                            codeSent: (String verificationId, int? token, ) {
-
+                            codeSent: (
+                              String verificationId,
+                              int? token,
+                            ) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Verify(
-                                    verificationId: verificationId,verificationcode: token.toString(), phoneNum: phoneNumberController.text.toString(),  facilitycode: facilitycode.toString(), customercode: customercode.toString(),
+                                    verificationId: verificationId,
 
-
+                                    phoneNum:
+                                        phoneNumberController.text.toString(),
+                                    facilitycode: facilitycode.toString(),
+                                    customercode: customercode.toString(), verificationcode: null,
                                   ),
                                 ),
                               );
@@ -225,7 +227,6 @@ class _LogInPageState extends State<LogInPage> {
                               });
                             },
                           );
-
                         }
 
                         if (state is LoginblocError) {
@@ -241,6 +242,8 @@ class _LogInPageState extends State<LogInPage> {
                           } else if (phoneNumberController.text.length < 10) {
                             Utils().toastMessage('Enter Valid Mobile Number');
                           } else {
+
+
                             auth.verifyPhoneNumber(
                               phoneNumber: '+91${phoneNumberController.text}',
                               verificationCompleted: (_) {
@@ -254,16 +257,20 @@ class _LogInPageState extends State<LogInPage> {
                                 });
                                 Utils().toastMessage(e.toString());
                               },
-
-                              codeSent: (String verificationId, int? token, ) {
-
+                              codeSent: (
+                                String verificationId,
+                                int? token,
+                              ) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Verify(
-                                      verificationId: verificationId,verificationcode: token.toString(), phoneNum: phoneNumberController.text.toString(),  facilitycode: facilitycode.toString(), customercode: customercode.toString(),
+                                      verificationId: verificationId,
 
-
+                                      phoneNum:
+                                          phoneNumberController.text.toString(),
+                                      facilitycode: facilitycode.toString(),
+                                      customercode: customercode.toString(), verificationcode: null,
                                     ),
                                   ),
                                 );
@@ -278,11 +285,7 @@ class _LogInPageState extends State<LogInPage> {
                                 });
                               },
                             );
-
                           }
-
-
-
                         },
                         child: Container(
                           height: 48.h,
@@ -296,24 +299,25 @@ class _LogInPageState extends State<LogInPage> {
                           child: Center(
                             child: loading
                                 ? const CircularProgressIndicator(
-                              color: Color(0xff282828),
-                            )
+                                    color: Color(0xff282828),
+                                  )
                                 : Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Continue',
-                                  style: GoogleFonts.montserrat(
-                                    color: const Color(0xFF191919),
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w600,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Continue',
+                                        style: GoogleFonts.montserrat(
+                                          color: const Color(0xFF191919),
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      SizedBox(width: 12.w),
+                                      const Icon(Icons.east_rounded),
+                                    ],
                                   ),
-                                ),
-                                SizedBox(width: 12.w),
-                                const Icon(Icons.east_rounded),
-                              ],
-                            ),
                           ),
                         ),
                       ),
@@ -327,18 +331,19 @@ class _LogInPageState extends State<LogInPage> {
       ),
     );
   }
+
   void token(String accessToken) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("accessToken", accessToken);
   }
+
   void customercode(String customerCode) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("customerCode", customerCode);
-
   }
+
   void facilitycode(String facilityCode) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("facilityCode", facilityCode);
   }
-
 }
