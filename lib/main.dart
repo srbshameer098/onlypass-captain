@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled7/Bloc/Event_Creation/event_bloc.dart';
 import 'package:untitled7/Bloc/LogIn/log_in_bloc.dart';
 
+import 'BloC/All_Event/all_event_bloc.dart';
 import 'Repository/API/Event_Api.dart';
 
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => LogInBloc()),
             BlocProvider(create: (context) => EventBloc()),
+            BlocProvider(create: (context) => AllEventBloc()),
           ],
           child: MaterialApp(
             title: 'Captain',

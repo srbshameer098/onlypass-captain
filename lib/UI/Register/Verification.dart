@@ -12,12 +12,10 @@ import '../View/home.dart';
 
 class Verification extends StatefulWidget {
   final String phoneNum;
-  final String verificationId;
 
   const Verification({
     super.key,
     required this.phoneNum,
-    required this.verificationId,
   });
 
   @override
@@ -28,6 +26,12 @@ class _VerificationState extends State<Verification> {
   bool loading = false;
   final auth = FirebaseAuth.instance;
   final verificationCodeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,18 +159,10 @@ class _VerificationState extends State<Verification> {
                         }
 
                         if (state is LoginblocLoaded) {
-                          token(BlocProvider.of<LogInBloc>(context)
-                              .logInModel
-                              .acsToken
-                              .toString());
-                          customercode(BlocProvider.of<LogInBloc>(context)
-                              .logInModel
-                              .customerCode
-                              .toString());
-                          facilitycode(BlocProvider.of<LogInBloc>(context)
-                              .logInModel
-                              .facilityCode
-                              .toString());
+                          String tokens = state.response.acsToken.toString();
+                          String facility = state.response.facilityCode.toString();
+                          String customer = state.response.customerCode.toString();
+                          userinfo(tokens, customer, facility);
 
                           setState(() {
                             loading = false;
@@ -202,19 +198,31 @@ class _VerificationState extends State<Verification> {
                             loading = true;
                           });
 
-                          final credential = PhoneAuthProvider.credential(
-                            verificationId:widget.verificationId,
-                            smsCode: verificationCodeController.text.toString(),
-                          );
-
                           try {
-                            await auth.signInWithCredential(credential);
+                            context.read<LogInBloc>().add(FetchLogin(
+                              phoneNumber: widget.phoneNum.toString(),
+                            ));
+                            // Fetch the customerCode from SharedPreferences
 
-                            // Assuming you have some conditions to check
-                            bool facilityId = true;
-                            bool customerId = true;
-print('${facilityId.toString()}*******************************************');
-                            if (facilityId == true && customerId == true) {
+                            final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                            bool facilityId =  true ;
+                            bool customerId =  false;
+                            String f = prefs.getString("facilityId") ?? '';
+                            String c = prefs.getString("customerId") ?? '';
+if (f == 'true'){
+  facilityId = true;
+}else{
+  facilityId = false;
+}
+                            if (f == 'true'){
+                              customerId = true;
+                            }else{
+                              customerId = false;
+                            }
+print('${f},8888888888888888888888888888888888888888888888888');
+                            print('${c},8888888888888888888888888888888888888888888888888');
+                            if (facilityId ==true  && customerId ==true ) {
                               Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
                                   builder: (_) => const Home(
@@ -323,18 +331,50 @@ print('${facilityId.toString()}*******************************************');
     );
   }
 
-  void token(String accessToken) async {
+  void userinfo(String accessToken, String customerCode, String facilityCode) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("accessToken", accessToken);
+
+    // Save the values to SharedPreferences
+    await prefs.setString("accessToken", accessToken);
+    await prefs.setString("customerCode", customerCode);
+    await prefs.setString("facilityCode", facilityCode);
+
+    // Determine and save boolean values based on customerCode and facilityCode
+    String customersCode = customerCode;
+    String facilityscode = facilityCode;
+
+    await prefs.setString("customerId", customersCode);
+    await prefs.setString("facilityId", facilityscode);
+
+    print('AccessToken saved: $accessToken');
+
+    print('CustomerId: $customersCode');
+    print('FacilityId: $facilityscode');
   }
 
-  void customercode(String customerCode) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("customerCode", customerCode);
-  }
-
-  void facilitycode(String facilityCode) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("facilityCode", facilityCode);
-  }
+  // void _printSavedValues() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? accessToken = prefs.getString("accessToken");
+  //   String? facilityCode = prefs.getString("facilityCode");
+  //   // bool customerId = await _checkCustomerId();
+  //
+  //
+  //   // print('CustomerId: $customerId');
+  //
+  // }
+  // Future<bool> _checkCustomerId() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? customerCode = prefs.getString("customerCode");
+  //   return customerCode != null && customerCode.isNotEmpty;
+  // }
+  // Future<bool> _checkFacilityId() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? facilityCode = prefs.getString("facilityCode");
+  //   return facilityCode != null && facilityCode.isNotEmpty;
+  // }
+  // Future<void> _saveCustomerIdBool(String customerCode) async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   bool customerId = customerCode.isNotEmpty;
+  //   await prefs.setBool("customerId", customerId);
+  // }
 }

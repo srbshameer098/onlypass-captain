@@ -2,35 +2,36 @@ import 'dart:convert';
 import 'dart:core';
 
 import 'package:http/http.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Model_Class/Event_model.dart';
 import 'api_client.dart';
 
+
+
+
 class EventApi {
   ApiClient apiClient = ApiClient();
-
   Future<EventModel> getEvent(
-     String name,
-     String facility,
-     String description,
-     String image,
-     String eventLeader,
-     String startDate,
-     String endDate,
-     bool fee,
-     String amount,
-     String availableSlot,
-     String repeatEndDate,
-     List<String> repetDays,
-     String eventAddress,
-     String eventLat_Long,
-     String id,
-     String createdAt,
-     String updatedAt,
-     String v,
-  ) async {
-
+      {
+        required String name,
+        required String facility,
+        required String description,
+        required String image,
+        required String eventLeader,
+        required String startDate,
+        required String endDate,
+        required bool fee,
+        required String amount,
+        required String availableSlot,
+        required String repeatEndDate,
+        required List<String> repetDays,
+        required String eventAddress,
+        required String eventLat_Long,
+        required String id,
+        required String createdAt,
+        required String updatedAt,
+        required String v,
+      }) async {
     String trendingpath = 'http://178.18.254.224:8654/api/event/create';
     var body = {
       "name": name,
@@ -53,8 +54,7 @@ class EventApi {
       "updatedAt": updatedAt,
       "__v": v
     };
-    Response response =
-        await apiClient.invokeAPI(trendingpath, 'POST', jsonEncode(body));
+    Response response = await apiClient.invokeAPI(trendingpath, 'POST', jsonEncode(body));
     return EventModel.fromJson(jsonDecode(response.body));
   }
 }

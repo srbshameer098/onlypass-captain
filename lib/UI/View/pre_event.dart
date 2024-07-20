@@ -5,8 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PreEvent extends StatefulWidget {
   final String text;
   final String img;
+  final String description;
 
-  const PreEvent({super.key, required this.text, required this.img});
+  const PreEvent(
+      {super.key,
+        required this.text,
+        required this.img,
+        required this.description});
 
   @override
   State<PreEvent> createState() => _PreEventState();
@@ -21,59 +26,75 @@ class _PreEventState extends State<PreEvent> {
         elevation: 0,
         centerTitle: true,
         forceMaterialTransparency: true,
-       title:  Row(
-         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-         children: [
-           GestureDetector(
-             onTap: () {
-               Navigator.pop(context);
-             },
-             child: Container(
-               width: 38.w,
-               height: 38.h,
-               decoration: ShapeDecoration(
-                 color: Color(0xFF282828),
-                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1.r)),
-               ),
-               child: Icon(Icons.arrow_back_ios_rounded,color: Colors.white,size: 16,),
-             ),
-           ),
-
-           Row(
-             children: [
-               GestureDetector(
-                 onTap: () {
-                   Navigator.pop(context);
-                 },
-                 child: Container(
-                   width: 38.w,
-                   height: 38.h,
-                   decoration: ShapeDecoration(
-                     color: Color(0xFF282828),
-                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1.r)),
-                   ),
-                   child: Icon(Icons.share,color: Colors.white,size: 16,),
-                 ),
-               ),
-               SizedBox(width: 16,),
-               GestureDetector(
-                 onTap: () {
-                   Navigator.pop(context);
-                 },
-                 child: Container(
-                   width: 38.w,
-                   height: 38.h,
-                   decoration: ShapeDecoration(
-                     color: Color(0xFF282828),
-                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1.r)),
-                   ),
-                   child: Icon(CupertinoIcons.square_pencil,color: Colors.white,size: 16,),
-                 ),
-               ),
-             ],
-           ),
-         ],
-       ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 38.w,
+                height: 38.h,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF282828),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(1.r)),
+                ),
+                child: Icon(
+                  Icons.arrow_back_ios_rounded,
+                  color: Colors.white,
+                  size: 16,
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    width: 38.w,
+                    height: 38.h,
+                    decoration: ShapeDecoration(
+                      color: Color(0xFF282828),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(1.r)),
+                    ),
+                    child: Icon(
+                      Icons.share,
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    width: 38.w,
+                    height: 38.h,
+                    decoration: ShapeDecoration(
+                      color: Color(0xFF282828),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(1.r)),
+                    ),
+                    child: Icon(
+                      CupertinoIcons.square_pencil,
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -94,30 +115,31 @@ class _PreEventState extends State<PreEvent> {
                 SizedBox(
                   height: 280.h,
                   width: double.infinity,
-                  child: Image.asset(
+                  child: Image.network(
                     widget.img,
                     fit: BoxFit.cover,
                   ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 25.w, vertical: 32.h),
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 25.w, vertical: 32.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         widget.text,
-                        style:  TextStyle(
+                        style: TextStyle(
                           color: Color(0xFFFEFEFE),
                           fontSize: 18.sp,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                       SizedBox(
+                      SizedBox(
                         height: 16.h,
                       ),
-                       Text(
-                        'This class is great for beginners or those who want a more relaxing practice. It focuses on is stretching and strengthening the body.',
+                      Text(
+                        widget.description,
                         style: TextStyle(
                           color: const Color(0xFF6F6F70),
                           fontSize: 16.sp,
@@ -125,10 +147,10 @@ class _PreEventState extends State<PreEvent> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                       SizedBox(
+                      SizedBox(
                         height: 32.h,
                       ),
-                       Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -158,7 +180,7 @@ class _PreEventState extends State<PreEvent> {
                       const SizedBox(
                         height: 24,
                       ),
-                       Row(
+                      Row(
                         children: [
                           Row(
                             children: [
@@ -181,7 +203,7 @@ class _PreEventState extends State<PreEvent> {
                               )
                             ],
                           ),
-                           SizedBox(
+                          SizedBox(
                             width: 24,
                           ),
                           Expanded(
@@ -213,7 +235,7 @@ class _PreEventState extends State<PreEvent> {
                       const SizedBox(
                         height: 16,
                       ),
-                       Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
@@ -269,7 +291,7 @@ class _PreEventState extends State<PreEvent> {
                       const SizedBox(
                         height: 32,
                       ),
-                       Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -300,41 +322,45 @@ class _PreEventState extends State<PreEvent> {
                         height: 24,
                       ),
                       Row(
-                       children: [
-                         Icon(Icons.location_on_outlined,color: Color(0xFF6F6F70),size: 20,),
-                         SizedBox(
-                           width: 15.w,
-                         ),
-                         Column(
-                           crossAxisAlignment: CrossAxisAlignment.start,
-                           mainAxisAlignment: MainAxisAlignment.start,
-                           children: [
-                             Text(
-                               'gymFit Club - Yoga Hall',
-                               style: TextStyle(
-                                 color: Color(0xFF6F6F70),
-                                 fontSize: 14.sp,
-                                 fontFamily: 'Montserrat',
-                                 fontWeight: FontWeight.w500,
-                               ),
-                             ),
-                             Text(
-                               'thazhthangadi Road, areekode -  673639',
-                               style: TextStyle(
-                                 color: Color(0xFF6F6F70),
-                                 fontSize: 14.sp,
-                                 fontFamily: 'Montserrat',
-                                 fontWeight: FontWeight.w400,
-                               ),
-                             )
-                           ],
-                         )
-                       ],
-                     ),
+                        children: [
+                          Icon(
+                            Icons.location_on_outlined,
+                            color: Color(0xFF6F6F70),
+                            size: 20,
+                          ),
+                          SizedBox(
+                            width: 15.w,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'gymFit Club - Yoga Hall',
+                                style: TextStyle(
+                                  color: Color(0xFF6F6F70),
+                                  fontSize: 14.sp,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
+                                'thazhthangadi Road, areekode -  673639',
+                                style: TextStyle(
+                                  color: Color(0xFF6F6F70),
+                                  fontSize: 14.sp,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                       const SizedBox(
                         height: 32,
                       ),
-                       Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(

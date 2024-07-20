@@ -174,18 +174,18 @@ class _LogInPageState extends State<LogInPage> {
                         }
 
                         if (state is LoginblocLoaded) {
-                          token(BlocProvider.of<LogInBloc>(context)
-                              .logInModel
-                              .acsToken
-                              .toString());
-                          customercode(BlocProvider.of<LogInBloc>(context)
-                              .logInModel
-                              .customerCode
-                              .toString());
-                          facilitycode(BlocProvider.of<LogInBloc>(context)
-                              .logInModel
-                              .facilityCode
-                              .toString());
+                          // token(BlocProvider.of<LogInBloc>(context)
+                          //     .logInModel
+                          //     .acsToken
+                          //     .toString());
+                          // customercode(BlocProvider.of<LogInBloc>(context)
+                          //     .logInModel
+                          //     .customerCode
+                          //     .toString());
+                          // facilitycode(BlocProvider.of<LogInBloc>(context)
+                          //     .logInModel
+                          //     .facilityCode
+                          //     .toString());
                           auth.verifyPhoneNumber(
                             phoneNumber: '+91${phoneNumberController.text}',
                             verificationCompleted: (_) {

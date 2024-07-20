@@ -59,6 +59,7 @@ dependencies:
   otp_input_editor:
   geolocator:
   geocoding:
+  shimmer: ^3.0.0
 
 
 

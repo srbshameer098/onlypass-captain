@@ -195,6 +195,10 @@ class _VerifyState extends State<Verify> {
                           //   MaterialPageRoute(builder: (_) => S1()),
                           //       (Route<dynamic> route) => false,
                           // );
+                          // context.read<LoginBloc>().add(Fetchlogin(
+                          //   phoneNumber:
+                          //   phoneNumberController.text.toString(),
+                          // ));
                           print('${widget.verificationId}*************');
                           print('${widget.facilitycode}**********************');
                           print('${widget.customercode}**********************');

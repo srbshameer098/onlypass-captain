@@ -1,23 +1,23 @@
 class EventModel {
   EventModel({
-      this.name, 
-      this.facility, 
-      this.description, 
-      this.image, 
-      this.eventLeader, 
-      this.startDate, 
-      this.endDate, 
-      this.fee, 
-      this.amount, 
-      this.availableSlot, 
-      this.repeatEndDate, 
-      this.repetDays, 
-      this.eventAddress, 
-      this.eventLatLong, 
-      this.id, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v,});
+    this.name,
+    this.facility,
+    this.description,
+    this.image,
+    this.eventLeader,
+    this.startDate,
+    this.endDate,
+    this.fee,
+    this.amount,
+    this.availableSlot,
+    this.repeatEndDate,
+    this.repetDays,
+    this.eventAddress,
+    this.eventLatLong,
+    this.id,
+    this.createdAt,
+    this.updatedAt,
+    this.v,});
 
   EventModel.fromJson(dynamic json) {
     name = json['name'];

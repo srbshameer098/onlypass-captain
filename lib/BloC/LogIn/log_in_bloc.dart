@@ -9,14 +9,14 @@ part 'log_in_state.dart';
 
 class LogInBloc extends Bloc<LogInEvent, LogInState> {
   LogInApi loginApi =LogInApi();
-  late LogInModel logInModel;
+  late LogInModel logInmodel;
   LogInBloc() : super(LogInInitial()) {
     on<FetchLogin>((event, emit) async {
       emit(LoginblocLoading());
       try{
-        logInModel = await loginApi.getLogin(event.phoneNumber);
+        logInmodel = await loginApi.getLogin(event.phoneNumber);
 
-        emit(LoginblocLoaded());
+        emit(LoginblocLoaded(logInmodel));
       }catch(e){
         print(e);
         emit(LoginblocError());

@@ -129,7 +129,7 @@ class _EventPagesState extends State<EventPages> {
                 // Navigator.of(context).pushAndRemoveUntil(
                 //   MaterialPageRoute(builder: (_) => const EventConfirm()),
                 //       (Route<dynamic> route) => false,);
-                Navigator.push(context, MaterialPageRoute(builder: (_)=> EventConfirm()));
+                Navigator.push(context, MaterialPageRoute(builder: (_)=> EventConfirm(name: '', category: '', type: true, startDateAndTime: '', endDateAndTime: '',)));
               }
             });
           },

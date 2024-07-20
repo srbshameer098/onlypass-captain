@@ -1,15 +1,19 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:untitled7/Bloc/Event_Creation/event_bloc.dart';
 import 'package:untitled7/UI/View/pre_event.dart';
 import 'package:untitled7/UI/View/wallet.dart';
 
+import '../../BloC/All_Event/all_event_bloc.dart';
+import '../../Repository/Model_Class/All_Event_Model.dart';
 import '../../components/Bottom Sheets/Admin customer-id form.dart';
 import '../../components/Bottom Sheets/New business enquiry.dart';
 import '../../components/facility_item.dart';
@@ -44,7 +48,7 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
 }
-
+late List<AllEventModel>? data;
 class _HomeState extends State<Home> {
   List<String> icons = [
     'assets/icons/history.png',
@@ -95,6 +99,7 @@ class _HomeState extends State<Home> {
         New_busineess_BottomSheet(context);
       }
     });
+    BlocProvider.of<AllEventBloc>(context).add(FetchAllEvent());
   }
 
   final PageController _pageController = PageController();
@@ -851,10 +856,12 @@ class _HomeState extends State<Home> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => const PreEvent(
-                                            text:
-                                                'Yoga class with Arun Master and team.',
-                                            img: "assets/images/img1.png",
-                                          )));
+                                        text:
+                                        'Yoga class with Arun Master and team.',
+                                        img: "assets/images/img1.png",
+                                        description:
+                                        'This class is great for beginners or those who want a more relaxing practice. It focuses on is stretching and strengthen the body.',
+                                      )));
                             },
                             child: SizedBox(
                               height: 270.h,
@@ -1035,19 +1042,444 @@ class _HomeState extends State<Home> {
                         ),
 
                         ///-----------Tab 2  -------------------///
-                        SingleChildScrollView(
-                          child: Center(
-                            child: Text(
-                              "No more data available",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.montserrat(
-                                color: Color(0xFF818181),
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 8.h, horizontal: 16),
+                          child: GestureDetector(
+                            onTap: () {
+                              data = BlocProvider.of<AllEventBloc>(context)
+                                  .allEventModel;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => PreEvent(
+                                    text: data![0].name.toString(),
+                                    // img: "assets/images/img1.png",
+                                    img: data![0].image.toString(),
+                                    description:
+                                    data![0].description.toString(),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: SizedBox(
+                              height: 270.h,
+                              child: BlocBuilder<AllEventBloc, AllEventState>(
+                                builder: (context, state) {
+                                  data = BlocProvider.of<AllEventBloc>(context)
+                                      .allEventModel;
+                                  if (state is AllEventBlocLoading) {
+                                    if (kDebugMode) {
+                                      print(
+                                          'Data AllEventBlocLoading ! ! ! ! ! !! ! ! ! ! !: ${data.toString()}');
+                                    }
+
+                                    ///  Shimmer effect  ///
+                                    return Shimmer.fromColors(
+                                      direction: ShimmerDirection.ltr,
+                                      baseColor: const Color(0xFFE7E7E7),
+                                      highlightColor: const Color(0xFF9B9B9B),
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (_, __) => Padding(
+                                          padding:
+                                          EdgeInsets.only(right: 16.w),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width: 140.w,
+                                                height: 185.h,
+                                                decoration:  BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            10.r))),
+                                              ),
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
+                                              Container(
+                                                width: 140.w,
+                                                height: 20.h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            10.r))),
+                                              ),
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
+                                              Container(
+                                                width: 140.w,
+                                                height: 20.h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            10.r))),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        itemCount: 3,
+                                      ),
+                                    );
+                                  }
+                                  if (state is AllEventBlocError) {
+                                    print(
+                                        'Data AllEventBlocError ! ! ! ! ! !! ! ! ! ! !: ${data.toString()}');
+                                    return const Center(
+                                      child: Text('Failed to load events'),
+                                    );
+                                  }
+                                  if (state is AllEventBlocLoaded) {
+                                    data =
+                                        BlocProvider.of<AllEventBloc>(context)
+                                            .allEventModel;
+                                    print(
+                                        'Data fetched ! ! ! ! ! !! ! ! ! ! ! AllEventBlocLoaded ! ! ! ! ! !! ! ! ! ! !: ${data.toString()}');
+                                    if (data == null || data!.isEmpty) {
+                                      print(
+                                          'Data fetched ! ! ! ! ! !! ! ! ! ! ! EMPTY ! ! ! ! ! !! ! ! ! ! !: ${data.toString()}');
+                                      return const Center(
+                                        child: Text('No events available'),
+                                      );
+                                    }
+                                    return ListView.separated(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: data!.length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                Container(
+                                                  width: 152.w,
+                                                  height: 194.h,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      image: NetworkImage(
+                                                          data![index]
+                                                              .image
+                                                              .toString()),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 163.h,
+                                                  child: Container(
+                                                    width: 152.w,
+                                                    height: 31.h,
+                                                    decoration: BoxDecoration(
+                                                      gradient: LinearGradient(
+                                                        begin: const Alignment(
+                                                            -0.00, 1.00),
+                                                        end: const Alignment(0, -1),
+                                                        colors: [
+                                                          const Color(0x91191919),
+                                                          Colors.black
+                                                              .withOpacity(
+                                                              0.35),
+                                                          const Color(0x00191919)
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  left: 101.w,
+                                                  top: 12.h,
+                                                  child: Container(
+                                                    width: 52.w,
+                                                    height: 16.h,
+                                                    decoration:
+                                                    const BoxDecoration(
+                                                      color: Colors.black,
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Weekly',
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                          color: const Color(
+                                                              0xFFFEFEFE),
+                                                          fontSize: 10.sp,
+                                                          fontWeight:
+                                                          FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  left: 15.w,
+                                                  top: 172.h,
+                                                  child: SizedBox(
+                                                    width: 16.w,
+                                                    height: 16.h,
+                                                    child: Image.asset(
+                                                      'assets/icons/groupIcon.png',
+                                                      height: 28.h,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  left: 39.w,
+                                                  top: 175.h,
+                                                  child: Text(
+                                                    '${data![index].availableSlot} availableSlot',
+                                                    style: TextStyle(
+                                                      color: const Color(
+                                                          0xFFFEFEFE),
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                      FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 8.h),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 4.w),
+                                              child: SizedBox(
+                                                width: 153.w,
+                                                child: Text(
+                                                  data![index].name.toString(),
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 12.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    height: 1.2.h,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 4.h),
+                                              child: SizedBox(
+                                                width: 153.w,
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      data![index]
+                                                          .startDate
+                                                          .toString(),
+                                                      style: GoogleFonts.inter(
+                                                        color: const Color(
+                                                            0xFF818181),
+                                                        fontSize: 10.sp,
+                                                        fontWeight:
+                                                        FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 4),
+                                                    Text(
+                                                      data![index]
+                                                          .endDate.toString(),
+                                                      style: GoogleFonts.inter(
+                                                        color: const Color(
+                                                            0xFF818181),
+                                                        fontSize: 10.sp,
+                                                        fontWeight:
+                                                        FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return SizedBox(width: 23.w);
+                                      },
+                                    );
+                                  } else {
+                                    return Container(
+                                      height: 20,
+                                      width: 20,
+                                      color: Colors.blue,
+                                    );
+                                    // data = BlocProvider.of<AllEventBloc>(context).allEventModel;
+                                    // print('Data fetched ! ! ! ! ! !! ! ! ! ! ! AllEventBlocLoaded ! ! ! ! ! !! ! ! ! ! !: ${data.toString()}');
+                                    // if (data == null || data!.isEmpty) {
+                                    //   print('Data fetched ! ! ! ! ! !! ! ! ! ! ! EMPTY ! ! ! ! ! !! ! ! ! ! !: ${data.toString()}');
+                                    //   return Center(
+                                    //     child: Text('No events available'),
+                                    //
+                                    //   );
+                                    // }
+                                    // return ListView.separated(
+                                    //   scrollDirection: Axis.horizontal,
+                                    //   itemCount: data!.length,
+                                    //   itemBuilder: (context, index) {
+                                    //     return Column(
+                                    //       children: [
+                                    //         Stack(
+                                    //           children: [
+                                    //             Container(
+                                    //               width: 152.w,
+                                    //               height: 194.h,
+                                    //               decoration: BoxDecoration(
+                                    //                 image: DecorationImage(
+                                    //                   image: NetworkImage(
+                                    //                       data![index].image.toString()),
+                                    //                   fit: BoxFit.cover,
+                                    //                 ),
+                                    //               ),
+                                    //             ),
+                                    //             Positioned(
+                                    //               top: 163.h,
+                                    //               child: Container(
+                                    //                 width: 152.w,
+                                    //                 height: 31.h,
+                                    //                 decoration: BoxDecoration(
+                                    //                   gradient: LinearGradient(
+                                    //                     begin: Alignment(
+                                    //                         -0.00, 1.00),
+                                    //                     end: Alignment(0, -1),
+                                    //                     colors: [
+                                    //                       Color(0x91191919),
+                                    //                       Colors.black
+                                    //                           .withOpacity(
+                                    //                           0.35),
+                                    //                       Color(0x00191919)
+                                    //                     ],
+                                    //                   ),
+                                    //                 ),
+                                    //               ),
+                                    //             ),
+                                    //             Positioned(
+                                    //               left: 101.w,
+                                    //               top: 12.h,
+                                    //               child: Container(
+                                    //                 width: 52.w,
+                                    //                 height: 16.h,
+                                    //                 decoration: const BoxDecoration(
+                                    //                   color: Colors.black,
+                                    //                 ),
+                                    //                 child: Center(
+                                    //                   child: Text(
+                                    //                     'Weekly',
+                                    //                     style: GoogleFonts
+                                    //                         .montserrat(
+                                    //                       color: const Color(
+                                    //                           0xFFFEFEFE),
+                                    //                       fontSize: 10.sp,
+                                    //                       fontWeight: FontWeight
+                                    //                           .w400,
+                                    //                     ),
+                                    //                   ),
+                                    //                 ),
+                                    //               ),
+                                    //             ),
+                                    //             Positioned(
+                                    //               left: 15.w,
+                                    //               top: 172.h,
+                                    //               child: SizedBox(
+                                    //                 width: 16.w,
+                                    //                 height: 16.h,
+                                    //                 child: Image.asset(
+                                    //                   'assets/icons/groupIcon.png',
+                                    //                   height: 28.h,
+                                    //                 ),
+                                    //               ),
+                                    //             ),
+                                    //             Positioned(
+                                    //               left: 39.w,
+                                    //               top: 175.h,
+                                    //               child: Text(
+                                    //                 '${data![index]
+                                    //                     .availableSlot} availableSlot',
+                                    //                 style: TextStyle(
+                                    //                   color: const Color(
+                                    //                       0xFFFEFEFE),
+                                    //                   fontSize: 10.sp,
+                                    //                   fontWeight: FontWeight
+                                    //                       .w500,
+                                    //                 ),
+                                    //               ),
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    //         SizedBox(height: 8),
+                                    //         Padding(
+                                    //           padding: EdgeInsets.symmetric(
+                                    //               vertical: 4.w),
+                                    //           child: SizedBox(
+                                    //             width: 153.w,
+                                    //             child: Text(
+                                    //               data![index].name.toString(),
+                                    //               style: TextStyle(
+                                    //                 color: Colors.white,
+                                    //                 fontSize: 12.sp,
+                                    //                 fontWeight: FontWeight.w400,
+                                    //                 height: 1.2.h,
+                                    //               ),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //         Padding(
+                                    //           padding: EdgeInsets.symmetric(
+                                    //               vertical: 4.h),
+                                    //           child: SizedBox(
+                                    //             width: 153.w,
+                                    //             child: Row(
+                                    //               children: [
+                                    //                 Text(
+                                    //                   data![index].startDate!
+                                    //                       .toString(),
+                                    //                   style: GoogleFonts.inter(
+                                    //                     color: const Color(
+                                    //                         0xFF818181),
+                                    //                     fontSize: 10.sp,
+                                    //                     fontWeight: FontWeight
+                                    //                         .w400,
+                                    //                   ),
+                                    //                 ),
+                                    //                 const SizedBox(width: 4),
+                                    //                 Text(
+                                    //                   data![index].endDate!
+                                    //                       .toString(),
+                                    //                   style: GoogleFonts.inter(
+                                    //                     color: const Color(
+                                    //                         0xFF818181),
+                                    //                     fontSize: 10.sp,
+                                    //                     fontWeight: FontWeight
+                                    //                         .w400,
+                                    //                   ),
+                                    //                 ),
+                                    //               ],
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ],
+                                    //     );
+                                    //   },
+                                    //   separatorBuilder: (BuildContext context,
+                                    //       int index) {
+                                    //     return SizedBox(width: 23.w);
+                                    //   },
+                                    // );
+                                  }
+                                },
                               ),
                             ),
                           ),
                         ),
+
 
                         ///-----------Tab 3  -------------------///
                         SingleChildScrollView(

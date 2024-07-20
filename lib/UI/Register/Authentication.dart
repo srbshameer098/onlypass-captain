@@ -177,39 +177,48 @@ class _LogInState extends State<LogIn> {
       } else if (phoneNumberController.text.length < 10) {
         Utils().toastMessage('Enter Valid Mobile Number');
       } else {
-        auth.verifyPhoneNumber(
-          phoneNumber: '+91${phoneNumberController.text}',
-          verificationCompleted: (_) {
-            setState(() {
-              loading = false;
-            });
-          },
-          verificationFailed: (e) {
-            setState(() {
-              loading = false;
-            });
-            Utils().toastMessage(e.toString());
-          },
-          codeSent: (String verificationId,
-              int? token,) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Verification(phoneNum: phoneNumberController.text,  verificationId: verificationId,)
-              ),
-            );
-            setState(() {
-              loading = false;
-            });
-          },
-          codeAutoRetrievalTimeout: (e) {
-            Utils().toastMessage(e.toString());
-            setState(() {
-              loading = false;
-            });
-          },
-        );
+        // auth.verifyPhoneNumber(
+        //   phoneNumber: '+91${phoneNumberController.text}',
+        //   verificationCompleted: (_) {
+        //     setState(() {
+        //       loading = false;
+        //     });
+        //   },
+        //   verificationFailed: (e) {
+        //     setState(() {
+        //       loading = false;
+        //     });
+        //     Utils().toastMessage(e.toString());
+        //   },
+        //   codeSent: (String verificationId,
+        //       int? token,) {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(
+        //           builder: (context) =>
+        //               Verification(phoneNum: phoneNumberController.text,  verificationId: verificationId,)
+        //       ),
+        //     );
+        //     setState(() {
+        //       loading = false;
+        //     });
+        //   },
+        //   codeAutoRetrievalTimeout: (e) {
+        //     Utils().toastMessage(e.toString());
+        //     setState(() {
+        //       loading = false;
+        //     });
+        //   },
+        // );
+        Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Verification(phoneNum: phoneNumberController.text,
+                            // verificationId: verificationId,
+                          )
+                  ),
+                );
       }
     },
       child:
