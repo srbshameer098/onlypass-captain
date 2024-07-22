@@ -1,12 +1,18 @@
 part of 'log_in_bloc.dart';
 
 @immutable
-sealed class LogInState {}
+abstract class LogInState {}
 
-final class LogInInitial extends LogInState {}
-final class LoginblocLoading extends LogInState {}
-final class LoginblocLoaded extends LogInState {
+class LogInInitial extends LogInState {}
+
+class LoginblocLoading extends LogInState {}
+
+class LoginblocLoaded extends LogInState {
   final LogInModel response;
   LoginblocLoaded(this.response);
 }
-final class LoginblocError extends LogInState {}
+
+class LoginblocError extends LogInState {
+  final String error;
+  LoginblocError({required this.error});
+}

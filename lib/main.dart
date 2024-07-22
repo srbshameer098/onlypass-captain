@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled7/BloC/CapUser/cap_user_bloc.dart';
 import 'package:untitled7/Bloc/Event_Creation/event_bloc.dart';
 import 'package:untitled7/Bloc/LogIn/log_in_bloc.dart';
 
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => LogInBloc()),
             BlocProvider(create: (context) => EventBloc()),
             BlocProvider(create: (context) => AllEventBloc()),
+            BlocProvider(create: (context) => CapUserBloc()),
           ],
           child: MaterialApp(
             title: 'Captain',

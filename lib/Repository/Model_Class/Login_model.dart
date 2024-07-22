@@ -3,9 +3,10 @@ class LogInModel {
   String? facilityId;
   String? facilityCode;
   String? acsToken;
+  String? customerId;
   String? customerCode;
 
-  LogInModel({this.facilityId, this.facilityCode, this.acsToken, this.customerCode});
+  LogInModel({this.facilityId, this.facilityCode, this.acsToken, this.customerId, this.customerCode});
 
   LogInModel.fromJson(Map<String, dynamic> json) {
     if(json["facilityId"] is String) {
@@ -16,6 +17,9 @@ class LogInModel {
     }
     if(json["acsToken"] is String) {
       acsToken = json["acsToken"];
+    }
+    if(json["customerId"] is String) {
+      customerId = json["customerId"];
     }
     if(json["customerCode"] is String) {
       customerCode = json["customerCode"];
@@ -31,6 +35,7 @@ class LogInModel {
     _data["facilityId"] = facilityId;
     _data["facilityCode"] = facilityCode;
     _data["acsToken"] = acsToken;
+    _data["customerId"] = customerId;
     _data["customerCode"] = customerCode;
     return _data;
   }
