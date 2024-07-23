@@ -332,9 +332,9 @@ class _LogInPageState extends State<LogInPage> {
     );
   }
 
-  void token(String accessToken) async {
+  void number(String number) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("accessToken", accessToken);
+    prefs.setString("number", number);
   }
 
   void customercode(String customerCode) async {

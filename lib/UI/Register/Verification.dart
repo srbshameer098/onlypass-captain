@@ -26,14 +26,15 @@ class _VerificationState extends State<Verification> {
   bool loading = false;
   final auth = FirebaseAuth.instance;
   final verificationCodeController = TextEditingController();
-  String f ='';
-  String c ='';
-  String a ='';
-  String fi ='';
+  String f = '';
+  String c = '';
+  String a = '';
+  String fi = '';
+
   @override
   void initState() {
     super.initState();
-
+    _printSharedPreferencesValues();
   }
 
   @override
@@ -162,16 +163,14 @@ class _VerificationState extends State<Verification> {
                         }
 
                         if (state is LoginblocLoaded) {
-
                           String tokens = state.response.acsToken.toString();
                           String facility = state.response.facilityCode.toString();
                           String customer = state.response.customerCode.toString();
-                          String facilityid =state.response.facilityId.toString();
+                          String facilityid = state.response.facilityId.toString();
                           userinfo(tokens, customer, facility, facilityid);
                           print('Login successful. Token: $tokens');
                           setState(() {
                             loading = false;
-
                           });
                         }
 
@@ -216,29 +215,27 @@ class _VerificationState extends State<Verification> {
                             final accessToken = prefs.getString('accessToken');
                             final facilityid = prefs.getString('facilityId');
 
-                            bool facilityId =  true ;
-                            bool customerId =  false;
+                            bool facilityId = true;
+                            bool customerId = false;
                             f = facilityCode.toString();
                             c = customerCode.toString();
                             a = accessToken.toString();
                             fi = facilityid.toString();
-                            if (f == 'true'){
+                            if (f == 'true') {
                               facilityId = true;
-                            }else{
+                            } else {
                               facilityId = false;
                             }
-                            if (c == 'true'){
+                            if (c == 'true') {
                               customerId = true;
-                            }else{
+                            } else {
                               customerId = false;
                             }
-                            // print(prefs.getString("facilityCode"));
-                            // print(prefs.getString('accessToken'));
                             print('${f},8888888888888888888888888888888888888888888888888');
                             print('${c},8888888888888888888888888888888888888888888888888');
                             print('${a},8888888888888888888888888888888888888888888888888');
                             print('${fi},8888888888888888888888888888888888888888888888888');
-                            if (facilityId ==true  && customerId ==true ) {
+                            if (facilityId == true && customerId == true) {
                               Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
                                   builder: (_) => const Home(
@@ -347,14 +344,42 @@ class _VerificationState extends State<Verification> {
     );
   }
 
-  void userinfo(String tokens, String customer, String facility,String facilityid) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  void userinfo(String tokens, String customer, String facility, String facilityid) async {
+    try {
+      // Introduce a delay of 2 seconds
+      await Future.delayed(Duration(seconds: 2));
 
-    // Save the values to SharedPreferences
-    await prefs.setString('accessToken', tokens);
-    await prefs.setString('customerCode', customer);
-    await prefs.setString('facilityCode', facility);
-    prefs.setString('facilityId', facilityid);
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      // Save the values to SharedPreferences
+      await prefs.setString('accessToken', tokens);
+      await prefs.setString('customerCode', customer);
+      await prefs.setString('facilityCode', facility);
+      await prefs.setString('facilityId', facilityid);
+      await prefs.setString('phone', widget.phoneNum);
+
+      print('Values saved to SharedPreferences');
+    } catch (e) {
+      print('Error saving values to SharedPreferences: $e');
+    }
   }
 
+  Future<void> _printSharedPreferencesValues() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final accessToken = prefs.getString('accessToken');
+      final customerCode = prefs.getString('customerCode');
+      final facilityCode = prefs.getString('facilityCode');
+      final facilityId = prefs.getString('facilityId');
+      final phone = prefs.getString('phone');
+
+      print('accessToken: ${accessToken ?? 'Not found'}');
+      print('customerCode: ${customerCode ?? 'Not found'}');
+      print('facilityCode: ${facilityCode ?? 'Not found'}');
+      print('facilityId: ${facilityId ?? 'Not found'}');
+      print('phone: ${phone ?? 'Not found'}');
+    } catch (e) {
+      print('Error reading values from SharedPreferences: $e');
+    }
+  }
 }

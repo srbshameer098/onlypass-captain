@@ -355,11 +355,11 @@ class _HomeState extends State<Home> {
                                         builder: (_) =>
                                         const Facilities_Search()));
                               }else{
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>
-                                          const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: true, )));}
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                        const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: true, )));}
                             },
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
@@ -567,93 +567,93 @@ class _HomeState extends State<Home> {
                     CarouselSlider.builder(
                       itemCount: 5,
                       itemBuilder: (BuildContext context, int itemIndex,
-                              int pageViewIndex) =>
+                          int pageViewIndex) =>
                           Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Container(
-                          width: 376.w,
-                          height: 64.h,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFFEFEFE),
-                              borderRadius:
+                            padding: EdgeInsets.all(8.0),
+                            child: Container(
+                              width: 376.w,
+                              height: 64.h,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xFFFEFEFE),
+                                  borderRadius:
                                   BorderRadius.all(Radius.circular(1.r))),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20.0.h),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 40.w,
-                                  height: 40.h,
-                                  decoration: ShapeDecoration(
-                                    image: const DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/imgLog.png"),
-                                      fit: BoxFit.fill,
-                                    ),
-                                    shape: OvalBorder(
-                                      side: BorderSide(
-                                          width: 0.30.w,
-                                          color: const Color(0xFF191919)),
-                                    ),
-                                  ),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20.0.h),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Jayaram Ravi',
-                                      style: TextStyle(
-                                        color: const Color(0xFF191919),
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w600,
+                                    Container(
+                                      width: 40.w,
+                                      height: 40.h,
+                                      decoration: ShapeDecoration(
+                                        image: const DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/imgLog.png"),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        shape: OvalBorder(
+                                          side: BorderSide(
+                                              width: 0.30.w,
+                                              color: const Color(0xFF191919)),
+                                        ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 5.h,
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Jayaram Ravi',
+                                          style: TextStyle(
+                                            color: const Color(0xFF191919),
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5.h,
+                                        ),
+                                        Text(
+                                          '3 Months plan',
+                                          style: GoogleFonts.montserrat(
+                                            color: const Color(0xFF9B9B9B),
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    Text(
-                                      '3 Months plan',
-                                      style: GoogleFonts.montserrat(
-                                        color: const Color(0xFF9B9B9B),
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          '₹ ' '5,799 .00',
+                                          style: GoogleFonts.montserrat(
+                                            color: const Color(0xFF191919),
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5.h,
+                                        ),
+                                        Text(
+                                          'DUE YESTERDAY',
+                                          style: GoogleFonts.montserrat(
+                                            color: const Color(0xFFE83507),
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        )
+                                      ],
                                     )
                                   ],
                                 ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      '₹ ' '5,799 .00',
-                                      style: GoogleFonts.montserrat(
-                                        color: const Color(0xFF191919),
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Text(
-                                      'DUE YESTERDAY',
-                                      style: GoogleFonts.montserrat(
-                                        color: const Color(0xFFE83507),
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
                       options: CarouselOptions(
                         viewportFraction: 0.9,
                         onPageChanged: (index, reason) {
@@ -714,7 +714,7 @@ class _HomeState extends State<Home> {
                                         builder: (_) => Account()));
                               },
                               child:
-                                  FacilityItem(icon: icons[0], text: texts[0])),
+                              FacilityItem(icon: icons[0], text: texts[0])),
                           GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -723,7 +723,7 @@ class _HomeState extends State<Home> {
                                         builder: (_) => const Members()));
                               },
                               child:
-                                  FacilityItem(icon: icons[1], text: texts[1])),
+                              FacilityItem(icon: icons[1], text: texts[1])),
                           GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -732,7 +732,7 @@ class _HomeState extends State<Home> {
                                         builder: (_) => const Enquiry()));
                               },
                               child:
-                                  FacilityItem(icon: icons[2], text: texts[2])),
+                              FacilityItem(icon: icons[2], text: texts[2])),
                           GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -741,7 +741,7 @@ class _HomeState extends State<Home> {
                                         builder: (_) => const Wallet()));
                               },
                               child:
-                                  FacilityItem(icon: icons[3], text: texts[3])),
+                              FacilityItem(icon: icons[3], text: texts[3])),
                         ],
                       ),
                     ),
@@ -781,7 +781,7 @@ class _HomeState extends State<Home> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      // builder: (_) => const CreateEvent()));
+                                    // builder: (_) => const CreateEvent()));
                                       builder: (_) => const EventPages()));
                             },
                             child: Text(
@@ -915,7 +915,7 @@ class _HomeState extends State<Home> {
                                                           Color(0x91191919),
                                                           Colors.black
                                                               .withOpacity(
-                                                                  0.35),
+                                                              0.35),
                                                           Color(0x00191919)
                                                         ],
                                                       ),
@@ -928,8 +928,8 @@ class _HomeState extends State<Home> {
                                                   width: 52.w,
                                                   height: 16.h,
                                                   decoration:
-                                                      const BoxDecoration(
-                                                          color: Colors.black),
+                                                  const BoxDecoration(
+                                                      color: Colors.black),
                                                   child: Center(
                                                     child: Text(
                                                       'Weekly',
@@ -939,7 +939,7 @@ class _HomeState extends State<Home> {
                                                             0xFFFEFEFE),
                                                         fontSize: 10.sp,
                                                         fontWeight:
-                                                            FontWeight.w400,
+                                                        FontWeight.w400,
                                                       ),
                                                     ),
                                                   ),
@@ -964,7 +964,7 @@ class _HomeState extends State<Home> {
                                                   '17 booked',
                                                   style: GoogleFonts.montserrat(
                                                     color:
-                                                        const Color(0xFFFEFEFE),
+                                                    const Color(0xFFFEFEFE),
                                                     fontSize: 10.sp,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -1005,7 +1005,7 @@ class _HomeState extends State<Home> {
                                                           0xFF818181),
                                                       fontSize: 10.sp,
                                                       fontWeight:
-                                                          FontWeight.w400,
+                                                      FontWeight.w400,
                                                     ),
                                                   ),
                                                   const SizedBox(
@@ -1018,7 +1018,7 @@ class _HomeState extends State<Home> {
                                                           0xFF818181),
                                                       fontSize: 10.sp,
                                                       fontWeight:
-                                                          FontWeight.w400,
+                                                      FontWeight.w400,
                                                     ),
                                                   ),
                                                 ],

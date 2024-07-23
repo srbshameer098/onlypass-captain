@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled7/UI/View/home.dart';
+import '../../BloC/LogIn/log_in_bloc.dart';
 import '../../Utils/utils.dart';
+import '../../components/Bottom Sheets/New business enquiry.dart';
 import '../s1.dart';
 
 class Verify extends StatefulWidget {
@@ -195,10 +198,10 @@ class _VerifyState extends State<Verify> {
                           //   MaterialPageRoute(builder: (_) => S1()),
                           //       (Route<dynamic> route) => false,
                           // );
-                          // context.read<LoginBloc>().add(Fetchlogin(
-                          //   phoneNumber:
-                          //   phoneNumberController.text.toString(),
-                          // ));
+                          context.read<LogInBloc>().add(FetchLogin(
+                            phoneNumber:
+                            phoneNumberController.text.toString(),
+                          ));
                           print('${widget.verificationId}*************');
                           print('${widget.facilitycode}**********************');
                           print('${widget.customercode}**********************');

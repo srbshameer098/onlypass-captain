@@ -49,11 +49,11 @@ class AllEventModel {
     if(json["fee"] is bool) {
       fee = json["fee"];
     }
-    if(json["amount"] is num) {
-      amount = (json["amount"] as num).toInt();
+    if(json["amount"] is int) {
+      amount = json["amount"];
     }
-    if(json["availableSlot"] is num) {
-      availableSlot = (json["availableSlot"] as num).toInt();
+    if(json["availableSlot"] is int) {
+      availableSlot = json["availableSlot"];
     }
     if(json["repeatEndDate"] is String) {
       repeatEndDate = json["repeatEndDate"];
@@ -73,8 +73,8 @@ class AllEventModel {
     if(json["updatedAt"] is String) {
       updatedAt = json["updatedAt"];
     }
-    if(json["__v"] is num) {
-      v = (json["__v"] as num).toInt();
+    if(json["__v"] is int) {
+      v = json["__v"];
     }
   }
 
@@ -106,44 +106,4 @@ class AllEventModel {
     _data["__v"] = v;
     return _data;
   }
-
-  AllEventModel copyWith({
-    String? id,
-    String? name,
-    String? facility,
-    String? description,
-    String? image,
-    String? eventLeader,
-    String? startDate,
-    String? endDate,
-    bool? fee,
-    int? amount,
-    int? availableSlot,
-    String? repeatEndDate,
-    List<String>? repetDays,
-    String? eventAddress,
-    String? eventLatLong,
-    String? createdAt,
-    String? updatedAt,
-    int? v,
-  }) => AllEventModel(
-    id: id ?? this.id,
-    name: name ?? this.name,
-    facility: facility ?? this.facility,
-    description: description ?? this.description,
-    image: image ?? this.image,
-    eventLeader: eventLeader ?? this.eventLeader,
-    startDate: startDate ?? this.startDate,
-    endDate: endDate ?? this.endDate,
-    fee: fee ?? this.fee,
-    amount: amount ?? this.amount,
-    availableSlot: availableSlot ?? this.availableSlot,
-    repeatEndDate: repeatEndDate ?? this.repeatEndDate,
-    repetDays: repetDays ?? this.repetDays,
-    eventAddress: eventAddress ?? this.eventAddress,
-    eventLatLong: eventLatLong ?? this.eventLatLong,
-    createdAt: createdAt ?? this.createdAt,
-    updatedAt: updatedAt ?? this.updatedAt,
-    v: v ?? this.v,
-  );
 }
