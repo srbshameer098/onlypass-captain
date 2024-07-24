@@ -60,6 +60,7 @@ dependencies:
   geolocator:
   geocoding:
   shimmer: ^3.0.0
+  flutter_multi_formatter: ^2.13.0
 
 
 

@@ -17,6 +17,7 @@ import '../../Repository/Model_Class/All_Event_Model.dart';
 import '../../components/Bottom Sheets/Admin customer-id form.dart';
 import '../../components/Bottom Sheets/New business enquiry.dart';
 import '../../components/facility_item.dart';
+import '../../components/radioButton.dart';
 import '../../event_pages.dart';
 import '../../components/Bottom Sheets/Staff customer-id form.dart';
 import 'Staff login - Facilities Search.dart';
@@ -149,8 +150,10 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     SizedBox(height: 32.h),
-                    GestureDetector(
-                      onTap: () {
+                    CustomRadioButton(
+                      text: 'I am a staff of a registered business',
+                      isSelected: selectedValue == 1,
+                      onSelect: (value) {
                         setModalState(() {
                           selectedValue = 1;
                         });
@@ -158,71 +161,19 @@ class _HomeState extends State<Home> {
                           selectedValue = 1;
                         });
                       },
-                      child: Container(
-                        width: 334.w,
-                        height: 95.h,
-                        decoration: ShapeDecoration(
-                          color: selectedValue == 1
-                              ? Color(0xFFFEFEFE)
-                              : Color(0xFF282828),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(1)),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Radio(
-                                  value: 1,
-                                  groupValue: selectedValue,
-                                  onChanged: (value) {
-                                    setModalState(() {
-                                      _handleRadioValueChange(value);
-                                    });
-                                    setState(() {
-                                      _handleRadioValueChange(value);
-                                    });
-                                  },
-                                  activeColor: Colors.green,
-                                ),
-                                Text(
-                                  'I am a staff of a registered business',
-                                  style: TextStyle(
-                                    color: selectedValue == 1
-                                        ? Color(0xFF191919)
-                                        : Color(0xFFFEFEFE),
-                                    fontSize: 13.sp,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 24.w,
-                              ),
-                              child: Text(
-                                'Select your business from registered list of businesses with a name or code.',
-                                style: TextStyle(
-                                  color: Color(0xFF818181),
-                                  fontSize: 14,
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      fontStyle: TextStyle(
+                        color: selectedValue == 1 ? Color(0xFF191919) : Color(0xFFFEFEFE),
+                        fontSize: 13.sp,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
                       ),
+                      description: 'Select your business from registered list of businesses with a name or code.',
                     ),
                     SizedBox(height: 24.h),
-                    GestureDetector(
-                      onTap: () {
+                    CustomRadioButton(
+                      text: 'I am a new user.',
+                      isSelected: selectedValue == 2,
+                      onSelect: (value) {
                         setModalState(() {
                           selectedValue = 2;
                         });
@@ -230,66 +181,13 @@ class _HomeState extends State<Home> {
                           selectedValue = 2;
                         });
                       },
-                      child: Container(
-                        width: 334.w,
-                        height: 74.h,
-                        decoration: ShapeDecoration(
-                          color: selectedValue == 2
-                              ? Color(0xFFFEFEFE)
-                              : Color(0xFF282828),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(1)),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Radio(
-                                  value: 2,
-                                  groupValue: selectedValue,
-                                  onChanged: (value) {
-                                    setModalState(() {
-                                      _handleRadioValueChange(value);
-                                    });
-                                    setState(() {
-                                      _handleRadioValueChange(value);
-                                    });
-                                  },
-                                  activeColor: Colors.green,
-                                ),
-                                Text(
-                                  'I am a new user.',
-                                  style: TextStyle(
-                                    color: selectedValue == 1
-                                        ? Color(0xFFFEFEFE)
-                                        : Color(0xFF191919),
-                                    fontSize: 14.sp,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 24.w),
-                              child: Text(
-                                'I would like to register my business.',
-                                style: TextStyle(
-                                  color: Color(0xFF6F6F70),
-                                  fontSize: 14,
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w400,
-                                  height: 0.08,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      fontStyle: TextStyle(
+                        color: selectedValue == 2 ? Color(0xFF191919) : Color(0xFFFEFEFE),
+                        fontSize: 14.sp,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
                       ),
+                      description: 'I would like to register my business.',
                     ),
                     SizedBox(height: 32.h),
                     Text(
@@ -305,11 +203,7 @@ class _HomeState extends State<Home> {
                         letterSpacing: 0.28,
                       ),
                     ),
-
-                    SizedBox(
-                      height: 38.h,
-                    ),
-
+                    SizedBox(height: 38.h),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -323,43 +217,25 @@ class _HomeState extends State<Home> {
                           width: 70.w,
                           height: 70.h,
                           selectedStepSize: 1,
-                          // roundedCap: (_, __) => true,
                           child: GestureDetector(
                             onTap: () {
-                              // setState(() {
-                              //   // if (currentPage < 2) {
-                              //   //   currentPage += 1;
-                              //   //   _pageController.jumpToPage(
-                              //   //     currentPage,
-                              //   //     // duration: Duration(milliseconds: 300),
-                              //   //     // curve: Curves.easeInOut,
-                              //   //   );
-                              //   // } else if (currentPage == 2) {
-                              //   //   setState(() {
-                              //   //     welcome_sheet = false;
-                              //   //   });
-                              //   //
-                              //   //   // Navigator.of(context).pushAndRemoveUntil(
-                              //   //   //   MaterialPageRoute(builder: (_) => const EventConfirm()),
-                              //   //   //       (Route<dynamic> route) => false,);
-                              //   //
-                              //   // }
-                              //
-                              //
-                              // });
-
-                              if(selectedValue==1){
+                              if (selectedValue == 1) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) =>
-                                        const Facilities_Search()));
-                              }else{
+                                        builder: (_) => const Facilities_Search()));
+                              } else {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) =>
-                                        const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: true, )));}
+                                        builder: (_) => const Home(
+                                          otpBottomSheet: false,
+                                          welcomeSheet: false,
+                                          profilebottomsheet: false,
+                                          adminformBottomSheet: false,
+                                          Newbusineessbottomsheet: true,
+                                        )));
+                              }
                             },
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
@@ -374,7 +250,6 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    // Add more widgets here if needed
                   ],
                 ),
               ),
@@ -384,6 +259,7 @@ class _HomeState extends State<Home> {
       },
     );
   }
+
 
   @override
   Widget build(BuildContext context) {

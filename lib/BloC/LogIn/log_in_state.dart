@@ -4,13 +4,11 @@ part of 'log_in_bloc.dart';
 abstract class LogInState {}
 
 class LogInInitial extends LogInState {}
-
 class LoginblocLoading extends LogInState {}
-
 class LoginblocLoaded extends LogInState {
-  final LogInModel response;
-  LoginblocLoaded(this.response);
-}
+//   final LogInModel get;
+//   LoginblocLoaded( this.get);
+ }
 
 class LoginblocError extends LogInState {
   final String error;

@@ -220,7 +220,7 @@ Future<void> staff_customer_id_BottomSheet(BuildContext context) async {
                           width: 300.w,
                           child: TextFormField(
                             textInputAction: TextInputAction.done,
-                            keyboardType: TextInputType.phone,
+                            keyboardType: TextInputType.name,
                             controller: phoneNumberController,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),

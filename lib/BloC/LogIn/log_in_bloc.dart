@@ -7,17 +7,21 @@ part 'log_in_event.dart';
 part 'log_in_state.dart';
 
 class LogInBloc extends Bloc<LogInEvent, LogInState> {
-  LogInApi loginApi = LogInApi();
+
   late LogInModel logInmodel;
+  LogInApi loginApi = LogInApi();
 
   LogInBloc() : super(LogInInitial()) {
     on<FetchLogin>((event, emit) async {
       emit(LoginblocLoading());
       try {
         logInmodel = await loginApi.getLogin(event.phoneNumber);
-        emit(LoginblocLoaded(logInmodel));
+        emit(LoginblocLoaded(
+            // logInmodel
+        ));
+        print('Bloc loaded successfulyy........');
       } catch (e) {
-        print(e);
+        print('************e');
         emit(LoginblocError(error: e.toString()));
       }
     });
