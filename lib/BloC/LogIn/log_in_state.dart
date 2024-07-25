@@ -6,8 +6,8 @@ abstract class LogInState {}
 class LogInInitial extends LogInState {}
 class LoginblocLoading extends LogInState {}
 class LoginblocLoaded extends LogInState {
-//   final LogInModel get;
-//   LoginblocLoaded( this.get);
+  final LogInModel response;
+  LoginblocLoaded( this.response);
  }
 
 class LoginblocError extends LogInState {

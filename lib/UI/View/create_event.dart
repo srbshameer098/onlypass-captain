@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-import '../../components/radioButton.dart';
+import '../../components/Buttons/radioButton.dart';
 import 'event_time.dart';
 
 class CreateEvent extends StatefulWidget {

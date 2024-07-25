@@ -25,7 +25,7 @@ void New_busineess_BottomSheet(BuildContext context) {
         builder:
             (BuildContext context, void Function(void Function()) setState) {
           return Container(
-            padding: const EdgeInsets.all(28.5),
+            padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 37.h),
             height: 629.h,
             width: double.infinity,
             color: const Color(0xff191919),
@@ -40,7 +40,7 @@ void New_busineess_BottomSheet(BuildContext context) {
                       },
                       child: Padding(
                         padding: EdgeInsets.only(
-                            top: 10.h, bottom: 10.h, right: 89.w),
+                            top: 10.h, bottom: 10.h, right: 91.24.w),
                         child: const Icon(
                           Icons.arrow_back_ios_new_rounded,
                           color: Colors.white,
@@ -61,13 +61,13 @@ void New_busineess_BottomSheet(BuildContext context) {
                         Navigator.pop(context);
                       },
                       child: Padding(
-                        padding: EdgeInsets.only(
-                            left: 81.w, top: 10.h, bottom: 10.h),
-                        child: const Icon(
-                          Icons.logout_outlined,
-                          color: Colors.white,
-                        ),
-                      ),
+                          padding: EdgeInsets.only(
+                              left: 83.w, top: 10.h, bottom: 10.h),
+                          child: Image.asset(
+                            'assets/icons/exit.png',
+                            width: 18.5.w,
+                            height: 18.5.h,
+                          )),
                     ),
                   ],
                 ),
@@ -155,7 +155,7 @@ void New_busineess_BottomSheet(BuildContext context) {
                 SizedBox(
                   height: 24.h,
                 ),
-                 Text.rich(
+                Text.rich(
                   TextSpan(
                     children: [
                       TextSpan(
@@ -262,37 +262,37 @@ void New_busineess_BottomSheet(BuildContext context) {
                     child: Row(
                       children: [
                         SizedBox(
-
-                            width: 300.w,
-                            child: TextFormField(
-                              maxLines: 3,
-                              textInputAction: TextInputAction.done,
-                              keyboardType: TextInputType.name,
-                              controller: phoneNumberController,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(10),
-                              ],
-                              style: GoogleFonts.montserrat(
-                                color: const Color(0xFFFEFEFE),
+                          width: 300.w,
+                          child: TextFormField(
+                            maxLines: 3,
+                            textInputAction: TextInputAction.done,
+                            keyboardType: TextInputType.name,
+                            controller: phoneNumberController,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(10),
+                            ],
+                            style: GoogleFonts.montserrat(
+                              color: const Color(0xFFFEFEFE),
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.6,
+                            ),
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              focusedBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              hintText:
+                                  'Mention other details you want to include\nin this request such as location, contact \ndetails, etc..',
+                              hintStyle: TextStyle(
+                                color: const Color(0xFF6F6F70),
                                 fontSize: 14.sp,
+                                fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
-                                letterSpacing: 0.6,
-                              ),
-                              cursorColor: Colors.white,
-                              decoration: InputDecoration(
-                                focusedBorder: InputBorder.none,
-                                disabledBorder: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                hintText: 'Mention other details you want to include\nin this request such as location, contact \ndetails, etc..',
-                                hintStyle: TextStyle(
-                                  color: const Color(0xFF6F6F70),
-                                  fontSize: 14.sp,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: -0.0,
-                                ),
+                                letterSpacing: -0.0,
                               ),
                             ),
+                          ),
                         ),
                       ],
                     ),
@@ -302,9 +302,7 @@ void New_busineess_BottomSheet(BuildContext context) {
                   height: 97.h,
                 ),
                 GestureDetector(
-                  onTap: (){
-
-                  },
+                  onTap: () {},
                   child: Container(
                     width: 334.w,
                     height: 48.h,
