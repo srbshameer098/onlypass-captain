@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 class GenderDropdown extends StatelessWidget {
   final String selectedGender;
   final ValueChanged onChanged;
@@ -10,7 +12,7 @@ class GenderDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 11.w,vertical: 14.h),
+      padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 14.h),
       child: DropdownButton<String>(
         style: const TextStyle(
           color: Color(0xffffffff),
@@ -18,14 +20,19 @@ class GenderDropdown extends StatelessWidget {
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.w500,
         ),
-        iconEnabledColor:Color(0xFFFEFEFE) ,
+        iconEnabledColor: Color(0xFFFEFEFE),
         underline: SizedBox(),
-        dropdownColor:Color(0xFF282828) ,
-        icon: Icon(Icons.keyboard_arrow_down_outlined),
+        dropdownColor: Color(0xFF282828),
+        icon: SvgPicture.asset(
+          'assets/icons/down arrow.svg',
+          width: 7.17.w,
+          height: 7.17.h,
+        ),
         isExpanded: true,
         value: selectedGender,
         onChanged: onChanged,
-        items: <String>['Male', 'Female'].map<DropdownMenuItem<String>>((String value) {
+        items: <String>['Male', 'Female']
+            .map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),

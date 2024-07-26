@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../Utils/utils.dart';
@@ -12,6 +13,9 @@ String _selectedGender = 'Male';
 String _selectedJobRole = 'Trainer';
 bool loading = false;
 final verificationCodeController = TextEditingController();
+final nameController = TextEditingController();
+final businessnameController = TextEditingController();
+final detailsController = TextEditingController();
 final phoneNumberController = TextEditingController();
 
 void New_busineess_BottomSheet(BuildContext context) {
@@ -27,26 +31,25 @@ void New_busineess_BottomSheet(BuildContext context) {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 37.h),
             height: 629.h,
-            width: double.infinity,
+            width: double.infinity.w,
             color: const Color(0xff191919),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            top: 10.h, bottom: 10.h, right: 91.24.w),
-                        child: const Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: SvgPicture.asset(
+                          'assets/icons/back arrow.svg',
+                          width: 7.76.w,
+                          height: 16.h,
+                        )),
+                    SizedBox(width: 99.24.w),
                     Text(
                       'Access request',
                       style: TextStyle(
@@ -56,19 +59,18 @@ void New_busineess_BottomSheet(BuildContext context) {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Padding(
-                          padding: EdgeInsets.only(
-                              left: 83.w, top: 10.h, bottom: 10.h),
-                          child: Image.asset(
-                            'assets/icons/exit.png',
-                            width: 18.5.w,
-                            height: 18.5.h,
-                          )),
+                    SizedBox(
+                      width: 90.w,
                     ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: SvgPicture.asset(
+                          'assets/icons/Exit.svg',
+                          width: 17.w,
+                          height: 17.h,
+                        )),
                   ],
                 ),
                 SizedBox(
@@ -84,7 +86,6 @@ void New_busineess_BottomSheet(BuildContext context) {
                           fontSize: 14.sp,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w600,
-                          height: 0,
                         ),
                       ),
                       TextSpan(
@@ -122,7 +123,7 @@ void New_busineess_BottomSheet(BuildContext context) {
                           child: TextFormField(
                             textInputAction: TextInputAction.done,
                             keyboardType: TextInputType.name,
-                            controller: phoneNumberController,
+                            controller: nameController,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10),
                             ],
@@ -139,7 +140,7 @@ void New_busineess_BottomSheet(BuildContext context) {
                               enabledBorder: InputBorder.none,
                               hintText: 'Enter your full name',
                               hintStyle: TextStyle(
-                                color: const Color(0xFF6F6F70),
+                                color: const Color(0xFF818181),
                                 fontSize: 14.sp,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
@@ -203,10 +204,8 @@ void New_busineess_BottomSheet(BuildContext context) {
                           child: TextFormField(
                             textInputAction: TextInputAction.done,
                             keyboardType: TextInputType.name,
-                            controller: phoneNumberController,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
-                            ],
+                            controller: businessnameController,
+
                             style: GoogleFonts.montserrat(
                               color: const Color(0xFFFEFEFE),
                               fontSize: 20.sp,
@@ -220,7 +219,7 @@ void New_busineess_BottomSheet(BuildContext context) {
                               enabledBorder: InputBorder.none,
                               hintText: 'Enter your Business name',
                               hintStyle: TextStyle(
-                                color: const Color(0xFF6F6F70),
+                                color: const Color(0xFF818181),
                                 fontSize: 14.sp,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
@@ -266,11 +265,8 @@ void New_busineess_BottomSheet(BuildContext context) {
                           child: TextFormField(
                             maxLines: 3,
                             textInputAction: TextInputAction.done,
-                            keyboardType: TextInputType.name,
-                            controller: phoneNumberController,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
-                            ],
+                            keyboardType: TextInputType.text,
+                            controller: detailsController,
                             style: GoogleFonts.montserrat(
                               color: const Color(0xFFFEFEFE),
                               fontSize: 14.sp,
@@ -283,13 +279,13 @@ void New_busineess_BottomSheet(BuildContext context) {
                               disabledBorder: InputBorder.none,
                               enabledBorder: InputBorder.none,
                               hintText:
-                                  'Mention other details you want to include\nin this request such as location, contact \ndetails, etc..',
+                                  'Mention other details you want to include in this request such as location, contact details, etc..',
                               hintStyle: TextStyle(
-                                color: const Color(0xFF6F6F70),
+                                color: const Color(0xFF818181),
                                 fontSize: 14.sp,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
-                                letterSpacing: -0.0,
+
                               ),
                             ),
                           ),

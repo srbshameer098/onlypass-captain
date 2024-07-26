@@ -134,7 +134,7 @@ class _HomeState extends State<Home> {
                     Text(
                       'Welcome to Onlypass Captain App',
                       style: TextStyle(
-                        color: Color(0xFFE4E4E4),
+                        color: const Color(0xFFE4E4E4),
                         fontSize: 16.sp,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w600,
@@ -163,7 +163,7 @@ class _HomeState extends State<Home> {
                         });
                       },
                       fontStyle: TextStyle(
-                        color: selectedValue == 1 ? Color(0xFF191919) : Color(0xFFFEFEFE),
+                        color: selectedValue == 1 ? const Color(0xFF191919) : const Color(0xFFFEFEFE),
                         fontSize: 14.sp,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w600,
@@ -183,7 +183,7 @@ class _HomeState extends State<Home> {
                         });
                       },
                       fontStyle: TextStyle(
-                        color: selectedValue == 2 ? Color(0xFF191919) : Color(0xFFFEFEFE),
+                        color: selectedValue == 2 ? const Color(0xFF191919) : const Color(0xFFFEFEFE),
                         fontSize: 14.sp,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w600,
@@ -194,13 +194,13 @@ class _HomeState extends State<Home> {
                     Text(
                       'Use another phone number',
                       style: TextStyle(
-                        color: Color(0xFFFEFEFE),
+                        color: const Color(0xFFFEFEFE),
                         fontSize: 14.sp,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w600,
                         decoration: TextDecoration.underline,
                         decorationColor: const Color(0xFFFEFEFE),
-                        height: 0,
+
                         letterSpacing: 0.28,
                       ),
                     ),
@@ -210,14 +210,15 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CircularStepProgressIndicator(
+
                           totalSteps: 100,
                           currentStep: 50 + currentPage * 50,
                           stepSize: 0,
-                          selectedColor: Color(0xFF37F840),
+                          selectedColor: const Color(0xFF37F840),
                           unselectedColor: Colors.transparent,
                           width: 70.w,
                           height: 70.h,
-                          selectedStepSize: 1,
+                          selectedStepSize: 3,
                           child: GestureDetector(
                             onTap: () {
                               if (selectedValue == 1) {
@@ -242,9 +243,9 @@ class _HomeState extends State<Home> {
                               backgroundColor: Colors.transparent,
                               radius: 30.r,
                               child: CircleAvatar(
-                                backgroundColor: Color(0xFFFEFEFE),
+                                backgroundColor: const Color(0xFFFEFEFE),
                                 radius: 30.r,
-                                child: Center(child: Icon(Icons.east)),
+                                child: const Center(child: Icon(Icons.east)),
                               ),
                             ),
                           ),
@@ -281,12 +282,12 @@ class _HomeState extends State<Home> {
                 width: 30.w,
               ),
               Container(
-                width: 207,
-                height: 40,
+                width: 207.w,
+                height: 40.h,
                 decoration: ShapeDecoration(
-                  color: Color(0x10FEFEFE),
+                  color: const Color(0x10FEFEFE),
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 0.30, color: Color(0x26B2B2B2)),
+                    side: BorderSide(width: 0.30.w, color: const Color(0x26B2B2B2)),
                     borderRadius: BorderRadius.circular(140),
                   ),
                 ),
@@ -309,7 +310,7 @@ class _HomeState extends State<Home> {
                       Text(
                         'See your performance',
                         style: GoogleFonts.montserrat(
-                          color: Color(0xfffefefe),
+                          color: const Color(0xfffefefe),
                           fontSize: 10.sp,
                           fontWeight: FontWeight.w500,
                         ),
@@ -320,7 +321,7 @@ class _HomeState extends State<Home> {
               ),
               GestureDetector(
                 onTap: () {
-                  New_busineess_BottomSheet(context,);
+                  showCustomBottomSheet(context);
                 },
                 child: Image.asset(
                   'assets/icons/account.png',
@@ -333,9 +334,9 @@ class _HomeState extends State<Home> {
           centerTitle: true,
           backgroundColor: Colors.black,
           bottom: PreferredSize(
-            preferredSize: Size(double.infinity, 5),
+            preferredSize: Size(double.infinity, 5.sp),
             child: Container(
-              width: double.infinity,
+              width: double.infinity.w,
               height: 1.h,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(

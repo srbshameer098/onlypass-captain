@@ -615,7 +615,7 @@ class _VerificationState extends State<Verification> {
                       borderWidth: 1,
                       borderRadius: BorderRadius.circular(0),
                       focusedBorderColor: Colors.grey,
-                      textStyle: GoogleFonts.montserrat(color: Colors.white,fontSize: 20.sp,),contentPadding: EdgeInsets.all(10),
+                      textStyle: GoogleFonts.montserrat(color: Colors.white,fontSize: 20.sp,),contentPadding: const EdgeInsets.all(10),
                       fillColor: const Color(0xFF282828),
                       filled: true,
                       keyboardType: TextInputType.phone,

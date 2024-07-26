@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class JobRoleDropdown2 extends StatelessWidget {
   final String selectedJobRole;
@@ -26,7 +27,11 @@ class JobRoleDropdown2 extends StatelessWidget {
         iconEnabledColor:Color(0xFFFEFEFE) ,
         underline: SizedBox(),
         dropdownColor:Color(0xFF282828) ,
-        icon: Icon(Icons.keyboard_arrow_down_outlined),
+        icon:  SvgPicture.asset(
+          'assets/icons/down arrow.svg',
+          width: 7.17.w,
+          height: 7.17.h,
+        ),
         isExpanded: true,
 
         value: selectedJobRole,

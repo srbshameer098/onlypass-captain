@@ -42,19 +42,19 @@ class _CustomRadioButton_1State extends State<CustomRadioButton_1> {
               children: [
                 widget.isSelected
                     ? Container(
-                  width: 12.w,
-                  height: 12.h,
+                  width: 16.w,
+                  height: 16.h,
                   decoration: ShapeDecoration(
                     shape: OvalBorder(
                       side: BorderSide(
-                          width: 3.w, color: Color(0xFF00FF00)),
+                          width: 5.w, color: Color(0xFF00FF00)),
                     ),
                   ),
                 )
                     : Icon(
                   Icons.circle_outlined,
                   color: Color(0xFFFEFEFE),
-                  size: 12.sp,
+                  size: 16.sp,
                 ),
                 SizedBox(
                   width: 8.w,

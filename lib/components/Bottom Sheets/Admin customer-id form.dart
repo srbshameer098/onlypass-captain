@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled7/UI/s1.dart';
@@ -33,7 +34,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
         builder:
             (BuildContext context, void Function(void Function()) setState) {
           return Container(
-            padding: const EdgeInsets.all(28.5),
+            padding:  EdgeInsets.symmetric(horizontal:28.w,vertical: 37.h),
             height: 629.h,
             width: double.infinity,
             color: const Color(0xff191919),
@@ -46,15 +47,12 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            top: 10.h, bottom: 10.h, right: 73.w),
-                        child: const Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: Colors.white,
-                        ),
-                      ),
+                      child:
+                          SvgPicture.asset('assets/icons/back arrow.svg',
+                            width:7.76.w,height: 16.h,
+                          )
                     ),
+                    SizedBox(width: 86.24.w),
                     Text(
                       'Profile information',
                       style: TextStyle(
@@ -64,18 +62,14 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
+                    SizedBox(width:75.w,),
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            left: 65.w, top: 10.h, bottom: 10.h),
-                        child: const Icon(
-                          Icons.logout_outlined,
-                          color: Colors.white,
-                        ),
-                      ),
+                      child:   SvgPicture.asset('assets/icons/Exit.svg',
+              width:17.w,height: 17.h,
+              )
                     ),
                   ],
                 ),
@@ -100,7 +94,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                   decoration: ShapeDecoration(
                     color: const Color(0xFF282828),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(1)),
+                        borderRadius: BorderRadius.circular(1.r)),
                   ),
                   child: Padding(
                     padding:
@@ -127,12 +121,15 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                             ),
                           ),
                         ),
-                        const Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: Colors.grey,
+                        const Opacity(
+                          opacity: 0.10,
+                          child: Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: Colors.grey,
+                          ),
                         ),
                         VerticalDivider(
-                          color: Color(0xFF191919),
+                          color: const Color(0xFF191919),
                           width: 1.5.w,
                           thickness: 2,
                           indent: 8.h,
@@ -147,7 +144,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                             child: Text(
                               phoneNumber ?? 'No number',
                               style: TextStyle(
-                                color: Color(0xFFFEFEFE),
+                                color: const Color(0xFFFEFEFE),
                                 fontSize: 14.sp,
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.w500,
@@ -164,10 +161,12 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                             fontSize: 12.sp,
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w500,
-                            height: 0,
                             letterSpacing: 1.20,
                           ),
                         ),
+                        SvgPicture.asset('assets/icons/Tick.svg',
+                          width:8.w,height: 8.h,
+                        )
                       ],
                     ),
                   ),
@@ -185,7 +184,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                           fontSize: 14.sp,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w600,
-                          height: 0,
+
                         ),
                       ),
                       TextSpan(
@@ -208,7 +207,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                   width: 334.w,
                   height: 48.h,
                   decoration: ShapeDecoration(
-                    color: Color(0xFF282828),
+                    color: const Color(0xFF282828),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(1)),
                   ),
@@ -224,9 +223,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                             textInputAction: TextInputAction.done,
                             keyboardType: TextInputType.name,
                             controller: fullnameController,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
-                            ],
+
                             style: GoogleFonts.montserrat(
                               color: const Color(0xFFFEFEFE),
                               fontSize: 20.sp,
@@ -240,7 +237,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                               enabledBorder: InputBorder.none,
                               hintText: 'Enter your full name',
                               hintStyle: TextStyle(
-                                color: const Color(0xFF6F6F70),
+                                color: const Color(0xFF818181),
                                 fontSize: 14.sp,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
@@ -264,7 +261,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                           TextSpan(
                             text: 'Gender',
                             style: TextStyle(
-                              color: Color(0xFFE4E4E4),
+                              color: const Color(0xFFE4E4E4),
                               fontSize: 14.sp,
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.w600,
@@ -273,7 +270,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                           TextSpan(
                             text: '*',
                             style: TextStyle(
-                              color: Color(0xFFFF001E),
+                              color: const Color(0xFFFF001E),
                               fontSize: 14.sp,
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.w600,
@@ -282,7 +279,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                         ],
                       ),
                     ),
-                    SizedBox(width: 116.w),
+                    SizedBox(width: 125.w),
                     Text(
                       'Admin role',
                       style: TextStyle(
@@ -303,7 +300,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                         width: 156.w,
                         height: 48.h,
                         decoration: ShapeDecoration(
-                          color: Color(0xFF282828),
+                          color: const Color(0xFF282828),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(1)),
                         ),
@@ -342,7 +339,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                 Text(
                   'Email address',
                   style: TextStyle(
-                    color: Color(0xFFE4E4E4),
+                    color: const Color(0xFFE4E4E4),
                     fontSize: 14.sp,
                     fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w600,
@@ -355,7 +352,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                   width: 334.w,
                   height: 48.h,
                   decoration: ShapeDecoration(
-                    color: Color(0xFF282828),
+                    color: const Color(0xFF282828),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(1)),
                   ),
@@ -371,9 +368,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                             textInputAction: TextInputAction.done,
                             keyboardType: TextInputType.emailAddress ,
                             controller: emailController,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(10),
-                            ],
+
                             style: GoogleFonts.montserrat(
                               color: const Color(0xFFFEFEFE),
                               fontSize: 20.sp,
@@ -387,7 +382,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                               enabledBorder: InputBorder.none,
                               hintText: 'Enter your email address (optional)',
                               hintStyle: TextStyle(
-                                color: const Color(0xFF6F6F70),
+                                color: const Color(0xFF818181),
                                 fontSize: 14.sp,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
