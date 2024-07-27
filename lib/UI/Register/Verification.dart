@@ -663,13 +663,74 @@ class _VerificationState extends State<Verification> {
                   Padding(
                     padding: EdgeInsets.only(top: 24.h),
                     child: BlocListener<LogInBloc, LogInState>(
-                      listener: (context, state) {
+                      listener: (context, state) async {
                         if (state is LoginblocLoading) {
                           setState(() {
                             loading = true;
                           });
                         } else if (state is LoginblocLoaded) {
                           _handleLoginSuccess(state);
+//                           final SharedPreferences prefs = await SharedPreferences.getInstance();
+// String f =prefs.getString('facilityCode').toString();
+// String c =prefs.getString('customerCode') .toString();
+//                           bool facilityId ;
+//                           bool customerId ;
+//                           if (prefs.getString('facilityCode').toString() == 'true') {
+//                             facilityId = true;
+//                           } else {
+//                             facilityId = false;
+//                           }
+//                           if (prefs.getString('customerCode') .toString() == 'true') {
+//                             customerId = true;
+//                           } else {
+//                             customerId = false;
+//                           }
+//
+//
+//                           if (facilityId == true && customerId == true) {
+//                             Navigator.of(context).pushAndRemoveUntil(
+//                               MaterialPageRoute(
+//                                 builder: (_) => const Home(
+//                                   otpBottomSheet: false,
+//                                   welcomeSheet: false,
+//                                   profilebottomsheet: false,
+//                                   adminformBottomSheet: false,
+//                                   Newbusineessbottomsheet: false,
+//                                 ),
+//                               ),
+//                                   (Route<dynamic> route) => false,
+//                             );
+//                           } else if (facilityId == true &&
+//                               !customerId == false) {
+//                             Navigator.of(context).pushAndRemoveUntil(
+//                               MaterialPageRoute(
+//                                 builder: (_) => const Home(
+//                                   otpBottomSheet: false,
+//                                   welcomeSheet: false,
+//                                   profilebottomsheet: false,
+//                                   adminformBottomSheet: true,
+//                                   Newbusineessbottomsheet: false,
+//                                 ),
+//                               ),
+//                                   (Route<dynamic> route) => false,
+//                             );
+//                           } else {
+//                             Navigator.of(context).pushAndRemoveUntil(
+//                               MaterialPageRoute(
+//                                 builder: (_) => const Home(
+//                                   otpBottomSheet: false,
+//                                   welcomeSheet: true,
+//                                   profilebottomsheet: false,
+//                                   adminformBottomSheet: false,
+//                                   Newbusineessbottomsheet: false,
+//                                 ),
+//                               ),
+//                                   (Route<dynamic> route) => false,
+//                             );
+//                           }
+
+
+
                         } else if (state is LoginblocError) {
                           _handleLoginError(state.error);
                         }
@@ -733,50 +794,7 @@ class _VerificationState extends State<Verification> {
         phoneNumber: widget.phoneNum.toString(),
       ));
 
-      bool facilityId =true;
-      bool customerId =false;
 
-      if (facilityId == true && customerId == true) {
-                            Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (_) => const Home(
-                                  otpBottomSheet: false,
-                                  welcomeSheet: false,
-                                  profilebottomsheet: false,
-                                  adminformBottomSheet: false,
-                                  Newbusineessbottomsheet: false,
-                                ),
-                              ),
-                              (Route<dynamic> route) => false,
-                            );
-                          } else if (facilityId == true &&
-                              !customerId == false) {
-                            Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (_) => const Home(
-                                  otpBottomSheet: false,
-                                  welcomeSheet: false,
-                                  profilebottomsheet: false,
-                                  adminformBottomSheet: true,
-                                  Newbusineessbottomsheet: false,
-                                ),
-                              ),
-                              (Route<dynamic> route) => false,
-                            );
-                          } else {
-                            Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (_) => const Home(
-                                  otpBottomSheet: false,
-                                  welcomeSheet: true,
-                                  profilebottomsheet: false,
-                                  adminformBottomSheet: false,
-                                  Newbusineessbottomsheet: false,
-                                ),
-                              ),
-                              (Route<dynamic> route) => false,
-                            );
-                          }
 
 
     } catch (e) {

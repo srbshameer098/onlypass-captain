@@ -41,7 +41,8 @@ Future<void> staff_customer_id_BottomSheet(BuildContext context) async {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                Row(crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -52,7 +53,7 @@ Future<void> staff_customer_id_BottomSheet(BuildContext context) async {
                           width:7.76.w,height: 16.h,
                         )
                     ),
-                    SizedBox(width: 86.24.w),
+                    SizedBox(width: 77.24.w),
                     Text(
                       'Profile information',
                       style: TextStyle(
@@ -62,7 +63,7 @@ Future<void> staff_customer_id_BottomSheet(BuildContext context) async {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(width:75.w,),
+                    SizedBox(width:69.w,),
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
