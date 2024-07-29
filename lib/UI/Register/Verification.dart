@@ -484,10 +484,11 @@ import '../View/home.dart';
 
 class Verification extends StatefulWidget {
   final String phoneNum;
+  final String verificationId;
 
   const Verification({
     super.key,
-    required this.phoneNum,
+    required this.phoneNum,   required this.verificationId,
   });
 
   @override
@@ -618,11 +619,11 @@ class _VerificationState extends State<Verification> {
                       textStyle: GoogleFonts.montserrat(color: Colors.white,fontSize: 20.sp,),contentPadding: const EdgeInsets.all(10),
                       fillColor: const Color(0xFF282828),
                       filled: true,
-                      keyboardType: TextInputType.phone,
+                      keyboardType: TextInputType.number,
                       cursorColor: Colors.white,
                       numberOfFields: 6,
                       enabledBorderColor: Colors.transparent,
-                      showFieldAsBox: true,
+                      showFieldAsBox: false,
                       onCodeChanged: (String code) {},
                       onSubmit: (String verificationCodes) {
                         verificationCodeController.text = verificationCodes;
@@ -788,6 +789,10 @@ class _VerificationState extends State<Verification> {
     setState(() {
       loading = true;
     });
+    // final credential = PhoneAuthProvider.credential(
+    //     verificationId:widget.verificationId,
+    //     smsCode:
+    //     verificationCodeController.text.toString());
 
     try {
       context.read<LogInBloc>().add(FetchLogin(
@@ -808,27 +813,77 @@ class _VerificationState extends State<Verification> {
     }
   }
 
-  void _handleLoginSuccess(LoginblocLoaded state) {
+  Future<void> _handleLoginSuccess(LoginblocLoaded state) async {
     String tokens = state.response.acsToken.toString();
     String facility = state.response.facilityCode.toString();
     String customer = state.response.customerCode.toString();
     String facilityid = state.response.facilityId.toString();
     String customerid = state.response.customerId.toString();
     userinfo(tokens, customer, facility, facilityid, customerid);
+
+    // Retrieve the values from SharedPreferences
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool facilityFlag = prefs.getString('facilityCode') == 'true';
+    bool customerFlag = prefs.getString('customerCode') == 'true';
+print('${facilityFlag}*****************************');
+    print('${customerFlag}****************************');
+
+
+    if (facilityFlag  && customerFlag ) {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (_) =>
+          const Home(
+            otpBottomSheet: false,
+            welcomeSheet: false,
+            profilebottomsheet: false,
+            adminformBottomSheet: false,
+            Newbusineessbottomsheet: false,
+          ),
+        ),
+            (Route<dynamic> route) => false,
+      );
+    }
+    else if (facilityFlag && !customerFlag) {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (_) => const Home(
+            otpBottomSheet: false,
+            welcomeSheet: false,
+            profilebottomsheet: false,
+            adminformBottomSheet: true,
+            Newbusineessbottomsheet: false,
+          ),
+        ),
+            (Route<dynamic> route) => false,
+      );
+    }
+
     print('Login successful. Token: $tokens');
     setState(() {
       loading = false;
     });
+
+
   }
 
   void _handleLoginError(String error) {
     setState(() {
       loading = false;
     });
-    _showSnackBar('Login failed', 'Try again', () {
-      Navigator.pop(context);
-    });
-    Utils().toastMessage(error);
+
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (_) => const Home(
+          otpBottomSheet: false,
+          welcomeSheet: true,
+          profilebottomsheet: false,
+          adminformBottomSheet: false,
+          Newbusineessbottomsheet: false,
+        ),
+      ),
+          (Route<dynamic> route) => false,
+    );
   }
 
   void _showSnackBar(String message, String actionLabel, VoidCallback action) {

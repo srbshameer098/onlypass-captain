@@ -196,50 +196,51 @@ class _LogInState extends State<LogIn> {
                         await storePhoneNumber(phoneNumberController.text);
 
                         // Uncomment the Firebase phone authentication lines below to use
-                        // auth.verifyPhoneNumber(
-                        //   phoneNumber: '+91${formattedNumber}',
-                        //   verificationCompleted: (_) {
-                        //     setState(() {
-                        //       loading = false;
-                        //     });
-                        //   },
-                        //   verificationFailed: (e) {
-                        //     setState(() {
-                        //       loading = false;
-                        //     });
-                        //     Utils().toastMessage(e.toString());
-                        //   },
-                        //   codeSent: (String verificationId, int? token) {
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) => Verification(
-                        //           phoneNum: phoneNumberController.text,
-                        //           verificationId: verificationId,
-                        //         ),
-                        //       ),
-                        //     );
-                        //     setState(() {
-                        //       loading = false;
-                        //     });
-                        //   },
-                        //   codeAutoRetrievalTimeout: (e) {
-                        //     Utils().toastMessage(e.toString());
-                        //     setState(() {
-                        //       loading = false;
-                        //     });
-                        //   },
-                        // );
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Verification(
-                              phoneNum:formattedNumber.toString(),
-                              // verificationId: verificationId,
-                            ),
-                          ),
+                         auth.verifyPhoneNumber(
+                          phoneNumber: '+91${formattedNumber}',
+                          verificationCompleted: (_) {
+                            setState(() {
+                              loading = false;
+                            });
+                          },
+                          verificationFailed: (e) {
+                            setState(() {
+                              loading = false;
+                            });
+                            Utils().toastMessage(e.toString());
+                          },
+                          codeSent: (String verificationId, int? token) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Verification(
+                                  phoneNum: formattedNumber,
+                                  verificationId: verificationId,
+                                ),
+                              ),
+                            );
+                            setState(() {
+                              loading = false;
+                            });
+                          },
+                          codeAutoRetrievalTimeout: (e) {
+                            Utils().toastMessage(e.toString());
+                            setState(() {
+                              loading = false;
+                            });
+                          },
                         );
+
+                        // Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //             builder: (context) => Verification(
+                        //               phoneNum: formattedNumber,
+                        //               verificationId: 'verificationId',
+                        //             ),
+                        //           ),
+                        //         );
+
                       }
                     },
                     child: Container(
