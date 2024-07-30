@@ -645,6 +645,7 @@ class _VerificationState extends State<Verification> {
                         ),
                         GestureDetector(
                           onTap: () {
+
                             // Add logic to resend the code
                           },
                           child: Text(

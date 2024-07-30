@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:untitled7/UI/View/home.dart';
 import 'package:untitled7/UI/View/wallet.dart';
 
@@ -24,14 +25,14 @@ class _Facilities_SearchState extends State<Facilities_Search> {
             Navigator.pop(context);
           },
           child: Padding(
-            padding: EdgeInsets.only(left: 25.w, top: 10.h, bottom: 10.h),
-            child: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.white,
-            ),
+            padding: EdgeInsets.only(left: 25.w, top: 16.h, bottom: 16.h),
+            child:  SvgPicture.asset(
+              'assets/icons/back arrow.svg',
+
+            )
           ),
         ),
-        backgroundColor: Color(0xFF191919),
+        backgroundColor: const Color(0xFF191919),
         automaticallyImplyLeading: false,
         elevation: 0,
         centerTitle: true,
@@ -40,153 +41,167 @@ class _Facilities_SearchState extends State<Facilities_Search> {
           style: TextStyle(
             color: Colors.white,
             fontSize: 16.sp,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
           ),
         ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 30.w),
-            child: Icon(
-              Icons.info_outline,
-              color: Colors.white,
-            ),
+            child: SvgPicture.asset(
+              'assets/icons/Group.svg',
+              width: 20.w,
+              height: 20.h,
+            )
           )
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 40.h),
+          padding: EdgeInsets.symmetric( vertical: 30.h),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               /// Search Container  ///
 
-              Container(
-                width: double.infinity,
-                height: 48.h,
-                padding: EdgeInsets.all(2),
-                decoration: ShapeDecoration(
-                  color: Color(0xFF282828),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(1.r)),
-                ),
-                child: TextField(
-                  autofocus: true,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.search,
-                  cursorColor: Colors.white,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 25.w,),
+                child: Container(
+                  width: double.infinity,
+                  height: 48.h,
+                  padding: const EdgeInsets.all(2),
+                  decoration: ShapeDecoration(
+                    color: const Color(0xFF282828),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.r)),
                   ),
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Search',
-                      hintStyle: TextStyle(
-                        color: Color(0xFF6F6F70),
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                        height: 0.08.h,
-                        letterSpacing: -0.32,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                        size: 28.sp,
-                      )),
+                  child: TextField(
+                    autofocus: true,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.search,
+                    cursorColor: Colors.white,
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Search',
+                        hintStyle: TextStyle(
+                          color: const Color(0xFF6F6F70),
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          height: 2,
+                          letterSpacing: 0.32,
+                        ),
+                        prefixIcon:  Padding(
+                          padding:  EdgeInsets.only(top: 13.h,bottom: 13),
+                          child: SvgPicture.asset(
+                            'assets/icons/fi-rr-search.svg',
+                            width: 7.76.w,
+                            height: 16.h,
+                          ),
+                        )),
+                  ),
                 ),
               ),
         SizedBox(height: 32.h,),
-              Text(
-                'Search results',
-                style: TextStyle(
-                  color: Color(0xFF818181),
-                  fontSize: 14.sp,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.w, ),
+                child: Text(
+                  'Search results',
+                  style: TextStyle(
+                    color: const Color(0xFF818181),
+                    fontSize: 14.sp,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
 
+                  ),
                 ),
               ),
         ///  list Column ///
-              Column(
-                children: [
-        SizedBox(height:24.h ,),
-                  SizedBox(
-                    height: 70.h * 4.h,
-                    child: GestureDetector(
-                      onTap: (){
+              SizedBox(height:24.h ,),
+                        Padding(
+                          padding: EdgeInsets.only(left: 12.w,right: 10.w),
+                          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 70.h * 4.h,
+                                child: GestureDetector(
+                                  onTap: (){
 
 
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=>  Home(otpBottomSheet: true, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: false, )));
+                                    Navigator.push(context, MaterialPageRoute(builder: (_)=>  const Home(otpBottomSheet: true, welcomeSheet: false, profilebottomsheet: false, adminformBottomSheet: false, Newbusineessbottomsheet: false, )));
 
-                      },
-                      child: ListView.separated(
-                        physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
-                          itemCount: 4,
-                          itemBuilder: (BuildContext context, int index) {
-                            return ListTile(
-                              leading: Container(
-                                width: 44.w,
-                                height: 44.h,
-                                decoration: ShapeDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/icons/logo.png'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                  shape: OvalBorder(),
-                                ),
-                              ),
-                              title: Text('Fitness Mate, Aluva',
-                                  style: TextStyle(
-                                    color: Color(0xFFFEFEFE),
-                                    fontSize: 14.sp,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w400,
+                                  },
+                                  child: ListView.separated(
+                                    physics: const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+                                      itemCount: 4,
+                                      itemBuilder: (BuildContext context, int index) {
+                                        return ListTile(
+                                          leading: Container(
+                                            width: 44.w,
+                                            height: 44.h,
+                                            decoration: const ShapeDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage('assets/icons/logo.png'),
+                                                fit: BoxFit.fill,
+                                              ),
+                                              shape: OvalBorder(),
+                                            ),
+                                          ),
+                                          title: Text('Fitness Mate, Aluva',
+                                              style: TextStyle(
+                                                color: const Color(0xFFFEFEFE),
+                                                fontSize: 14.sp,
+                                                fontFamily: 'Montserrat',
+                                                fontWeight: FontWeight.w400,
 
+                                              ),),
+                                          subtitle:  Text(
+                                            'A047523',
+                                            style: TextStyle(
+                                              color: const Color(0xFF818181),
+                                              fontSize: 12.sp,
+                                              fontFamily: 'Montserrat',
+                                              fontWeight: FontWeight.w400,
+
+                                            ),
+                                          ),
+
+
+
+
+                                        );
+
+                                      }, separatorBuilder: (context, index) => Container(
+                                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                    height: 16.h,
+                                    child: const Divider(color: Color(0xFF282828),),
                                   ),),
-                              subtitle:  Text(
-                                'A047523',
-                                style: TextStyle(
-                                  color: Color(0xFF818181),
-                                  fontSize: 12.sp,
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w400,
-
                                 ),
+
                               ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 25.w),
+                          child: const Divider(color: Color(0xFF282828),),
+                        ),
+                    SizedBox(height: 12.h,),
+                        Center(
+                          child: Text(
+                            'No more data available',
+                            style: TextStyle(
+                              color: const Color(0xFF818181),
+                              fontSize: 14.sp,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w500,
 
-
-
-
-                            );
-
-                          }, separatorBuilder: (context, index) => Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        height: 16.h,
-                        child: const Divider(color: Color(0xFF282828),),
-                      ),),
-                    ),
-
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 16.w),
-                    child: const Divider(color: Color(0xFF282828),),
-                  ),
-              SizedBox(height: 12.h,),
-                  Center(
-                    child: Text(
-                      'No more data available',
-                      style: TextStyle(
-                        color: const Color(0xFF818181),
-                        fontSize: 14.sp,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w500,
-
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
+                            ),
+                          ),
+                        ),
 
 
 

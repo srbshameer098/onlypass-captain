@@ -21,12 +21,12 @@ void showCustomBottomSheet(BuildContext context) {
         builder: (BuildContext context, void Function(void Function()) setState) {
           return AnimatedPadding(
             padding: MediaQuery.of(context).viewInsets,
-            duration: const Duration(milliseconds: 0),
+            duration: const Duration(milliseconds:300),curve: Curves. easeInOut,
             child: Container(
               padding: EdgeInsets.all(28.5),
               height: 340.h,
               width: double.infinity,
-              color: Colors.grey[900],
+              color: const Color(0xff191919),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
