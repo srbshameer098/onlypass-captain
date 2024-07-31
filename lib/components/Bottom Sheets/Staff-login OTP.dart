@@ -21,11 +21,11 @@ void showCustomBottomSheet(BuildContext context) {
         builder: (BuildContext context, void Function(void Function()) setState) {
           return AnimatedPadding(
             padding: MediaQuery.of(context).viewInsets,
-            duration: const Duration(milliseconds:300),curve: Curves. easeInOut,
+            duration: const Duration(milliseconds:0),curve: Curves.easeInOutBack,
             child: Container(
-              padding: EdgeInsets.all(28.5),
+              padding: EdgeInsets.only(left: 28.w,top: 27.h),
               height: 340.h,
-              width: double.infinity,
+              width: double.infinity.w,
               color: const Color(0xff191919),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,25 +39,45 @@ void showCustomBottomSheet(BuildContext context) {
                     ),
                   ),
                   SizedBox(height: 16.h,),
-                  Text(
-                    'A six digit verification code has been sent to the registered phone number ending with 1234',
-                    style: GoogleFonts.montserrat(
-                      color: const Color(0xFF6F6F70),
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'A six digit verification code has been sent to  the registered phone number ending with ',
+                          style: TextStyle(
+                            color: const Color(0xFF6F6F70),
+                            fontSize: 14.sp,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
+
+                          ),
+                        ),
+                        TextSpan(
+                          text: '1287',
+                          style: TextStyle(
+                            color: const Color(0xFFE4E4E4),
+                            fontSize: 14.sp,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w600,
+
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.h),
+                    padding: EdgeInsets.symmetric(vertical: 24.h),
                     child: OtpTextField(
                       // styles: [TextStyle(fontSize: 20.sp)],
                       autoFocus: true,
-            
+
+                      margin:  EdgeInsets. only(right: 14.w),
                       clearText: true,
-                      alignment: FractionalOffset.topCenter,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      fieldWidth: 45.w,
-                      fieldHeight: 45.h,
+
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      fieldWidth: 44.w,
+                      fieldHeight: 43.h,
                       borderWidth: 1,
                       borderRadius: BorderRadius.circular(0),
                       focusedBorderColor: Colors.grey,
@@ -76,17 +96,17 @@ void showCustomBottomSheet(BuildContext context) {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(0.0),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Didn’t receive the code?  ',
+                            "Didn’t receive the code?  ",
                             style: TextStyle(
-                              color: Color(0xFFA3A3A3),
-                              fontSize: 12,
+                              color: const Color(0xFFA3A3A3),
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -95,9 +115,9 @@ void showCustomBottomSheet(BuildContext context) {
                             child: Text(
                               'Resend',
                               style: GoogleFonts.montserrat(
-                                color: Color(0xFFFEFEFE),
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w500,
+                                color: const Color(0xFFFEFEFE),
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
                                 decoration: TextDecoration.underline,
                                 decorationColor: Colors.white,
                               ),
@@ -117,7 +137,7 @@ void showCustomBottomSheet(BuildContext context) {
             
                         try {
                           Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (_) => Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: true, adminformBottomSheet: false, Newbusineessbottomsheet: false, )),
+                            MaterialPageRoute(builder: (_) => const Home(otpBottomSheet: false, welcomeSheet: false, profilebottomsheet: true, adminformBottomSheet: false, Newbusineessbottomsheet: false, )),
                                 (Route<dynamic> route) => false,
                           );
                           // await auth.signInWithCredential(credential);
@@ -146,7 +166,7 @@ void showCustomBottomSheet(BuildContext context) {
                         }
                       },
                       child: Container(
-                        width: 376.w,
+                        width: 334.w,
                         height: 48.h,
                         decoration: ShapeDecoration(
                           color: Colors.white,
@@ -169,11 +189,11 @@ void showCustomBottomSheet(BuildContext context) {
                                 'Verify',
                                 style: GoogleFonts.montserrat(
                                   color: const Color(0xFF191919),
-                                  fontSize: 14.sp,
+                                  fontSize: 16.sp,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              SizedBox(width: 12.w),
+                              Center(child: SizedBox(width: 12.w)),
                               const Icon(Icons.east_rounded),
                             ],
                           ),

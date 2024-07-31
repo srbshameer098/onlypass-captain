@@ -41,7 +41,7 @@ class _Facilities_SearchState extends State<Facilities_Search> {
           style: TextStyle(
             color: Colors.white,
             fontSize: 16.sp,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
         actions: [
@@ -68,7 +68,7 @@ class _Facilities_SearchState extends State<Facilities_Search> {
                 child: Container(
                   width: double.infinity,
                   height: 48.h,
-                  padding: const EdgeInsets.all(2),
+                  padding: const EdgeInsets.all(3),
                   decoration: ShapeDecoration(
                     color: const Color(0xFF282828),
                     shape: RoundedRectangleBorder(
@@ -80,7 +80,7 @@ class _Facilities_SearchState extends State<Facilities_Search> {
                     textInputAction: TextInputAction.search,
                     cursorColor: Colors.white,
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 18.sp,
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
                     ),

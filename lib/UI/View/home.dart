@@ -38,6 +38,7 @@ class Home extends StatefulWidget {
 
 
 
+
   const Home(
       {super.key,
         required this.otpBottomSheet,
@@ -45,6 +46,7 @@ class Home extends StatefulWidget {
         required this.profilebottomsheet,
         required this.adminformBottomSheet,
         required this.Newbusineessbottomsheet,
+
       });
 
   @override
@@ -270,9 +272,11 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         backgroundColor: const Color(0xFF191919),
         appBar: AppBar(
+
+          backgroundColor: const Color(0xff000000),
           toolbarHeight: 75.h,
           automaticallyImplyLeading: false,
-          forceMaterialTransparency: true,
+          forceMaterialTransparency: false,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -282,10 +286,10 @@ class _HomeState extends State<Home> {
                 width: 30.w,
               ),
               Container(
-                width: 207.w,
+                width: 212.w,
                 height: 40.h,
                 decoration: ShapeDecoration(
-                  color: const Color(0x10FEFEFE),
+                  color: const Color(0x19FEFEFE),
                   shape: RoundedRectangleBorder(
                     side: BorderSide(width: 0.30.w, color: const Color(0x26B2B2B2)),
                     borderRadius: BorderRadius.circular(140),
@@ -297,7 +301,7 @@ class _HomeState extends State<Home> {
                     children: [
                       CircleAvatar(
                         radius: 14.r,
-                        backgroundColor: const Color(0xFF202020),
+                        backgroundColor: const Color(0xFF282828),
                         child: Image.asset(
                           'assets/icons/performance.png',
                           height: 14.h,
@@ -333,12 +337,12 @@ class _HomeState extends State<Home> {
             ],
           ),
           centerTitle: true,
-          backgroundColor: Colors.black,
+
           bottom: PreferredSize(
             preferredSize: Size(double.infinity, 5.sp),
             child: Container(
               width: double.infinity.w,
-              height: 1.h,
+              height: 0.5.h,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment(1.00, 0.00),
