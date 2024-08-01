@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -34,25 +35,21 @@ class Home extends StatefulWidget {
   final bool adminformBottomSheet;
   final bool Newbusineessbottomsheet;
 
-
-
-
-
-
-  const Home(
-      {super.key,
-        required this.otpBottomSheet,
-        required this.welcomeSheet,
-        required this.profilebottomsheet,
-        required this.adminformBottomSheet,
-        required this.Newbusineessbottomsheet,
-
-      });
+  const Home({
+    super.key,
+    required this.otpBottomSheet,
+    required this.welcomeSheet,
+    required this.profilebottomsheet,
+    required this.adminformBottomSheet,
+    required this.Newbusineessbottomsheet,
+  });
 
   @override
   State<Home> createState() => _HomeState();
 }
+
 late List<AllEventModel>? data;
+
 class _HomeState extends State<Home> {
   List<String> icons = [
     'assets/icons/history.png',
@@ -71,7 +68,8 @@ class _HomeState extends State<Home> {
 
   // bool customer_id = true;
 
-  bool welcome_sheet =true ;
+  bool welcome_sheet = true;
+
   bool otp_bottom_sheet = true;
   bool profile_bottom_sheet = true;
   bool admin_form_BottomSheet = true;
@@ -86,6 +84,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    // BlocProvider.of<AllEventBloc>(context).add(FetchAllEvent());
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (welcome_sheet == widget.welcomeSheet) {
         _showModalBottomSheet(context);
@@ -97,13 +97,15 @@ class _HomeState extends State<Home> {
         staff_customer_id_BottomSheet(context);
       }
       if (admin_form_BottomSheet == widget.adminformBottomSheet) {
-        admin_customer_id_BottomSheet( context,);
+        admin_customer_id_BottomSheet(
+          context,
+        );
       }
       if (New_busineess_bottom_sheet == widget.Newbusineessbottomsheet) {
         New_busineess_BottomSheet(context);
       }
     });
-    BlocProvider.of<AllEventBloc>(context).add(FetchAllEvent());
+
   }
 
   final PageController _pageController = PageController();
@@ -165,12 +167,15 @@ class _HomeState extends State<Home> {
                         });
                       },
                       fontStyle: TextStyle(
-                        color: selectedValue == 1 ? const Color(0xFF191919) : const Color(0xFFFEFEFE),
+                        color: selectedValue == 1
+                            ? const Color(0xFF191919)
+                            : const Color(0xFFFEFEFE),
                         fontSize: 14.sp,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w600,
                       ),
-                      description: 'Select your business from registered list of businesses with a name or code.',
+                      description:
+                          'Select your business from registered list of businesses with a name or code.',
                     ),
                     SizedBox(height: 24.h),
                     CustomRadioButton_1(
@@ -185,7 +190,9 @@ class _HomeState extends State<Home> {
                         });
                       },
                       fontStyle: TextStyle(
-                        color: selectedValue == 2 ? const Color(0xFF191919) : const Color(0xFFFEFEFE),
+                        color: selectedValue == 2
+                            ? const Color(0xFF191919)
+                            : const Color(0xFFFEFEFE),
                         fontSize: 14.sp,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w600,
@@ -202,7 +209,6 @@ class _HomeState extends State<Home> {
                         fontWeight: FontWeight.w600,
                         decoration: TextDecoration.underline,
                         decorationColor: const Color(0xFFFEFEFE),
-
                         letterSpacing: 0.28,
                       ),
                     ),
@@ -212,7 +218,6 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CircularStepProgressIndicator(
-
                           totalSteps: 100,
                           currentStep: 50 + currentPage * 50,
                           stepSize: 0,
@@ -227,18 +232,19 @@ class _HomeState extends State<Home> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (_) => const Facilities_Search()));
+                                        builder: (_) =>
+                                            const Facilities_Search()));
                               } else {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (_) => const Home(
-                                          otpBottomSheet: false,
-                                          welcomeSheet: false,
-                                          profilebottomsheet: false,
-                                          adminformBottomSheet: false,
-                                          Newbusineessbottomsheet: true,
-                                        )));
+                                              otpBottomSheet: false,
+                                              welcomeSheet: false,
+                                              profilebottomsheet: false,
+                                              adminformBottomSheet: false,
+                                              Newbusineessbottomsheet: true,
+                                            )));
                               }
                             },
                             child: CircleAvatar(
@@ -264,7 +270,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -272,7 +277,6 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         backgroundColor: const Color(0xFF191919),
         appBar: AppBar(
-
           backgroundColor: const Color(0xff000000),
           toolbarHeight: 75.h,
           automaticallyImplyLeading: false,
@@ -280,34 +284,32 @@ class _HomeState extends State<Home> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(
-                'assets/images/CaptainLogoOnly.png',
-                height: 30.h,
-                width: 30.w,
+              SvgPicture.asset('assets/icons/onlypass.svg',
+                width:33.87.w,height: 33.87.h,
               ),
               Container(
-                width: 212.w,
+                width: 204.w,
                 height: 40.h,
                 decoration: ShapeDecoration(
                   color: const Color(0x19FEFEFE),
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 0.30.w, color: const Color(0x26B2B2B2)),
-                    borderRadius: BorderRadius.circular(140),
+                    side: BorderSide(
+                        width: 0.50.w, color: const Color(0x26B2B2B2)),
+                    borderRadius: BorderRadius.circular(140.r),
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 14.w),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: Row(
                     children: [
                       CircleAvatar(
-                        radius: 14.r,
-                        backgroundColor: const Color(0xFF282828),
-                        child: Image.asset(
-                          'assets/icons/performance.png',
-                          height: 14.h,
-                          width: 14.w,
-                        ),
-                      ),
+                          radius: 14.r,
+                          backgroundColor: const Color(0xFF282828),
+                          child: SvgPicture.asset(
+                            'assets/icons/performance.svg',
+                            width: 16.w,
+                            height: 16.h,
+                          )),
                       SizedBox(
                         width: 10.w,
                       ),
@@ -315,8 +317,9 @@ class _HomeState extends State<Home> {
                         'See your performance',
                         style: GoogleFonts.montserrat(
                           color: const Color(0xfffefefe),
-                          fontSize: 10.sp,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
+                          letterSpacing: 0.4
                         ),
                       ),
                     ],
@@ -324,20 +327,18 @@ class _HomeState extends State<Home> {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  _showModalBottomSheet(context);
-                  (context);
-                },
-                child: Image.asset(
-                  'assets/icons/account.png',
-                  height: 24.h,
-                  width: 24.w,
-                ),
-              ),
+                  onTap: () {
+                    _showModalBottomSheet(context);
+                    (context);
+                  },
+                  child: SvgPicture.asset(
+                    'assets/icons/person.svg',
+                    width: 24.w,
+                    height: 24.h,
+                  )),
             ],
           ),
           centerTitle: true,
-
           bottom: PreferredSize(
             preferredSize: Size(double.infinity, 5.sp),
             child: Container(
@@ -372,7 +373,7 @@ class _HomeState extends State<Home> {
           child: Stack(
             children: [
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment(0, -1),
                     end: Alignment(0, 1),
@@ -386,46 +387,47 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding:  EdgeInsets.only(top: 12.h),
                       child: Center(
                         child: Container(
-                          width: 44,
-                          height: 3,
+                          width: 44.w,
+                          height: 3.h,
                           decoration: ShapeDecoration(
-                            color: Color(0xFF464646),
+                            color: const Color(0xFF464646),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
+                              borderRadius: BorderRadius.circular(100.r),
                             ),
                           ),
                         ),
                       ),
                     ),
+                    SizedBox(height: 30.h,),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 25.h, vertical: 10.h),
+                          horizontal: 25.h, ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
                               Text(
-                                'Quick view notification',
+                                'Quick notification',
                                 style: GoogleFonts.montserrat(
-                                  color: const Color(0xFF818181),
+                                  color: const Color(0xFF6F6F6F),
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0.w),
+                                padding: EdgeInsets.all(6.w),
                                 child: CircleAvatar(
                                   radius: 10.r,
                                   backgroundColor: const Color(0xFF00FF00),
                                   child: Text(
-                                    '9+',
+                                    '9',
                                     style: GoogleFonts.montserrat(
                                       color: Colors.black,
-                                      fontSize: 10.sp,
+                                      fontSize: 12.sp,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -436,46 +438,47 @@ class _HomeState extends State<Home> {
                           Text(
                             'view all',
                             style: GoogleFonts.montserrat(
-                              color: const Color(0xFFFEFEFE),
+                              color: const Color(0xFFE4E4E4),
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                               decoration: TextDecoration.underline,
-                              decorationColor: Colors.white,
+                              decorationColor:const Color(0xFFE4E4E4),
                               decorationThickness: 1.w,
                             ),
                           )
                         ],
                       ),
                     ),
+                    SizedBox(height: 24.h,),
                     CarouselSlider.builder(
                       itemCount: 5,
                       itemBuilder: (BuildContext context, int itemIndex,
-                          int pageViewIndex) =>
+                              int pageViewIndex) =>
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Container(
-                              width: 376.w,
+                              width: 326.w,
                               height: 64.h,
                               decoration: BoxDecoration(
                                   color: const Color(0xFFFEFEFE),
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(1.r))),
+                                      BorderRadius.all(Radius.circular(1.r))),
                               child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 20.0.h),
+                                padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 12.h),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      width: 40.w,
-                                      height: 40.h,
+                                      width: 44.w,
+                                      height: 44.h,
                                       decoration: ShapeDecoration(
                                         image: const DecorationImage(
                                           image: AssetImage(
                                               "assets/images/imgLog.png"),
                                           fit: BoxFit.fill,
                                         ),
-                                        shape: OvalBorder(
+                                        shape: CircleBorder(
                                           side: BorderSide(
                                               width: 0.30.w,
                                               color: const Color(0xFF191919)),
@@ -495,14 +498,14 @@ class _HomeState extends State<Home> {
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 5.h,
+                                          height: 4.h,
                                         ),
                                         Text(
                                           '3 Months plan',
                                           style: GoogleFonts.montserrat(
                                             color: const Color(0xFF9B9B9B),
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         )
                                       ],
@@ -520,7 +523,7 @@ class _HomeState extends State<Home> {
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 5.h,
+                                          height: 6.h,
                                         ),
                                         Text(
                                           'DUE YESTERDAY',
@@ -568,15 +571,15 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     SizedBox(
-                      height: 35,
+                      height: 40.h,
                     ),
 
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 25),
                       child: Text(
                         'Manage your facility',
-                        style: GoogleFonts.montserrat(
-                          color: const Color(0xFF818181),
+                            style: GoogleFonts.montserrat(
+                          color: const Color(0xFF6F6F6F),
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                         ),
@@ -597,7 +600,7 @@ class _HomeState extends State<Home> {
                                         builder: (_) => Account()));
                               },
                               child:
-                              FacilityItem(icon: icons[0], text: texts[0])),
+                                  FacilityItem(icon: icons[0], text: texts[0])),
                           GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -606,7 +609,7 @@ class _HomeState extends State<Home> {
                                         builder: (_) => const Members()));
                               },
                               child:
-                              FacilityItem(icon: icons[1], text: texts[1])),
+                                  FacilityItem(icon: icons[1], text: texts[1])),
                           GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -615,7 +618,7 @@ class _HomeState extends State<Home> {
                                         builder: (_) => const Enquiry()));
                               },
                               child:
-                              FacilityItem(icon: icons[2], text: texts[2])),
+                                  FacilityItem(icon: icons[2], text: texts[2])),
                           GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -624,7 +627,7 @@ class _HomeState extends State<Home> {
                                         builder: (_) => const Wallet()));
                               },
                               child:
-                              FacilityItem(icon: icons[3], text: texts[3])),
+                                  FacilityItem(icon: icons[3], text: texts[3])),
                         ],
                       ),
                     ),
@@ -664,7 +667,7 @@ class _HomeState extends State<Home> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    // builder: (_) => const CreateEvent()));
+                                      // builder: (_) => const CreateEvent()));
                                       builder: (_) => const EventPages()));
                             },
                             child: Text(
@@ -710,7 +713,7 @@ class _HomeState extends State<Home> {
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             height: 0),
-                        tabs: [
+                        tabs: const [
                           Tab(
                             height: 30,
                             text: 'Upcoming (${3})',
@@ -739,35 +742,103 @@ class _HomeState extends State<Home> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => const PreEvent(
-                                        text:
-                                        'Yoga class with Arun Master and team.',
-                                        img: "assets/images/img1.png",
-                                        description:
-                                        'This class is great for beginners or those who want a more relaxing practice. It focuses on is stretching and strengthen the body.',
-                                      )));
+                                            text:
+                                                'Yoga class with Arun Master and team.',
+                                            img: "assets/images/img1.png",
+                                            description:
+                                                'This class is great for beginners or those who want a more relaxing practice. It focuses on is stretching and strengthen the body.',
+                                          )));
                             },
                             child: SizedBox(
                               height: 270.h,
-                              child: BlocBuilder<EventBloc, EventState>(
+                              child: BlocBuilder<AllEventBloc, AllEventState>(
                                 builder: (context, state) {
-                                  if (state is EventBloCLoading) {
-                                    return const Center(
-                                      child: CircularProgressIndicator(
-                                        color: Colors.white,
+                                  if (state is AllEventBlocLoading) {
+                                    print('bloc loading ');
+                                    return Shimmer.fromColors(
+                                      direction: ShimmerDirection.ltr,
+                                      baseColor: const Color(0xFFE7E7E7),
+                                      highlightColor: const Color(0xFF9B9B9B),
+                                      child: ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(parent: NeverScrollableScrollPhysics()),
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (BuildContext, int) => Padding(
+                                          padding: EdgeInsets.only(right: 16.w),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width: 140.w,
+                                                height: 185.h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            10.r))),
+                                              ),
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
+                                              Container(
+                                                width: 140.w,
+                                                height: 20.h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            10.r))),
+                                              ),
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
+                                              Container(
+                                                width: 140.w,
+                                                height: 20.h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            10.r))),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        itemCount: 3,
                                       ),
                                     );
                                   }
-                                  if (state is EventBloCError) {
-                                    return const Center(
-                                      child: Text('something else !!'),
+                                  if (state is AllEventBlocError) {
+                                    return RefreshIndicator(
+                                      onRefresh: () async {
+                                        return BlocProvider.of<
+                                            AllEventBloc>(context)
+                                            .add(FetchAllEvent());
+                                      },
+                                      child: SingleChildScrollView(
+                                        physics:
+                                        const BouncingScrollPhysics(),
+                                        child: SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                                .9.h,
+                                            // color: Colors.red,
+                                            child: const Center(
+                                                child: Text(
+                                                    'Oops something went wrong',style: TextStyle(color: Colors.white),))),
+                                      ),
                                     );
                                   }
-                                  if (state is EventBLoCLoaded) {
-                                    // data = BlocProvider.of.<EventBloc>(context).eventModel;
+                                  if (state is AllEventBlocLoaded) {
+                                     data = BlocProvider.of<AllEventBloc>(context).allEventModel ;
                                   }
                                   return ListView.separated(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: 3,
+                                    itemCount: data!.length,
                                     itemBuilder: (context, position) {
                                       return Column(
                                         children: [
@@ -798,7 +869,7 @@ class _HomeState extends State<Home> {
                                                           Color(0x91191919),
                                                           Colors.black
                                                               .withOpacity(
-                                                              0.35),
+                                                                  0.35),
                                                           Color(0x00191919)
                                                         ],
                                                       ),
@@ -811,8 +882,8 @@ class _HomeState extends State<Home> {
                                                   width: 52.w,
                                                   height: 16.h,
                                                   decoration:
-                                                  const BoxDecoration(
-                                                      color: Colors.black),
+                                                      const BoxDecoration(
+                                                          color: Colors.black),
                                                   child: Center(
                                                     child: Text(
                                                       'Weekly',
@@ -822,7 +893,7 @@ class _HomeState extends State<Home> {
                                                             0xFFFEFEFE),
                                                         fontSize: 10.sp,
                                                         fontWeight:
-                                                        FontWeight.w400,
+                                                            FontWeight.w400,
                                                       ),
                                                     ),
                                                   ),
@@ -844,10 +915,10 @@ class _HomeState extends State<Home> {
                                                 left: 39.w,
                                                 top: 175.h,
                                                 child: Text(
-                                                  '17 booked',
+                                                 '${data![position].availableSlot} bookings',
                                                   style: GoogleFonts.montserrat(
                                                     color:
-                                                    const Color(0xFFFEFEFE),
+                                                        const Color(0xFFFEFEFE),
                                                     fontSize: 10.sp,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -864,7 +935,7 @@ class _HomeState extends State<Home> {
                                             child: SizedBox(
                                               width: 153.w,
                                               child: Text(
-                                                'Yoga class with Arun Master and team.',
+                                                data![position].description.toString(),
                                                 style: GoogleFonts.montserrat(
                                                   color: Colors.white,
                                                   fontSize: 12.sp,
@@ -888,7 +959,7 @@ class _HomeState extends State<Home> {
                                                           0xFF818181),
                                                       fontSize: 10.sp,
                                                       fontWeight:
-                                                      FontWeight.w400,
+                                                          FontWeight.w400,
                                                     ),
                                                   ),
                                                   const SizedBox(
@@ -901,7 +972,7 @@ class _HomeState extends State<Home> {
                                                           0xFF818181),
                                                       fontSize: 10.sp,
                                                       fontWeight:
-                                                      FontWeight.w400,
+                                                          FontWeight.w400,
                                                     ),
                                                   ),
                                                 ],
@@ -917,6 +988,7 @@ class _HomeState extends State<Home> {
                                         width: 23.w,
                                       );
                                     },
+
                                   );
                                 },
                               ),
@@ -930,8 +1002,8 @@ class _HomeState extends State<Home> {
                               vertical: 8.h, horizontal: 16),
                           child: GestureDetector(
                             onTap: () {
-                              data = BlocProvider.of<AllEventBloc>(context)
-                                  .allEventModel;
+                              // data = BlocProvider.of<AllEventBloc>(context)
+                              //     .allEventModel;
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -940,7 +1012,7 @@ class _HomeState extends State<Home> {
                                     // img: "assets/images/img1.png",
                                     img: data![0].image.toString(),
                                     description:
-                                    data![0].description.toString(),
+                                        data![0].description.toString(),
                                   ),
                                 ),
                               );
@@ -949,8 +1021,8 @@ class _HomeState extends State<Home> {
                               height: 270.h,
                               child: BlocBuilder<AllEventBloc, AllEventState>(
                                 builder: (context, state) {
-                                  data = BlocProvider.of<AllEventBloc>(context)
-                                      .allEventModel;
+
+
                                   if (state is AllEventBlocLoading) {
                                     if (kDebugMode) {
                                       print(
@@ -965,21 +1037,20 @@ class _HomeState extends State<Home> {
                                       child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (_, __) => Padding(
-                                          padding:
-                                          EdgeInsets.only(right: 16.w),
+                                          padding: EdgeInsets.only(right: 16.w),
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 width: 140.w,
                                                 height: 185.h,
-                                                decoration:  BoxDecoration(
+                                                decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(
-                                                            10.r))),
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.r))),
                                               ),
                                               SizedBox(
                                                 height: 10.h,
@@ -990,9 +1061,9 @@ class _HomeState extends State<Home> {
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(
-                                                            10.r))),
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.r))),
                                               ),
                                               SizedBox(
                                                 height: 10.h,
@@ -1003,9 +1074,9 @@ class _HomeState extends State<Home> {
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(
-                                                            10.r))),
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.r))),
                                               ),
                                             ],
                                           ),
@@ -1064,13 +1135,16 @@ class _HomeState extends State<Home> {
                                                       gradient: LinearGradient(
                                                         begin: const Alignment(
                                                             -0.00, 1.00),
-                                                        end: const Alignment(0, -1),
+                                                        end: const Alignment(
+                                                            0, -1),
                                                         colors: [
-                                                          const Color(0x91191919),
+                                                          const Color(
+                                                              0x91191919),
                                                           Colors.black
                                                               .withOpacity(
-                                                              0.35),
-                                                          const Color(0x00191919)
+                                                                  0.35),
+                                                          const Color(
+                                                              0x00191919)
                                                         ],
                                                       ),
                                                     ),
@@ -1083,7 +1157,7 @@ class _HomeState extends State<Home> {
                                                     width: 52.w,
                                                     height: 16.h,
                                                     decoration:
-                                                    const BoxDecoration(
+                                                        const BoxDecoration(
                                                       color: Colors.black,
                                                     ),
                                                     child: Center(
@@ -1095,7 +1169,7 @@ class _HomeState extends State<Home> {
                                                               0xFFFEFEFE),
                                                           fontSize: 10.sp,
                                                           fontWeight:
-                                                          FontWeight.w400,
+                                                              FontWeight.w400,
                                                         ),
                                                       ),
                                                     ),
@@ -1123,7 +1197,7 @@ class _HomeState extends State<Home> {
                                                           0xFFFEFEFE),
                                                       fontSize: 10.sp,
                                                       fontWeight:
-                                                      FontWeight.w500,
+                                                          FontWeight.w500,
                                                     ),
                                                   ),
                                                 ),
@@ -1162,19 +1236,20 @@ class _HomeState extends State<Home> {
                                                             0xFF818181),
                                                         fontSize: 10.sp,
                                                         fontWeight:
-                                                        FontWeight.w400,
+                                                            FontWeight.w400,
                                                       ),
                                                     ),
                                                     const SizedBox(width: 4),
                                                     Text(
                                                       data![index]
-                                                          .endDate.toString(),
+                                                          .endDate
+                                                          .toString(),
                                                       style: GoogleFonts.inter(
                                                         color: const Color(
                                                             0xFF818181),
                                                         fontSize: 10.sp,
                                                         fontWeight:
-                                                        FontWeight.w400,
+                                                            FontWeight.w400,
                                                       ),
                                                     ),
                                                   ],
@@ -1362,7 +1437,6 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                         ),
-
 
                         ///-----------Tab 3  -------------------///
                         SingleChildScrollView(

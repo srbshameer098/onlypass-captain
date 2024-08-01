@@ -12,7 +12,7 @@ class AllEventApi {
   ApiClient apiClient = ApiClient();
 
   Future<List<AllEventModel>> getAllEvent() async {
-    String path = 'http://192.168.1.19:5000/api/event';
+    String path = '178.18.254.224:8654/api/event';
     var body = {};
 
     Response response= await apiClient.invokeAPI(path, 'GET', body);

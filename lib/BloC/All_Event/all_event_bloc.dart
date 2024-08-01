@@ -19,6 +19,7 @@ class AllEventBloc extends Bloc<AllEventEvent, AllEventState> {
       emit(AllEventBlocLoading());
       try {
         allEventModel = await allEventApi.getAllEvent();
+        print('***************************************');
         emit(AllEventBlocLoaded());
       } catch (e) {
         print(e);
