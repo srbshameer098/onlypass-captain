@@ -8,6 +8,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled7/UI/s1.dart';
 
 import '../../Bloc/LogIn/log_in_bloc.dart';
 import '../../Utils/utils.dart';
@@ -367,7 +368,7 @@ print('${facilityFlag}*****************************');
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (_) =>
-          const Home(
+          const S1(
             otpBottomSheet: false,
             welcomeSheet: false,
             profilebottomsheet: false,

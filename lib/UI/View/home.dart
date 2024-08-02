@@ -52,10 +52,10 @@ late List<AllEventModel>? data;
 
 class _HomeState extends State<Home> {
   List<String> icons = [
-    'assets/icons/history.png',
-    'assets/icons/members.png',
-    'assets/icons/Enquiries.png',
-    'assets/icons/Wallet.png',
+    'assets/icons/account.svg',
+    'assets/icons/members.svg',
+    'assets/icons/enquiries.svg',
+    'assets/icons/wallet.svg',
   ];
   List<String> texts = [
     'Account',
@@ -66,209 +66,15 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   int? selectedValue = 1;
 
-  // bool customer_id = true;
-
-  bool welcome_sheet = true;
-
-  bool otp_bottom_sheet = true;
-  bool profile_bottom_sheet = true;
-  bool admin_form_BottomSheet = true;
-  bool New_busineess_bottom_sheet = true;
-
-  void _handleRadioValueChange(int? value) {
-    setState(() {
-      selectedValue = value ?? 1;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    // BlocProvider.of<AllEventBloc>(context).add(FetchAllEvent());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (welcome_sheet == widget.welcomeSheet) {
-        _showModalBottomSheet(context);
-      }
-      if (otp_bottom_sheet == widget.otpBottomSheet) {
-        showCustomBottomSheet(context);
-      }
-      if (profile_bottom_sheet == widget.profilebottomsheet) {
-        staff_customer_id_BottomSheet(context);
-      }
-      if (admin_form_BottomSheet == widget.adminformBottomSheet) {
-        admin_customer_id_BottomSheet(
-          context,
-        );
-      }
-      if (New_busineess_bottom_sheet == widget.Newbusineessbottomsheet) {
-        New_busineess_BottomSheet(context);
-      }
-    });
-
+    BlocProvider.of<AllEventBloc>(context).add(FetchAllEvent());
   }
 
   final PageController _pageController = PageController();
-  int currentPage = 0; // Track current page index
 
-  void _showModalBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      isDismissible: false,
-      enableDrag: false,
-      isScrollControlled: true,
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setModalState) {
-            return Container(
-              height: 534.h,
-              decoration: BoxDecoration(
-                color: Color(0xFF191919),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(2.r),
-                  topRight: Radius.circular(2.r),
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 32.h),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Welcome to Onlypass Captain App',
-                      style: TextStyle(
-                        color: const Color(0xFFE4E4E4),
-                        fontSize: 16.sp,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(height: 16.h),
-                    Text(
-                      "We couldn't find any account registered with the phone number. Select one of the below.",
-                      style: TextStyle(
-                        color: const Color(0xFF6F6F6F),
-                        fontSize: 14.sp,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    SizedBox(height: 32.h),
-                    CustomRadioButton_1(
-                      text: 'I am a staff of a registered business',
-                      isSelected: selectedValue == 1,
-                      onSelect: (value) {
-                        setModalState(() {
-                          selectedValue = 1;
-                        });
-                        setState(() {
-                          selectedValue = 1;
-                        });
-                      },
-                      fontStyle: TextStyle(
-                        color: selectedValue == 1
-                            ? const Color(0xFF191919)
-                            : const Color(0xFFFEFEFE),
-                        fontSize: 14.sp,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                      ),
-                      description:
-                          'Select your business from registered list of businesses with a name or code.',
-                    ),
-                    SizedBox(height: 24.h),
-                    CustomRadioButton_1(
-                      text: 'I am a new user.',
-                      isSelected: selectedValue == 2,
-                      onSelect: (value) {
-                        setModalState(() {
-                          selectedValue = 2;
-                        });
-                        setState(() {
-                          selectedValue = 2;
-                        });
-                      },
-                      fontStyle: TextStyle(
-                        color: selectedValue == 2
-                            ? const Color(0xFF191919)
-                            : const Color(0xFFFEFEFE),
-                        fontSize: 14.sp,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                      ),
-                      description: 'I would like to register my business.',
-                    ),
-                    SizedBox(height: 32.h),
-                    Text(
-                      'Use another phone number',
-                      style: TextStyle(
-                        color: const Color(0xFFFEFEFE),
-                        fontSize: 14.sp,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.underline,
-                        decorationColor: const Color(0xFFFEFEFE),
-                        letterSpacing: 0.28,
-                      ),
-                    ),
-                    SizedBox(height: 38.h),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        CircularStepProgressIndicator(
-                          totalSteps: 100,
-                          currentStep: 50 + currentPage * 50,
-                          stepSize: 0,
-                          selectedColor: const Color(0xFF37F840),
-                          unselectedColor: Colors.transparent,
-                          width: 70.w,
-                          height: 70.h,
-                          selectedStepSize: 3,
-                          child: GestureDetector(
-                            onTap: () {
-                              if (selectedValue == 1) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) =>
-                                            const Facilities_Search()));
-                              } else {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => const Home(
-                                              otpBottomSheet: false,
-                                              welcomeSheet: false,
-                                              profilebottomsheet: false,
-                                              adminformBottomSheet: false,
-                                              Newbusineessbottomsheet: true,
-                                            )));
-                              }
-                            },
-                            child: CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              radius: 30.r,
-                              child: CircleAvatar(
-                                backgroundColor: const Color(0xFFFEFEFE),
-                                radius: 30.r,
-                                child: const Center(child: Icon(Icons.east)),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
+  // int currentPage = 0; // Track current page index
 
   @override
   Widget build(BuildContext context) {
@@ -284,11 +90,13 @@ class _HomeState extends State<Home> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SvgPicture.asset('assets/icons/onlypass.svg',
-                width:33.87.w,height: 33.87.h,
+              SvgPicture.asset(
+                'assets/icons/onlypass.svg',
+                width: 33.87.w,
+                height: 33.87.h,
               ),
               Container(
-                width: 204.w,
+                width: 206.w,
                 height: 40.h,
                 decoration: ShapeDecoration(
                   color: const Color(0x19FEFEFE),
@@ -316,21 +124,17 @@ class _HomeState extends State<Home> {
                       Text(
                         'See your performance',
                         style: GoogleFonts.montserrat(
-                          color: const Color(0xfffefefe),
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 0.4
-                        ),
+                            color: const Color(0xfffefefe),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.4),
                       ),
                     ],
                   ),
                 ),
               ),
               GestureDetector(
-                  onTap: () {
-                    _showModalBottomSheet(context);
-                    (context);
-                  },
+                  onTap: () {},
                   child: SvgPicture.asset(
                     'assets/icons/person.svg',
                     width: 24.w,
@@ -387,7 +191,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Padding(
-                      padding:  EdgeInsets.only(top: 12.h),
+                      padding: EdgeInsets.only(top: 12.h),
                       child: Center(
                         child: Container(
                           width: 44.w,
@@ -401,10 +205,13 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30.h,),
+                    SizedBox(
+                      height: 30.h,
+                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 25.h, ),
+                        horizontal: 29.w,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -419,7 +226,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(6.w),
+                                padding: const EdgeInsets.all(6),
                                 child: CircleAvatar(
                                   radius: 10.r,
                                   backgroundColor: const Color(0xFF00FF00),
@@ -442,104 +249,106 @@ class _HomeState extends State<Home> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                               decoration: TextDecoration.underline,
-                              decorationColor:const Color(0xFFE4E4E4),
+                              decorationColor: const Color(0xFFE4E4E4),
                               decorationThickness: 1.w,
                             ),
                           )
                         ],
                       ),
                     ),
-                    SizedBox(height: 24.h,),
+                    SizedBox(
+                      height: 24.h,
+                    ),
                     CarouselSlider.builder(
                       itemCount: 5,
                       itemBuilder: (BuildContext context, int itemIndex,
                               int pageViewIndex) =>
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              width: 326.w,
-                              height: 64.h,
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFFFEFEFE),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(1.r))),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 12.h),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 44.w,
-                                      height: 44.h,
-                                      decoration: ShapeDecoration(
-                                        image: const DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/imgLog.png"),
-                                          fit: BoxFit.fill,
-                                        ),
-                                        shape: CircleBorder(
-                                          side: BorderSide(
-                                              width: 0.30.w,
-                                              color: const Color(0xFF191919)),
-                                        ),
-                                      ),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Jayaram Ravi',
-                                          style: TextStyle(
-                                            color: const Color(0xFF191919),
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 4.h,
-                                        ),
-                                        Text(
-                                          '3 Months plan',
-                                          style: GoogleFonts.montserrat(
-                                            color: const Color(0xFF9B9B9B),
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          '₹ ' '5,799 .00',
-                                          style: GoogleFonts.montserrat(
-                                            color: const Color(0xFF191919),
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 6.h,
-                                        ),
-                                        Text(
-                                          'DUE YESTERDAY',
-                                          style: GoogleFonts.montserrat(
-                                            color: const Color(0xFFE83507),
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                  ],
+                          Container(
+                        width: 326.w,
+                        height: 64.h,
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFFEFEFE),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1.r))),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.w, vertical: 12.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 44.w,
+                                height: 44.h,
+                                decoration: ShapeDecoration(
+                                  image: const DecorationImage(
+                                    image:
+                                        AssetImage("assets/images/imgLog.png"),
+                                    fit: BoxFit.fill,
+                                  ),
+                                  shape: CircleBorder(
+                                    side: BorderSide(
+                                        width: 0.30.w,
+                                        color: const Color(0xFF191919)),
+                                  ),
                                 ),
                               ),
-                            ),
+                              SizedBox(width: 8.w,),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Jayaram Ravi',
+                                    style: TextStyle(
+                                      color: const Color(0xFF191919),
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 4.h,
+                                  ),
+                                  Text(
+                                    '3 Months plan',
+                                    style: GoogleFonts.montserrat(
+                                      color: const Color(0xFF9B9B9B),
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(width: 59.w,),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    '₹ ' '5,799 .00',
+                                    style: GoogleFonts.montserrat(
+                                      color: const Color(0xFF191919),
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 6.h,
+                                  ),
+                                  Text(
+                                    'DUE YESTERDAY',
+                                    style: GoogleFonts.montserrat(
+                                      color: const Color(0xFFE83507),
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
                           ),
+                        ),
+                      ),
                       options: CarouselOptions(
                         viewportFraction: 0.9,
                         onPageChanged: (index, reason) {
@@ -548,24 +357,24 @@ class _HomeState extends State<Home> {
                           });
                         },
                         enlargeCenterPage: false,
-                        clipBehavior: Clip.none,
+                        clipBehavior: Clip.antiAlias,
                         enableInfiniteScroll: false,
-                        aspectRatio: 400 / 64,
-                        height: 88.h,
+                        aspectRatio: 326/64,
+                        height: 64.h,
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(8.0.w),
+                      padding: EdgeInsets.only(top: 10.h),
                       child: Center(
                         child: DotsIndicator(
                           dotsCount: 5,
                           position: _currentIndex,
-                          decorator: const DotsDecorator(
-                            activeColor: Colors.white,
-                            color: Color(0xFF5D5D5D),
-                            spacing: EdgeInsets.all(2),
-                            activeSize: Size(10, 8),
-                            size: Size(9, 4),
+                          decorator:  DotsDecorator(
+                            activeColor: const Color(0xFFE4E4E4),
+                            color: const Color(0xFF5D5D5D),
+                            spacing: EdgeInsets.only(left: 2.w),
+                            activeSize: const Size(10, 8),
+                            size: const Size(9, 4),
                           ),
                         ),
                       ),
@@ -575,19 +384,21 @@ class _HomeState extends State<Home> {
                     ),
 
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      padding:  EdgeInsets.symmetric(horizontal: 28.w),
                       child: Text(
                         'Manage your facility',
-                            style: GoogleFonts.montserrat(
+                        style: GoogleFonts.montserrat(
                           color: const Color(0xFF6F6F6F),
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
+
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 10.h, vertical: 30.w),
+                        vertical: 32.h,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -633,7 +444,7 @@ class _HomeState extends State<Home> {
                     ),
                     Container(
                       width: double.infinity,
-                      height: 1.h,
+                      height: 0.5.h,
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment(1.00, 0.00),
@@ -647,17 +458,17 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     SizedBox(
-                      height: 40.h,
+                      height: 32.h,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      padding: EdgeInsets.symmetric(horizontal: 28.w),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Create & edit classes/events ',
+                            'Classes and events',
                             style: GoogleFonts.montserrat(
-                              color: const Color(0xFF818181),
+                              color: const Color(0xFF6F6F6F),
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w600,
                             ),
@@ -673,69 +484,70 @@ class _HomeState extends State<Home> {
                             child: Text(
                               'add new',
                               style: GoogleFonts.montserrat(
-                                  color: const Color(0xFFFEFEFE),
+                                  color: const Color(0xFFE4E4E4),
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w500,
                                   decoration: TextDecoration.underline,
-                                  decorationColor: Color(0xfffefefe),
+                                  decorationColor: const Color(0xFFE4E4E4),
                                   decorationThickness: 1.w),
                             ),
                           )
                         ],
                       ),
                     ),
-                    SizedBox(height: 8.h),
+                    SizedBox(height: 32.h),
 
                     ///-----------Tab Bar  -------------------///
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 25.w, vertical: 24.h),
+                          horizontal: 28.w, ),
                       child: ButtonsTabBar(
-                        buttonMargin: EdgeInsets.only(right: 32),
-                        splashColor: Colors.white,
-                        height: 30,
-                        elevation: 0,
+                        buttonMargin: EdgeInsets.only(right: 53.w),
+                        splashColor: const Color(0xFFFEFEFE),
+                        height: 30.h,
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 6.w),
                         radius: 0,
                         borderWidth: 0.9,
-                        borderColor: Color(0xFF282828),
-                        unselectedBorderColor: Color(0xFF4D4D4D),
+                        borderColor: const Color(0xFF282828),
+                        unselectedBorderColor: const Color(0xFFA3A3A3),
                         backgroundColor: Colors.white,
                         unselectedBackgroundColor: Colors.transparent,
                         labelStyle: GoogleFonts.montserrat(
-                            color: Color(0xFF191919),
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            height: 0),
+                          color: const Color(0xFF191919),
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
                         unselectedLabelStyle: GoogleFonts.montserrat(
-                            color: Color(0xFF818181),
+                            color: const Color(0xFFA3A3A3),
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
-                            height: 0),
-                        tabs: const [
+                            ),
+                        tabs:
+                        [
                           Tab(
-                            height: 30,
+                            height: 30.h,
                             text: 'Upcoming (${3})',
                           ),
                           Tab(
-                            height: 30,
+                            height: 30.h,
                             text: 'Regular (${2})',
                           ),
                           Tab(
-                            height: 30,
+                            height: 30.h,
                             text: 'Past (${5})',
                           ),
                         ],
                       ),
                     ),
+                    SizedBox(height: 24.h,),
                     SizedBox(
-                      height: 300.h,
+                      height: 327.h,
                       child: TabBarView(children: [
                         ///-----------Tab 1  -------------------///
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              vertical: 8.h, horizontal: 16),
+                              horizontal: 28.w),
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -750,7 +562,7 @@ class _HomeState extends State<Home> {
                                           )));
                             },
                             child: SizedBox(
-                              height: 270.h,
+                              height: 327.h,
                               child: BlocBuilder<AllEventBloc, AllEventState>(
                                 builder: (context, state) {
                                   if (state is AllEventBlocLoading) {
@@ -760,13 +572,16 @@ class _HomeState extends State<Home> {
                                       baseColor: const Color(0xFFE7E7E7),
                                       highlightColor: const Color(0xFF9B9B9B),
                                       child: ListView.builder(
-                                        physics: NeverScrollableScrollPhysics(parent: NeverScrollableScrollPhysics()),
+                                        physics: const NeverScrollableScrollPhysics(
+                                            parent:
+                                                NeverScrollableScrollPhysics()),
                                         scrollDirection: Axis.horizontal,
-                                        itemBuilder: (BuildContext, int) => Padding(
+                                        itemBuilder: (BuildContext, int) =>
+                                            Padding(
                                           padding: EdgeInsets.only(right: 16.w),
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 width: 140.w,
@@ -774,9 +589,9 @@ class _HomeState extends State<Home> {
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(
-                                                            10.r))),
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.r))),
                                               ),
                                               SizedBox(
                                                 height: 10.h,
@@ -787,9 +602,9 @@ class _HomeState extends State<Home> {
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(
-                                                            10.r))),
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.r))),
                                               ),
                                               SizedBox(
                                                 height: 10.h,
@@ -800,9 +615,9 @@ class _HomeState extends State<Home> {
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(
-                                                            10.r))),
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.r))),
                                               ),
                                             ],
                                           ),
@@ -814,27 +629,31 @@ class _HomeState extends State<Home> {
                                   if (state is AllEventBlocError) {
                                     return RefreshIndicator(
                                       onRefresh: () async {
-                                        return BlocProvider.of<
-                                            AllEventBloc>(context)
+                                        return BlocProvider.of<AllEventBloc>(
+                                                context)
                                             .add(FetchAllEvent());
                                       },
                                       child: SingleChildScrollView(
-                                        physics:
-                                        const BouncingScrollPhysics(),
+                                        physics: const BouncingScrollPhysics(),
                                         child: SizedBox(
                                             height: MediaQuery.of(context)
-                                                .size
-                                                .height *
+                                                    .size
+                                                    .height *
                                                 .9.h,
                                             // color: Colors.red,
                                             child: const Center(
                                                 child: Text(
-                                                    'Oops something went wrong',style: TextStyle(color: Colors.white),))),
+                                              'Oops something went wrong',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ))),
                                       ),
                                     );
                                   }
                                   if (state is AllEventBlocLoaded) {
-                                     data = BlocProvider.of<AllEventBloc>(context).allEventModel ;
+                                    data =
+                                        BlocProvider.of<AllEventBloc>(context)
+                                            .allEventModel;
                                   }
                                   return ListView.separated(
                                     scrollDirection: Axis.horizontal,
@@ -845,8 +664,8 @@ class _HomeState extends State<Home> {
                                           Stack(
                                             children: [
                                               Container(
-                                                width: 152.w,
-                                                height: 194.h,
+                                                width: 155.w,
+                                                height: 224.h,
                                                 decoration: const BoxDecoration(
                                                   image: DecorationImage(
                                                       image: AssetImage(
@@ -856,31 +675,30 @@ class _HomeState extends State<Home> {
                                                 ),
                                               ),
                                               Positioned(
-                                                  top: 163.h,
+                                                  top: 188.h,
                                                   child: Container(
-                                                    width: 152.w,
-                                                    height: 31.h,
+                                                    width: 155.w,
+                                                    height: 36.h,
                                                     decoration: BoxDecoration(
                                                       gradient: LinearGradient(
-                                                        begin: Alignment(
-                                                            -0.00, 1.00),
-                                                        end: Alignment(0, -1),
+                                                        begin: const Alignment(-0.00, 1.00),
+                                                        end: const Alignment(0, -1),
                                                         colors: [
-                                                          Color(0x91191919),
+                                                          const Color(0x91191919),
                                                           Colors.black
                                                               .withOpacity(
                                                                   0.35),
-                                                          Color(0x00191919)
+                                                          const Color(0x00191919)
                                                         ],
                                                       ),
                                                     ),
                                                   )),
                                               Positioned(
-                                                left: 101.w,
-                                                top: 12.h,
+                                                left: 95.w,
+                                                top: 14.h,
                                                 child: Container(
-                                                  width: 52.w,
-                                                  height: 16.h,
+                                                  width: 60.w,
+                                                  height: 20.h,
                                                   decoration:
                                                       const BoxDecoration(
                                                           color: Colors.black),
@@ -891,7 +709,7 @@ class _HomeState extends State<Home> {
                                                           .montserrat(
                                                         color: const Color(
                                                             0xFFFEFEFE),
-                                                        fontSize: 10.sp,
+                                                        fontSize: 12.sp,
                                                         fontWeight:
                                                             FontWeight.w400,
                                                       ),
@@ -900,84 +718,85 @@ class _HomeState extends State<Home> {
                                                 ),
                                               ),
                                               Positioned(
-                                                left: 15.w,
-                                                top: 172.h,
+                                                left: 12.7.w,
+                                                top: 202.h,
                                                 child: SizedBox(
-                                                  width: 16.w,
-                                                  height: 16.h,
-                                                  child: Image.asset(
-                                                    'assets/icons/groupIcon.png',
-                                                    height: 28.h,
+                                                  width: 22.79.w,
+                                                  height: 14.5.h,
+                                                  child:  SvgPicture.asset('assets/icons/pepole.svg',
+                                                    width:22.79.w,height: 14.5.h,
                                                   ),
                                                 ),
                                               ),
                                               Positioned(
-                                                left: 39.w,
-                                                top: 175.h,
+                                                left: 42.9.w,
+                                                top: 200.h,
                                                 child: Text(
-                                                 '${data![position].availableSlot} bookings',
+                                                  '${data![position].availableSlot} bookings',
                                                   style: GoogleFonts.montserrat(
                                                     color:
                                                         const Color(0xFFFEFEFE),
-                                                    fontSize: 10.sp,
-                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           ),
                                           SizedBox(
-                                            height: 8,
+                                            height: 14.5.h,
                                           ),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 4.w),
-                                            child: SizedBox(
-                                              width: 153.w,
-                                              child: Text(
-                                                data![position].description.toString(),
-                                                style: GoogleFonts.montserrat(
-                                                  color: Colors.white,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.2.h,
-                                                ),
-                                              ),
+                                          SizedBox(
+                                            width: 155.w,
+                                            child: Text(
+                                              data![position]
+                                                  .description
+                                                  .toString(),
+                                              style: GoogleFonts.montserrat(
+
+                                                color: Colors.white,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w500,
+                                                height: 1.10.h,
+                                              ),overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
                                             ),
                                           ),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 4.h),
-                                            child: SizedBox(
-                                              width: 153.w,
-                                              child: Row(
+                                          SizedBox(height: 6.h,),
+                                          Row(
+                                            children: [
+                                              Column(
                                                 children: [
-                                                  Text(
-                                                    'Fri, Dec 23',
-                                                    style: GoogleFonts.inter(
-                                                      color: const Color(
-                                                          0xFF818181),
-                                                      fontSize: 10.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                  SizedBox(width:155.w,
+                                                    child: Text(
+                                                      'Fri, Dec 23 8:30 am to',
+                                                      style: GoogleFonts.inter(
+                                                        color: const Color(
+                                                            0xFF818181),
+                                                        fontSize: 14.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
                                                     ),
                                                   ),
-                                                  const SizedBox(
-                                                    width: 4,
-                                                  ),
-                                                  Text(
-                                                    '8:30am - 9:30am',
-                                                    style: GoogleFonts.inter(
-                                                      color: const Color(
-                                                          0xFF818181),
-                                                      fontSize: 10.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400,
+
+                                                  SizedBox(width:155.w,
+                                                    child: Text(
+                                                      'Fri, Dec 23 9:30 am ',
+                                                      style: GoogleFonts.inter(
+                                                        color: const Color(
+                                                            0xFF818181),
+                                                        fontSize: 14.sp,
+                                                        fontWeight:
+                                                        FontWeight.w400,
+                                                      ),
                                                     ),
+
                                                   ),
                                                 ],
                                               ),
-                                            ),
+
+                                            ],
                                           )
                                         ],
                                       );
@@ -985,10 +804,9 @@ class _HomeState extends State<Home> {
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return SizedBox(
-                                        width: 23.w,
+                                        width: 16.w,
                                       );
                                     },
-
                                   );
                                 },
                               ),
@@ -1021,8 +839,6 @@ class _HomeState extends State<Home> {
                               height: 270.h,
                               child: BlocBuilder<AllEventBloc, AllEventState>(
                                 builder: (context, state) {
-
-
                                   if (state is AllEventBlocLoading) {
                                     if (kDebugMode) {
                                       print(

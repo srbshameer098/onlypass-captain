@@ -404,7 +404,13 @@ Future<void> staff_customer_id_BottomSheet(BuildContext context) async {
                 GestureDetector(
                   onTap: (){
                     Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => S1()),
+                      MaterialPageRoute(builder: (_) => const S1(
+                        otpBottomSheet: false,
+                        welcomeSheet: false,
+                        profilebottomsheet: false,
+                        adminformBottomSheet: false,
+                        Newbusineessbottomsheet: false,
+                      )),
                           (Route<dynamic> route) => false,
                     );
                   },
