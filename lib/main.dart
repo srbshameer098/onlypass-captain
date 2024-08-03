@@ -46,6 +46,12 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => CapUserBloc()),
           ],
           child: MaterialApp(
+            builder: (context, child) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(0.9)),
+                child: child!,
+              );
+            },
             title: 'Captain',
             theme:
             // ThemeData.dark(

@@ -36,7 +36,7 @@ class FacilityItem extends StatelessWidget {
             color: const Color(0xFFE4E4E4),
             fontSize: 14.sp,
             fontWeight: FontWeight.w500,
-          ),
+          ),overflow: TextOverflow.ellipsis,
         )
       ],
     );

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:untitled7/Bloc/Event_Creation/event_bloc.dart';
@@ -121,13 +122,17 @@ class _HomeState extends State<Home> {
                       SizedBox(
                         width: 10.w,
                       ),
-                      Text(
-                        'See your performance',
-                        style: GoogleFonts.montserrat(
-                            color: const Color(0xfffefefe),
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 0.4),
+                      SizedBox(width: 151.w,
+                        child: Text(
+                          'See your performance',
+                          style: GoogleFonts.montserrat(
+                              color: const Color(0xfffefefe),
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.4
+
+                          ),overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
@@ -164,7 +169,7 @@ class _HomeState extends State<Home> {
         ),
         bottomNavigationBar: Container(
           width: double.infinity,
-          height: 1.h,
+          height: 0.5.h,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment(1.00, 0.00),
@@ -177,6 +182,7 @@ class _HomeState extends State<Home> {
           child: Stack(
             children: [
               Container(
+                height: 0.5.h,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment(0, -1),
@@ -275,11 +281,11 @@ class _HomeState extends State<Home> {
                               horizontal: 12.w, vertical: 12.h),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Container(
-                                width: 44.w,
-                                height: 44.h,
+                                width: 40.w,
+                                height: 40.h,
                                 decoration: ShapeDecoration(
                                   image: const DecorationImage(
                                     image:
@@ -293,57 +299,79 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 8.w,),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Jayaram Ravi',
-                                    style: TextStyle(
-                                      color: const Color(0xFF191919),
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4.h,
-                                  ),
-                                  Text(
-                                    '3 Months plan',
-                                    style: GoogleFonts.montserrat(
-                                      color: const Color(0xFF9B9B9B),
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  )
-                                ],
+                              SizedBox(
+                                width: 8.w,
                               ),
-                              SizedBox(width: 59.w,),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    '₹ ' '5,799 .00',
-                                    style: GoogleFonts.montserrat(
-                                      color: const Color(0xFF191919),
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w600,
+                              SizedBox(width: 107.w,
+
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(width: 107.w,
+                                      height: 17.h,
+                                      child: Text(
+                                        'Jayaram Ravi',
+                                        style: TextStyle(
+                                          color: const Color(0xFF191919),
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600,
+                                        ),overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 6.h,
-                                  ),
-                                  Text(
-                                    'DUE YESTERDAY',
-                                    style: GoogleFonts.montserrat(
-                                      color: const Color(0xFFE83507),
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w600,
+                                    SizedBox(
+                                      height: 4.h,
                                     ),
-                                  )
-                                ],
+                                    SizedBox(width: 107.w,
+                                      height: 17.h,
+                                      child: Text(
+                                        '3 Months plan',
+                                        style: GoogleFonts.montserrat(
+                                          color: const Color(0xFF9B9B9B),
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),overflow: TextOverflow.ellipsis,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 27.w,
+                              ),
+                              SizedBox(width: 120.w,
+
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      height: 17.h,
+                                      child: Text(
+                                        '₹ ' '5,799 .00',
+                                        style: GoogleFonts.montserrat(
+                                          color: const Color(0xFF191919),
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600,
+                                        ),overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 6.h,
+                                    ),
+                                    SizedBox(
+                                      height: 17.h,
+                                      child: Text(
+                                        'DUE YESTERDAY',
+                                        style: GoogleFonts.montserrat(
+                                          color: const Color(0xFFE83507),
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w600,
+                                        ),overflow: TextOverflow.ellipsis,
+                                      ),
+                                    )
+                                  ],
+                                ),
                               )
                             ],
                           ),
@@ -359,7 +387,7 @@ class _HomeState extends State<Home> {
                         enlargeCenterPage: false,
                         clipBehavior: Clip.antiAlias,
                         enableInfiniteScroll: false,
-                        aspectRatio: 326/64,
+                        aspectRatio: 326 / 64,
                         height: 64.h,
                       ),
                     ),
@@ -369,7 +397,7 @@ class _HomeState extends State<Home> {
                         child: DotsIndicator(
                           dotsCount: 5,
                           position: _currentIndex,
-                          decorator:  DotsDecorator(
+                          decorator: DotsDecorator(
                             activeColor: const Color(0xFFE4E4E4),
                             color: const Color(0xFF5D5D5D),
                             spacing: EdgeInsets.only(left: 2.w),
@@ -384,7 +412,7 @@ class _HomeState extends State<Home> {
                     ),
 
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 28.w),
+                      padding: EdgeInsets.symmetric(horizontal: 28.w),
                       child: Text(
                         'Manage your facility',
                         style: GoogleFonts.montserrat(
@@ -397,10 +425,10 @@ class _HomeState extends State<Home> {
 
                     Padding(
                       padding: EdgeInsets.symmetric(
-                        vertical: 32.h,
+                        vertical: 32.h,horizontal: 28.w
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           GestureDetector(
@@ -463,16 +491,20 @@ class _HomeState extends State<Home> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 28.w),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
-                            'Classes and events',
-                            style: GoogleFonts.montserrat(
-                              color: const Color(0xFF6F6F6F),
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
+                          SizedBox(width:137.w,
+                            child: Text(
+                              'Classes and events',
+                              style: GoogleFonts.montserrat(
+                                color: const Color(0xFF6F6F6F),
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                              ),overflow: TextOverflow.ellipsis,
                             ),
                           ),
+                          SizedBox(width: 135.w,),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -481,15 +513,17 @@ class _HomeState extends State<Home> {
                                       // builder: (_) => const CreateEvent()));
                                       builder: (_) => const EventPages()));
                             },
-                            child: Text(
-                              'add new',
-                              style: GoogleFonts.montserrat(
-                                  color: const Color(0xFFE4E4E4),
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: const Color(0xFFE4E4E4),
-                                  decorationThickness: 1.w),
+                            child: SizedBox(width: 62.w,
+                              child: Text(
+                                'add new',
+                                style: GoogleFonts.montserrat(
+                                    color: const Color(0xFFE4E4E4),
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: const Color(0xFFE4E4E4),
+                                    decorationThickness: 1.w),overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           )
                         ],
@@ -500,31 +534,32 @@ class _HomeState extends State<Home> {
                     ///-----------Tab Bar  -------------------///
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 28.w, ),
+                        horizontal: 28.w,
+                      ),
                       child: ButtonsTabBar(
-                        buttonMargin: EdgeInsets.only(right: 53.w),
+                        physics: const NeverScrollableScrollPhysics(parent: NeverScrollableScrollPhysics()),
+                        buttonMargin: EdgeInsets.only(right: 30.w),
                         splashColor: const Color(0xFFFEFEFE),
                         height: 30.h,
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 6.w),
                         radius: 0,
                         borderWidth: 0.9,
-                        borderColor: const Color(0xFF282828),
+                        // borderColor: const Color(0xFFE11010),
                         unselectedBorderColor: const Color(0xFFA3A3A3),
                         backgroundColor: Colors.white,
                         unselectedBackgroundColor: Colors.transparent,
                         labelStyle: GoogleFonts.montserrat(
                           color: const Color(0xFF191919),
                           fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w400,textStyle:  const TextStyle(overflow: TextOverflow.ellipsis,)
                         ),
                         unselectedLabelStyle: GoogleFonts.montserrat(
-                            color: const Color(0xFFA3A3A3),
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            ),
-                        tabs:
-                        [
+                          color: const Color(0xFFA3A3A3),
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        tabs: [
                           Tab(
                             height: 30.h,
                             text: 'Upcoming (${3})',
@@ -540,14 +575,15 @@ class _HomeState extends State<Home> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 24.h,),
+                    SizedBox(
+                      height: 24.h,
+                    ),
                     SizedBox(
                       height: 327.h,
                       child: TabBarView(children: [
                         ///-----------Tab 1  -------------------///
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 28.w),
+                          padding: EdgeInsets.symmetric(horizontal: 28.w),
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -681,14 +717,18 @@ class _HomeState extends State<Home> {
                                                     height: 36.h,
                                                     decoration: BoxDecoration(
                                                       gradient: LinearGradient(
-                                                        begin: const Alignment(-0.00, 1.00),
-                                                        end: const Alignment(0, -1),
+                                                        begin: const Alignment(
+                                                            -0.00, 1.00),
+                                                        end: const Alignment(
+                                                            0, -1),
                                                         colors: [
-                                                          const Color(0x91191919),
+                                                          const Color(
+                                                              0x91191919),
                                                           Colors.black
                                                               .withOpacity(
                                                                   0.35),
-                                                          const Color(0x00191919)
+                                                          const Color(
+                                                              0x00191919)
                                                         ],
                                                       ),
                                                     ),
@@ -703,15 +743,17 @@ class _HomeState extends State<Home> {
                                                       const BoxDecoration(
                                                           color: Colors.black),
                                                   child: Center(
-                                                    child: Text(
-                                                      'Weekly',
-                                                      style: GoogleFonts
-                                                          .montserrat(
-                                                        color: const Color(
-                                                            0xFFFEFEFE),
-                                                        fontSize: 12.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400,
+                                                    child: SizedBox(width:45.w,height: 15.h,
+                                                      child: Text(
+                                                        'Weekly',
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                          color: const Color(
+                                                              0xFFFEFEFE),
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),overflow: TextOverflow.ellipsis,
                                                       ),
                                                     ),
                                                   ),
@@ -723,21 +765,26 @@ class _HomeState extends State<Home> {
                                                 child: SizedBox(
                                                   width: 22.79.w,
                                                   height: 14.5.h,
-                                                  child:  SvgPicture.asset('assets/icons/pepole.svg',
-                                                    width:22.79.w,height: 14.5.h,
+                                                  child: SvgPicture.asset(
+                                                    'assets/icons/pepole.svg',
+                                                    width: 22.79.w,
+                                                    height: 14.5.h,
                                                   ),
                                                 ),
                                               ),
                                               Positioned(
                                                 left: 42.9.w,
                                                 top: 200.h,
-                                                child: Text(
-                                                  '${data![position].availableSlot} bookings',
-                                                  style: GoogleFonts.montserrat(
-                                                    color:
-                                                        const Color(0xFFFEFEFE),
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w400,
+                                                child: SizedBox(width:130.w,height: 17.h,
+
+                                                  child: Text(
+                                                    '${data![position].availableSlot} bookings',
+                                                    style: GoogleFonts.montserrat(
+                                                      color:
+                                                          const Color(0xFFFEFEFE),
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.w400,
+                                                    ),overflow: TextOverflow.ellipsis,
                                                   ),
                                                 ),
                                               ),
@@ -753,21 +800,24 @@ class _HomeState extends State<Home> {
                                                   .description
                                                   .toString(),
                                               style: GoogleFonts.montserrat(
-
                                                 color: Colors.white,
                                                 fontSize: 14.sp,
                                                 fontWeight: FontWeight.w500,
-                                                height: 1.10.h,
-                                              ),overflow: TextOverflow.ellipsis,
+                                                height: 1.18.h,
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
                                               maxLines: 2,
                                             ),
                                           ),
-                                          SizedBox(height: 6.h,),
+                                          SizedBox(
+                                            height: 6.h,
+                                          ),
                                           Row(
                                             children: [
                                               Column(
                                                 children: [
-                                                  SizedBox(width:155.w,
+                                                  SizedBox(
+                                                    width: 155.w,
                                                     child: Text(
                                                       'Fri, Dec 23 8:30 am to',
                                                       style: GoogleFonts.inter(
@@ -776,11 +826,11 @@ class _HomeState extends State<Home> {
                                                         fontSize: 14.sp,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                      ),
+                                                      ),overflow: TextOverflow.ellipsis,
                                                     ),
                                                   ),
-
-                                                  SizedBox(width:155.w,
+                                                  SizedBox(
+                                                    width: 155.w,
                                                     child: Text(
                                                       'Fri, Dec 23 9:30 am ',
                                                       style: GoogleFonts.inter(
@@ -788,14 +838,12 @@ class _HomeState extends State<Home> {
                                                             0xFF818181),
                                                         fontSize: 14.sp,
                                                         fontWeight:
-                                                        FontWeight.w400,
-                                                      ),
+                                                            FontWeight.w400,
+                                                      ),overflow: TextOverflow.ellipsis,
                                                     ),
-
                                                   ),
                                                 ],
                                               ),
-
                                             ],
                                           )
                                         ],
@@ -805,6 +853,7 @@ class _HomeState extends State<Home> {
                                         (BuildContext context, int index) {
                                       return SizedBox(
                                         width: 16.w,
+
                                       );
                                     },
                                   );
@@ -827,8 +876,8 @@ class _HomeState extends State<Home> {
                                 MaterialPageRoute(
                                   builder: (_) => PreEvent(
                                     text: data![0].name.toString(),
-                                    // img: "assets/images/img1.png",
-                                    img: data![0].image.toString(),
+                                    img: "assets/images/img1.png",
+                                    // img: data![0].image.toString(),
                                     description:
                                         data![0].description.toString(),
                                   ),
@@ -873,7 +922,7 @@ class _HomeState extends State<Home> {
                                               ),
                                               Container(
                                                 width: 140.w,
-                                                height: 20.h,
+
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
@@ -886,7 +935,7 @@ class _HomeState extends State<Home> {
                                               ),
                                               Container(
                                                 width: 140.w,
-                                                height: 20.h,
+
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:

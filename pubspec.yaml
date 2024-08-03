@@ -62,6 +62,7 @@ dependencies:
   shimmer: ^3.0.0
   flutter_multi_formatter: ^2.13.0
   flutter_svg: ^2.0.10+1
+  lottie: ^3.1.2
 
 
 
@@ -93,6 +94,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
+    - assets/Animations/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
