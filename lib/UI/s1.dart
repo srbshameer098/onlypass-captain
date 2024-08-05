@@ -268,6 +268,7 @@ class _S1State extends State<S1> {
       },
     );
   }
+  ///   bottomNavigationBar   ///
 
   @override
   Widget build(BuildContext context) {
@@ -337,10 +338,10 @@ class _S1State extends State<S1> {
                       color: _currentIndex == itemIndex
                           ? Colors.white
                           : const Color(0xFF818181),
-                      fontSize: _currentIndex == itemIndex ? 12.sp : 11.sp,
+                      fontSize: _currentIndex == itemIndex ? 14.sp : 14.sp,
                       fontWeight: _currentIndex == itemIndex
                           ? FontWeight.w600
-                          : FontWeight.w500,
+                          : FontWeight.w400,
                     ),
                   ),
                 ],
@@ -350,7 +351,7 @@ class _S1State extends State<S1> {
           options: CarouselOptions(
             initialPage: 1,
             autoPlay: false,
-            viewportFraction: 0.285,
+            viewportFraction: 0.3785,
             onPageChanged: (index, reason) {
               setState(() {
                 _currentIndex = index;

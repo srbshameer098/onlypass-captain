@@ -88,64 +88,67 @@ class _HomeState extends State<Home> {
           toolbarHeight: 75.h,
           automaticallyImplyLeading: false,
           forceMaterialTransparency: false,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SvgPicture.asset(
-                'assets/icons/onlypass.svg',
-                width: 33.87.w,
-                height: 33.87.h,
-              ),
-              Container(
-                width: 206.w,
-                height: 40.h,
-                decoration: ShapeDecoration(
-                  color: const Color(0x19FEFEFE),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                        width: 0.50.w, color: const Color(0x26B2B2B2)),
-                    borderRadius: BorderRadius.circular(140.r),
-                  ),
+          title: Padding(
+            padding:  EdgeInsets.only(left:10.w,right: 15.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/onlypass.svg',
+                  width: 33.87.w,
+                  height: 33.87.h,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                          radius: 14.r,
-                          backgroundColor: const Color(0xFF282828),
-                          child: SvgPicture.asset(
-                            'assets/icons/performance.svg',
-                            width: 16.w,
-                            height: 16.h,
-                          )),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      SizedBox(width: 151.w,
-                        child: Text(
-                          'See your performance',
-                          style: GoogleFonts.montserrat(
-                              color: const Color(0xfffefefe),
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 0.4
-
-                          ),overflow: TextOverflow.ellipsis,
+                Container(
+                  width: 206.w,
+                  height: 40.h,
+                  decoration: ShapeDecoration(
+                    color: const Color(0x19FEFEFE),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                          width: 0.50.w, color: const Color(0x26B2B2B2)),
+                      borderRadius: BorderRadius.circular(140.r),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                            radius: 14.r,
+                            backgroundColor: const Color(0xFF282828),
+                            child: SvgPicture.asset(
+                              'assets/icons/performance.svg',
+                              width: 16.w,
+                              height: 16.h,
+                            )),
+                        SizedBox(
+                          width: 10.w,
                         ),
-                      ),
-                    ],
+                        SizedBox(width: 151.w,
+                          child: Text(
+                            'See your performance',
+                            style: GoogleFonts.montserrat(
+                                color: const Color(0xfffefefe),
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 0.4
+
+                            ),overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              GestureDetector(
-                  onTap: () {},
-                  child: SvgPicture.asset(
-                    'assets/icons/person.svg',
-                    width: 24.w,
-                    height: 24.h,
-                  )),
-            ],
+                GestureDetector(
+                    onTap: () {},
+                    child: SvgPicture.asset(
+                      'assets/icons/person.svg',
+                      width: 24.w,
+                      height: 24.h,
+                    )),
+              ],
+            ),
           ),
           centerTitle: true,
           bottom: PreferredSize(
@@ -229,6 +232,7 @@ class _HomeState extends State<Home> {
                                   color: const Color(0xFF6F6F6F),
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w600,
+                                  letterSpacing: 0.8
                                 ),
                               ),
                               Padding(
@@ -254,9 +258,12 @@ class _HomeState extends State<Home> {
                               color: const Color(0xFFE4E4E4),
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
-                              decoration: TextDecoration.underline,
+                              decoration:
+                              TextDecoration.underline,
+                              textBaseline: TextBaseline.alphabetic,
                               decorationColor: const Color(0xFFE4E4E4),
                               decorationThickness: 1.w,
+                              letterSpacing: 0.4
                             ),
                           )
                         ],
@@ -285,7 +292,7 @@ class _HomeState extends State<Home> {
                             children: [
                               Container(
                                 width: 40.w,
-                                height: 40.h,
+
                                 decoration: ShapeDecoration(
                                   image: const DecorationImage(
                                     image:
@@ -309,7 +316,7 @@ class _HomeState extends State<Home> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SizedBox(width: 107.w,
-                                      height: 17.h,
+
                                       child: Text(
                                         'Jayaram Ravi',
                                         style: TextStyle(
@@ -320,7 +327,7 @@ class _HomeState extends State<Home> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 4.h,
+                                      height: 2.h,
                                     ),
                                     SizedBox(width: 107.w,
                                       height: 17.h,
@@ -357,7 +364,7 @@ class _HomeState extends State<Home> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 6.h,
+                                      height: 2.h,
                                     ),
                                     SizedBox(
                                       height: 17.h,
@@ -365,7 +372,7 @@ class _HomeState extends State<Home> {
                                         'DUE YESTERDAY',
                                         style: GoogleFonts.montserrat(
                                           color: const Color(0xFFE83507),
-                                          fontSize: 12.sp,
+                                          fontSize: 14.sp,
                                           fontWeight: FontWeight.w600,
                                         ),overflow: TextOverflow.ellipsis,
                                       ),
@@ -378,7 +385,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       options: CarouselOptions(
-                        viewportFraction: 0.9,
+                        viewportFraction: 0.88,
                         onPageChanged: (index, reason) {
                           setState(() {
                             _currentIndex = index;
@@ -419,6 +426,7 @@ class _HomeState extends State<Home> {
                           color: const Color(0xFF6F6F6F),
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
+                          letterSpacing: 0.8
                         ),
                       ),
                     ),
@@ -494,17 +502,16 @@ class _HomeState extends State<Home> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          SizedBox(width:137.w,
-                            child: Text(
-                              'Classes and events',
-                              style: GoogleFonts.montserrat(
-                                color: const Color(0xFF6F6F6F),
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w600,
-                              ),overflow: TextOverflow.ellipsis,
-                            ),
+                          Text(
+                            'Classes and events',
+                            style: GoogleFonts.montserrat(
+                              color: const Color(0xFF6F6F6F),
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.8
+                            ),overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(width: 135.w,),
+                          SizedBox(width: 132.w,),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -519,7 +526,7 @@ class _HomeState extends State<Home> {
                                 style: GoogleFonts.montserrat(
                                     color: const Color(0xFFE4E4E4),
                                     fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w500,letterSpacing: 0.4,
                                     decoration: TextDecoration.underline,
                                     decorationColor: const Color(0xFFE4E4E4),
                                     decorationThickness: 1.w),overflow: TextOverflow.ellipsis,
@@ -545,19 +552,20 @@ class _HomeState extends State<Home> {
                             horizontal: 12.w, vertical: 6.w),
                         radius: 0,
                         borderWidth: 0.9,
-                        // borderColor: const Color(0xFFE11010),
-                        unselectedBorderColor: const Color(0xFFA3A3A3),
+                         borderColor:  Colors.transparent,
+                        unselectedBorderColor: const Color(0xFFA4A4A4),
                         backgroundColor: Colors.white,
                         unselectedBackgroundColor: Colors.transparent,
                         labelStyle: GoogleFonts.montserrat(
                           color: const Color(0xFF191919),
                           fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,textStyle:  const TextStyle(overflow: TextOverflow.ellipsis,)
+                          fontWeight: FontWeight.w400,letterSpacing: 0.4,
+                            textStyle:  const TextStyle(overflow: TextOverflow.ellipsis,)
                         ),
                         unselectedLabelStyle: GoogleFonts.montserrat(
                           color: const Color(0xFFA3A3A3),
                           fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w400,letterSpacing: 0.4
                         ),
                         tabs: [
                           Tab(
@@ -752,7 +760,7 @@ class _HomeState extends State<Home> {
                                                               0xFFFEFEFE),
                                                           fontSize: 12.sp,
                                                           fontWeight:
-                                                              FontWeight.w400,
+                                                              FontWeight.w400,letterSpacing: 0.4
                                                         ),overflow: TextOverflow.ellipsis,
                                                       ),
                                                     ),
@@ -783,7 +791,7 @@ class _HomeState extends State<Home> {
                                                       color:
                                                           const Color(0xFFFEFEFE),
                                                       fontSize: 14.sp,
-                                                      fontWeight: FontWeight.w400,
+                                                      fontWeight: FontWeight.w400,letterSpacing: 0.4
                                                     ),overflow: TextOverflow.ellipsis,
                                                   ),
                                                 ),
@@ -791,7 +799,7 @@ class _HomeState extends State<Home> {
                                             ],
                                           ),
                                           SizedBox(
-                                            height: 14.5.h,
+                                            height: 16.h,
                                           ),
                                           SizedBox(
                                             width: 155.w,
@@ -810,7 +818,7 @@ class _HomeState extends State<Home> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 6.h,
+                                            height: 8.h,
                                           ),
                                           Row(
                                             children: [
@@ -819,23 +827,24 @@ class _HomeState extends State<Home> {
                                                   SizedBox(
                                                     width: 155.w,
                                                     child: Text(
-                                                      'Fri, Dec 23 8:30 am to',
+                                                      'Fri, Dec 23 8:30 am ',
                                                       style: GoogleFonts.inter(
                                                         color: const Color(
-                                                            0xFF818181),
+                                                            0xFF6f6f6f),
                                                         fontSize: 14.sp,
                                                         fontWeight:
                                                             FontWeight.w400,
                                                       ),overflow: TextOverflow.ellipsis,
                                                     ),
                                                   ),
+
                                                   SizedBox(
                                                     width: 155.w,
                                                     child: Text(
                                                       'Fri, Dec 23 9:30 am ',
                                                       style: GoogleFonts.inter(
                                                         color: const Color(
-                                                            0xFF818181),
+                                                            0xFF6f6f6f),
                                                         fontSize: 14.sp,
                                                         fontWeight:
                                                             FontWeight.w400,

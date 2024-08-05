@@ -20,9 +20,9 @@ class GenderDropdown extends StatelessWidget {
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.w500,
         ),
+        dropdownColor: Color(0xFF282828),
         iconEnabledColor: Color(0xFFFEFEFE),
         underline: SizedBox(),
-        dropdownColor: Color(0xFF282828),
         icon: SvgPicture.asset(
           'assets/icons/down arrow.svg',
           width: 7.17.w,

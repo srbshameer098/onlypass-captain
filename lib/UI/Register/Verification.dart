@@ -72,16 +72,16 @@ class _VerificationState extends State<Verification> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 28.w,top: 27.h),
+              padding: EdgeInsets.only(left: 28.w,top: 32.h),
               height: 340.h,
               width: double.infinity,
               color: const Color(0xff191919),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 27.h),
+                  // SizedBox(height: 27.h),
                   Text(
-                    'Enter OTP received',
+                    'Enter the OTP received',
                     style: GoogleFonts.montserrat(
                       color: const Color(0xFFE4E4E4),
                       fontSize: 16.sp,
@@ -89,48 +89,41 @@ class _VerificationState extends State<Verification> {
                     ),
                   ),
                   SizedBox(height: 16.h),
-                  Stack(
+                  SizedBox(
+                    width: 334.w,
+                    child: Text(
+                      'A six digit verification code has been sent to',
+                      style: GoogleFonts.montserrat(
+                        color: const Color(0xFF6F6F70),
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 6.h,),
+                  Row(
                     children: [
-                      SizedBox(
-                        width: 334.w,
-                        child: Text(
-                          'A six digit verification code has been sent to number ',
-                          style: GoogleFonts.montserrat(
-                            color: const Color(0xFF6F6F70),
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
+                      Text(
+                        '+91 ${widget.phoneNum.toString()} ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Positioned(
-                        left: 65,
-                        top: 21,
-                        child: Row(
-                          children: [
-                            Text(
-                              '+91 ${widget.phoneNum.toString()} ',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                'Change',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14.sp,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          'Change',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.sp,
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ],
@@ -302,7 +295,7 @@ class _VerificationState extends State<Verification> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                SizedBox(width: 12.w),
+                                SizedBox(width: 8.w),
                                 const Icon(Icons.east_rounded),
                               ],
                             ),
@@ -358,13 +351,15 @@ class _VerificationState extends State<Verification> {
 
     // Retrieve the values from SharedPreferences
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+
     bool facilityFlag = prefs.getString('facilityCode') == 'true';
     bool customerFlag = prefs.getString('customerCode') == 'true';
-print('${facilityFlag}*****************************');
+    print('${facilityFlag}*****************************');
     print('${customerFlag}****************************');
 
 
-    if (facilityFlag  && customerFlag ) {
+    if ( customerFlag ) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (_) =>
@@ -379,7 +374,8 @@ print('${facilityFlag}*****************************');
             (Route<dynamic> route) => false,
       );
     }
-    else if (facilityFlag && !customerFlag) {
+    else
+       {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (_) => const Home(
@@ -392,7 +388,8 @@ print('${facilityFlag}*****************************');
         ),
             (Route<dynamic> route) => false,
       );
-    }
+    };
+
 
     print('Login successful. Token: $tokens');
     setState(() {

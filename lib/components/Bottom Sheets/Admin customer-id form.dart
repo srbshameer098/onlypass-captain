@@ -78,7 +78,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                   height: 32.h,
                 ),
                 Text(
-                  'PhoneNumber',
+                  'Phone number',
                   style: TextStyle(
                     color: const Color(0xFFE4E4E4),
                     fontSize: 14.sp,
@@ -104,7 +104,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Opacity(
-                          opacity: 0.10,
+                          opacity: 0.30,
                           child: Image.asset(
                             'assets/icons/indflag.png',
                             height: 16.sp,
@@ -116,7 +116,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                             '+91',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 14.sp,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                               letterSpacing: 1.6,
                             ),
@@ -146,7 +146,7 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                               phoneNumber ?? 'No number',
                               style: TextStyle(
                                 color: const Color(0xFFFEFEFE),
-                                fontSize: 14.sp,
+                                fontSize: 16.sp,
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.w500,
 
@@ -220,14 +220,15 @@ void admin_customer_id_BottomSheet(BuildContext context,  )  async {
                         SizedBox(
                           height: 20.h,
                           width: 300.w,
-                          child: TextFormField(
+                          child: TextFormField(textCapitalization: TextCapitalization.words,
                             textInputAction: TextInputAction.done,
                             keyboardType: TextInputType.name,
+
                             controller: fullnameController,
 
                             style: GoogleFonts.montserrat(
                               color: const Color(0xFFFEFEFE),
-                              fontSize: 20.sp,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                               letterSpacing: 1.6,
                             ),

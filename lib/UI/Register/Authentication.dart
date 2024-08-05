@@ -126,7 +126,7 @@ class _LogInState extends State<LogIn> {
                           '+91',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 18.sp,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 1.6,
                           ),
@@ -144,7 +144,7 @@ class _LogInState extends State<LogIn> {
                         ),
                         SizedBox(width: 5.w),
                         SizedBox(
-                          height: 20.h,
+
                           width: 204.w,
                           child: TextFormField(
                             textInputAction: TextInputAction.done,
@@ -168,9 +168,9 @@ class _LogInState extends State<LogIn> {
                               hintStyle: TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 color: const Color(0xFF6F6F70),
-                                fontSize: 18.sp,
+                                fontSize: 20.sp,
                                 fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
@@ -265,11 +265,11 @@ class _LogInState extends State<LogIn> {
                               'Continue',
                               style: GoogleFonts.montserrat(
                                 color: const Color(0xFF191919),
-                                fontSize: 14.sp,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(width: 12.w),
+                            SizedBox(width: 8.w),
                             const Icon(Icons.east_rounded),
                           ],
                         ),

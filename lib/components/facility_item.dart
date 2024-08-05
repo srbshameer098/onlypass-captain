@@ -35,8 +35,9 @@ class FacilityItem extends StatelessWidget {
           style: GoogleFonts.montserrat(
             color: const Color(0xFFE4E4E4),
             fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w500,letterSpacing: 0.4
           ),overflow: TextOverflow.ellipsis,
+
         )
       ],
     );

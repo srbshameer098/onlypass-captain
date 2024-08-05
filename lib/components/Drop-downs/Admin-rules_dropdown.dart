@@ -38,7 +38,7 @@ class JobRoleDropdown2 extends StatelessWidget {
         onChanged: onChanged,
         items: <String>[
           'Owner',
-          'Manger',
+          'Manager',
           'Accountant',
 
         ].map<DropdownMenuItem<String>>((String value) {
